@@ -10,7 +10,11 @@ export function FinalCta() {
   return (
     <SectionContainer className="pb-20 pt-6 md:pb-24">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2rem] border border-ink/10 bg-ink px-6 py-12 text-center text-cream shadow-premium-lg sm:px-10 sm:py-16">
+        <div
+          className="relative overflow-hidden rounded-[2rem] border border-ink/10 bg-ink px-6 py-12 text-center text-cream shadow-premium-lg sm:px-10 sm:py-16"
+          data-drip-anchor="final-cta"
+          data-drip-order={5}
+        >
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(198,223,170,0.25),transparent_44%),radial-gradient(circle_at_79%_8%,rgba(255,179,159,0.27),transparent_44%)]" />
           <div className="pointer-events-none absolute inset-0 halftone-bg opacity-15" />
 

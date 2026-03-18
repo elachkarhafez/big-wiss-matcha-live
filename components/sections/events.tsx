@@ -141,41 +141,43 @@ export function Events() {
       </Stagger>
 
       <Reveal delay={0.08} className="mt-10">
-        <h3
-          className={cn(
-            "text-xs font-bold uppercase tracking-[0.2em]",
-            isNight ? "text-peach-300" : "text-matcha-700"
-          )}
-        >
-          Package Preview
-        </h3>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {EVENT_PACKAGE_PREVIEWS.map((pack) => (
-            <Card
-              key={pack.title}
-              className={cn(
-                "border p-5",
-                isNight
-                  ? "border-white/15 bg-white/5"
-                  : "border-ink/10 bg-white/90"
-              )}
-            >
-              <h4 className={cn("text-lg font-semibold", isNight ? "text-cream" : "text-ink")}>
-                {pack.title}
-              </h4>
-              <p className={cn("mt-2 text-sm", isNight ? "text-cream/75" : "text-ink/70")}>
-                {pack.summary}
-              </p>
-              <p
+        <div data-drip-anchor="events-packages" data-drip-order={3}>
+          <h3
+            className={cn(
+              "text-xs font-bold uppercase tracking-[0.2em]",
+              isNight ? "text-peach-300" : "text-matcha-700"
+            )}
+          >
+            Package Preview
+          </h3>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {EVENT_PACKAGE_PREVIEWS.map((pack) => (
+              <Card
+                key={pack.title}
                 className={cn(
-                  "mt-3 text-xs font-semibold uppercase tracking-[0.12em]",
-                  isNight ? "text-matcha-100" : "text-matcha-700"
+                  "border p-5",
+                  isNight
+                    ? "border-white/15 bg-white/5"
+                    : "border-ink/10 bg-white/90"
                 )}
               >
-                {pack.includes}
-              </p>
-            </Card>
-          ))}
+                <h4 className={cn("text-lg font-semibold", isNight ? "text-cream" : "text-ink")}>
+                  {pack.title}
+                </h4>
+                <p className={cn("mt-2 text-sm", isNight ? "text-cream/75" : "text-ink/70")}>
+                  {pack.summary}
+                </p>
+                <p
+                  className={cn(
+                    "mt-3 text-xs font-semibold uppercase tracking-[0.12em]",
+                    isNight ? "text-matcha-100" : "text-matcha-700"
+                  )}
+                >
+                  {pack.includes}
+                </p>
+              </Card>
+            ))}
+          </div>
         </div>
       </Reveal>
     </SectionContainer>

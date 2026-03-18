@@ -1,5 +1,6 @@
 import { CursorGlow } from "@/components/layout/cursor-glow";
 import { Footer } from "@/components/layout/footer";
+import { GlobalMatchaDripLayer } from "@/components/layout/global-matcha-drip-layer";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { Navbar } from "@/components/layout/navbar";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
@@ -23,7 +24,8 @@ export default function HomePage() {
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
-      <main className="pb-20 lg:pb-0">
+      <main className="relative isolate pb-20 lg:pb-0">
+        <GlobalMatchaDripLayer />
         <Hero />
         <SeenAtStrip />
         <LiquidDivider />

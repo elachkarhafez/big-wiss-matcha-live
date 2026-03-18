@@ -183,7 +183,11 @@ export function InquiryForm() {
       </Reveal>
 
       <Reveal delay={0.05} className="mt-10">
-        <Card className="border-ink/12 bg-white/95 p-5 sm:p-7 lg:p-8">
+        <Card
+          className="border-ink/12 bg-white/95 p-5 sm:p-7 lg:p-8"
+          data-drip-anchor="inquiry-form"
+          data-drip-order={4}
+        >
           <form onSubmit={onSubmit} noValidate>
             <div className="grid gap-4 lg:grid-cols-[1fr_260px]">
               <div className="grid gap-4 sm:grid-cols-3">

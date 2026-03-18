@@ -156,7 +156,11 @@ export function Menu() {
       </Reveal>
 
       <Reveal delay={0.05} className="mt-8">
-        <Card className="relative overflow-hidden border-ink/12 bg-ink p-6 text-cream">
+        <Card
+          className="relative overflow-hidden border-ink/12 bg-ink p-6 text-cream"
+          data-drip-anchor="menu-spotlight"
+          data-drip-order={2}
+        >
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(198,223,170,0.3),transparent_42%),radial-gradient(circle_at_80%_4%,rgba(255,179,159,0.32),transparent_46%)]" />
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-4">
             <div>
