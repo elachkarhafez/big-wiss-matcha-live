@@ -5,6 +5,7 @@ export type MenuItem = {
   price?: string;
   approved?: boolean;
   supportsLevel?: boolean;
+  image?: string;
 };
 
 export type MatchaLevelKey = "light" | "balanced" | "strong";

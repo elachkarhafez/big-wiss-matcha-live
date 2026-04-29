@@ -11,6 +11,12 @@ import { Button } from "@/components/ui/button";
 import { CTA_COPY } from "@/lib/constants";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
+const FEATURE_CUPS = [
+  { src: "/product-cups/classic-matcha.png", alt: "Classic Matcha", label: "Classic" },
+  { src: "/product-cups/strawberry-matcha.png", alt: "Strawberry Matcha", label: "Strawberry" },
+  { src: "/product-cups/cream-top.png", alt: "Cream Top", label: "Cream Top" },
+];
+
 export function ActionFeature() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -51,21 +57,76 @@ export function ActionFeature() {
               </Link>
             </div>
 
+            {/* Cup composition instead of comic poster */}
             <motion.div
-              className="diagonal-frame relative overflow-hidden rounded-[1.6rem] border border-white/15"
+              className="relative overflow-hidden rounded-[1.6rem] border border-white/10"
+              style={{
+                background: "linear-gradient(145deg, #1a4d2e 0%, #0f2a1b 60%, #0d2317 100%)",
+              }}
               initial={shouldReduceMotion ? false : { opacity: 0, y: 52, scale: 0.96 }}
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.62, ease: [0.2, 0.65, 0.15, 1] }}
             >
-              <Image
-                src="/images/big-wiss-action-poster.png"
-                alt="Big Wiss founder campaign poster"
-                width={950}
-                height={1280}
-                className="h-[360px] w-full object-cover sm:h-[420px]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
+              <div className="relative h-[360px] sm:h-[420px] flex items-end justify-center px-4 pb-0 overflow-hidden">
+                {/* Glow behind cups */}
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[200px] pointer-events-none"
+                  style={{
+                    background: "radial-gradient(ellipse at center bottom, rgba(125, 206, 160, 0.15) 0%, transparent 70%)",
+                  }}
+                />
+
+                {/* Matcha text watermark */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                  <p className="font-display text-[120px] font-bold uppercase text-white/[0.03] leading-none tracking-tighter whitespace-nowrap">
+                    BIG WISS
+                  </p>
+                </div>
+
+                {/* 3 cups composition */}
+                {FEATURE_CUPS.map((cup, i) => {
+                  const positions = [
+                    { left: "10%", zIndex: 2, scale: 0.9, rotate: -8 },
+                    { left: "50%", zIndex: 3, scale: 1.05, rotate: 0, translateX: "-50%" },
+                    { left: "auto", right: "10%", zIndex: 2, scale: 0.9, rotate: 8 },
+                  ];
+                  const pos = positions[i];
+
+                  return (
+                    <motion.div
+                      key={cup.src}
+                      className="absolute bottom-0"
+                      style={{
+                        left: pos.left,
+                        right: (pos as any).right || "auto",
+                        zIndex: pos.zIndex,
+                        transform: `scale(${pos.scale}) rotate(${pos.rotate}deg) ${pos.translateX ? `translateX(${pos.translateX})` : ""}`,
+                      }}
+                      initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+                      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
+                    >
+                      <div className="relative w-32 h-[320px] sm:w-36 sm:h-[370px]">
+                        <Image
+                          src={cup.src}
+                          alt={cup.alt}
+                          fill
+                          className="object-contain"
+                          style={{
+                            filter: "drop-shadow(0 15px 35px rgba(0,0,0,0.5))",
+                          }}
+                          quality={90}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+
+                {/* Bottom gradient fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0d2317] to-transparent pointer-events-none z-10" />
+              </div>
             </motion.div>
           </div>
         </div>

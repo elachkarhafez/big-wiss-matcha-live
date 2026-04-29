@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matcha Cup Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f3f0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #2d5a3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #1f3e2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Classic Matcha</h2>
+        <canvas id="cup1" width="300" height="400"></canvas>
+        <button onclick="downloadCanvas('cup1', 'cup-1.png')">Download Cup 1</button>
+    </div>
+
+    <div class="container">
+        <h2>Cream Top</h2>
+        <canvas id="cup2" width="300" height="400"></canvas>
+        <button onclick="downloadCanvas('cup2', 'cup-2.png')">Download Cup 2</button>
+    </div>
+
+    <div class="container">
+        <h2>Boba Matcha</h2>
+        <canvas id="cup3" width="300" height="400"></canvas>
+        <button onclick="downloadCanvas('cup3', 'cup-3.png')">Download Cup 3</button>
+    </div>
+
+    <div class="container">
+        <h2>Iced Matcha</h2>
+        <canvas id="cup4" width="300" height="400"></canvas>
+        <button onclick="downloadCanvas('cup4', 'cup-4.png')">Download Cup 4</button>
+    </div>
+
+    <div class="container">
+        <h2>Strawberry Matcha</h2>
+        <canvas id="cup5" width="300" height="400"></canvas>
+        <button onclick="downloadCanvas('cup5', 'cup-5.png')">Download Cup 5</button>
+    </div>
+
+    <script>
+        function drawCup(canvasId, type) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.fillStyle = 'transparent';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Cup body
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 2;
+
+            // Cup shape - trapezoid
+            ctx.beginPath();
+            ctx.moveTo(80, 150);
+            ctx.lineTo(220, 150);
+            ctx.lineTo(200, 340);
+            ctx.lineTo(100, 340);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Add shadow under cup
+            ctx.fillStyle = 'rgba(0,0,0,0.15)';
+            ctx.beginPath();
+            ctx.ellipse(150, 360, 80, 15, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Cup rim
+            ctx.fillStyle = '#f0f0f0';
+            ctx.beginPath();
+            ctx.moveTo(80, 150);
+            ctx.lineTo(220, 150);
+            ctx.lineTo(215, 145);
+            ctx.lineTo(85, 145);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Logo/branding area
+            ctx.fillStyle = '#2d5a3d';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('BIG WISS', 150, 160);
+            ctx.font = '12px Arial';
+            ctx.fillStyle = '#c4a57b';
+            ctx.fillText('MATCHA', 150, 180);
+
+            // Draw liquid based on type
+            const liquidY = 340;
+            const topY = 150;
+
+            if (type === 1) {
+                // Classic Matcha - pure green
+                ctx.fillStyle = '#6ba76b';
+                ctx.beginPath();
+                ctx.moveTo(82, topY + 5);
+                ctx.lineTo(218, topY + 5);
+                ctx.lineTo(198, liquidY - 10);
+                ctx.lineTo(102, liquidY - 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Matcha foam
+                ctx.fillStyle = 'rgba(200, 230, 200, 0.6)';
+                for (let i = 0; i < 15; i++) {
+                    ctx.beginPath();
+                    ctx.arc(90 + Math.random() * 120, 160 + Math.random() * 10, 2 + Math.random() * 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            } else if (type === 2) {
+                // Cream Top
+                ctx.fillStyle = '#6ba76b';
+                ctx.beginPath();
+                ctx.moveTo(82, topY + 5);
+                ctx.lineTo(218, topY + 5);
+                ctx.lineTo(198, liquidY - 60);
+                ctx.lineTo(102, liquidY - 60);
+                ctx.closePath();
+                ctx.fill();
+
+                // Cream layer
+                ctx.fillStyle = '#f5e6d3';
+                ctx.beginPath();
+                ctx.moveTo(82, liquidY - 60);
+                ctx.lineTo(218, liquidY - 60);
+                ctx.lineTo(198, liquidY - 10);
+                ctx.lineTo(102, liquidY - 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Cream texture
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                for (let i = 0; i < 8; i++) {
+                    ctx.beginPath();
+                    ctx.arc(90 + Math.random() * 120, 275 + Math.random() * 20, 1 + Math.random() * 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            } else if (type === 3) {
+                // Boba Matcha
+                ctx.fillStyle = '#6ba76b';
+                ctx.beginPath();
+                ctx.moveTo(82, topY + 5);
+                ctx.lineTo(218, topY + 5);
+                ctx.lineTo(198, liquidY - 10);
+                ctx.lineTo(102, liquidY - 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Boba pearls
+                ctx.fillStyle = '#3d2817';
+                for (let i = 0; i < 20; i++) {
+                    const x = 105 + Math.random() * 90;
+                    const y = 280 + Math.random() * 40;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4 + Math.random() * 3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Boba shine
+                    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                    ctx.beginPath();
+                    ctx.arc(x - 2, y - 2, 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#3d2817';
+                }
+            } else if (type === 4) {
+                // Iced Matcha
+                ctx.fillStyle = '#6ba76b';
+                ctx.beginPath();
+                ctx.moveTo(82, topY + 5);
+                ctx.lineTo(218, topY + 5);
+                ctx.lineTo(198, liquidY - 40);
+                ctx.lineTo(102, liquidY - 40);
+                ctx.closePath();
+                ctx.fill();
+
+                // Ice cubes
+                ctx.fillStyle = 'rgba(200, 240, 255, 0.6)';
+                ctx.strokeStyle = 'rgba(100, 200, 255, 0.4)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < 12; i++) {
+                    const x = 110 + Math.random() * 80;
+                    const y = 250 + Math.random() * 70;
+                    const size = 10 + Math.random() * 12;
+                    ctx.fillRect(x, y, size, size);
+                    ctx.strokeRect(x, y, size, size);
+                }
+
+                // Water droplets
+                ctx.fillStyle = 'rgba(100, 200, 255, 0.3)';
+                for (let i = 0; i < 8; i++) {
+                    ctx.beginPath();
+                    ctx.arc(85 + Math.random() * 130, 155 + Math.random() * 20, 2 + Math.random() * 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            } else if (type === 5) {
+                // Strawberry Matcha - layered
+                ctx.fillStyle = '#6ba76b';
+                ctx.beginPath();
+                ctx.moveTo(82, topY + 5);
+                ctx.lineTo(218, topY + 5);
+                ctx.lineTo(198, liquidY - 80);
+                ctx.lineTo(102, liquidY - 80);
+                ctx.closePath();
+                ctx.fill();
+
+                // Strawberry layer
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.moveTo(82, liquidY - 80);
+                ctx.lineTo(218, liquidY - 80);
+                ctx.lineTo(198, liquidY - 10);
+                ctx.lineTo(102, liquidY - 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // Layer separation
+                ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(85, liquidY - 80);
+                ctx.lineTo(215, liquidY - 80);
+                ctx.stroke();
+
+                // Strawberry sheen
+                ctx.fillStyle = 'rgba(255,100,100,0.3)';
+                for (let i = 0; i < 10; i++) {
+                    ctx.beginPath();
+                    ctx.arc(100 + Math.random() * 100, 270 + Math.random() * 40, 2 + Math.random() * 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Straw
+            ctx.strokeStyle = '#2d5a3d';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(150, 140);
+            ctx.lineTo(150, 320);
+            ctx.stroke();
+
+            // Straw gradient effect
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(147, 140);
+            ctx.lineTo(147, 320);
+            ctx.stroke();
+        }
+
+        // Draw all cups
+        drawCup('cup1', 1);
+        drawCup('cup2', 2);
+        drawCup('cup3', 3);
+        drawCup('cup4', 4);
+        drawCup('cup5', 5);
+
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

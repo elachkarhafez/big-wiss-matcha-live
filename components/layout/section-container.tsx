@@ -14,9 +14,9 @@ export function SectionContainer({
   return (
     <section
       id={id}
-      className={cn("relative scroll-mt-24 py-16 md:py-24", className)}
+      className={cn("relative scroll-mt-24 py-10 md:py-[60px] xl:py-20", className)}
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+      <div className="mx-auto w-full max-w-[1400px] px-5 md:px-8 xl:px-12">{children}</div>
     </section>
   );
 }

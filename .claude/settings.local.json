@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__magic__21st_magic_component_builder",
+      "Bash(npm run:*)",
+      "mcp__7a3ca81c-f4b1-4038-b1b7-1da8ab76ef98__deploy_to_vercel",
+      "Bash(vercel deploy:*)",
+      "mcp__magic__21st_magic_component_inspiration",
+      "Bash(find 'C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA' -maxdepth 3 -type f \\\\\\(-iname *.png -o -iname *.jpg -o -iname *.jpeg \\\\\\))",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\Matcha Flavors\\\\Classic matcha.jpg\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cup-1.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\Matcha Flavors\\\\Cream Top matcha.jpg\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cup-2.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\Matcha Flavors\\\\Dirty Matcha.jpg\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cup-3.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\Matcha Flavors\\\\Iced matcha.jpg\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cup-4.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\Matcha Flavors\\\\Strawberry Matcha.jpg\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cup-5.jpg\")",
+      "Bash(ls -la \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\"\" 2>&1 || echo \"Directory check result above \")",
+      "Bash(npx vercel:*)",
+      "WebFetch(domain:big-wiss-matcha-live.vercel.app)",
+      "Bash(node remove-backgrounds.js)",
+      "Bash(pip3 install:*)",
+      "Bash(python3 clean_backgrounds.py)",
+      "Bash(python3 fix_transparency.py)",
+      "mcp__Claude_Preview__preview_start",
+      "WebSearch",
+      "WebFetch(domain:cuzenmatcha.com)",
+      "WebFetch(domain:www.awwwards.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:www.designrush.com)",
+      "WebFetch(domain:en.dviga.marketing)",
+      "WebFetch(domain:blog.logrocket.com)"
+    ]
+  }
+}

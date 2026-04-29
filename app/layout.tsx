@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 
 import "@/app/globals.css";
 import { appConfig } from "@/lib/config";
 
-const displayFont = Bebas_Neue({
+const displayFont = Montserrat({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: "400"
+  weight: ["600", "700"]
 });
 
-const bodyFont = Plus_Jakarta_Sans({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600", "700"]

@@ -57,19 +57,22 @@ export const MENU_ITEMS: MenuItem[] = [
     badge: "Signature",
     price: "$7",
     approved: true,
-    supportsLevel: true
+    supportsLevel: true,
+    image: "/product-cups/classic-matcha.png"
   },
   {
     name: "Iced Matcha",
     description: "Cold, creamy, and easy to love.",
     price: "$7",
-    supportsLevel: true
+    supportsLevel: true,
+    image: "/product-cups/iced-matcha.png"
   },
   {
     name: "Vanilla Matcha",
     description: "Sweet and balanced with a clean finish.",
     price: "$8",
-    supportsLevel: true
+    supportsLevel: true,
+    image: "/product-cups/vanilla-matcha.png"
   },
   {
     name: "Strawberry Matcha",
@@ -77,7 +80,8 @@ export const MENU_ITEMS: MenuItem[] = [
     badge: "Popular",
     price: "$8",
     approved: true,
-    supportsLevel: true
+    supportsLevel: true,
+    image: "/product-cups/strawberry-matcha.png"
   },
   {
     name: "Honey Matcha",
@@ -91,13 +95,15 @@ export const MENU_ITEMS: MenuItem[] = [
     badge: "Premium",
     price: "$9",
     approved: true,
-    supportsLevel: true
+    supportsLevel: true,
+    image: "/product-cups/cream-top.png"
   },
   {
     name: "Dirty Matcha",
     description: "Matcha with espresso.",
     price: "$9",
-    supportsLevel: false
+    supportsLevel: false,
+    image: "/product-cups/dirty-matcha.png"
   },
   {
     name: "Big Wiss Special",
@@ -264,7 +270,7 @@ export const SOCIAL_LINKS = [
 ];
 
 export const LOCATION_DETAILS = {
-  name: "Creative Style",
+  name: "Big Wiss Matcha",
   addressLine1: "13731 W Warren Ave",
   addressLine2: "Dearborn, MI 48126",
   phoneDisplay: "(313) 624-9707",
