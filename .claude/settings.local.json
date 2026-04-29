@@ -26,7 +26,12 @@
       "WebFetch(domain:medium.com)",
       "WebFetch(domain:www.designrush.com)",
       "WebFetch(domain:en.dviga.marketing)",
-      "WebFetch(domain:blog.logrocket.com)"
+      "WebFetch(domain:blog.logrocket.com)",
+      "mcp__7a3ca81c-f4b1-4038-b1b7-1da8ab76ef98__list_teams",
+      "mcp__7a3ca81c-f4b1-4038-b1b7-1da8ab76ef98__list_projects",
+      "mcp__7a3ca81c-f4b1-4038-b1b7-1da8ab76ef98__list_deployments",
+      "Bash(start https://big-wiss-matcha-live.vercel.app)",
+      "mcp__7a3ca81c-f4b1-4038-b1b7-1da8ab76ef98__get_project"
     ]
   }
 }
