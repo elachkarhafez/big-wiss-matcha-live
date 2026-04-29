@@ -15,6 +15,15 @@ const HERO_CUPS = [
   { src: "/product-cups/vanilla-matcha.png", alt: "Vanilla Matcha", label: "Vanilla" },
 ];
 
+const DRINK_FLAVORS = [
+  "Classic",
+  "Cream Top",
+  "Iced",
+  "Strawberry",
+  "Dirty",
+  "Vanilla"
+];
+
 export function Hero() {
   return (
     <section
@@ -135,24 +144,47 @@ export function Hero() {
               );
             })}
 
-            {/* Coming Soon Badge in Middle */}
+            {/* Coming Soon Badge + Drink Flavors in Middle */}
             <motion.div
-              className="flex flex-col items-center justify-end px-4 md:px-6 lg:px-8 mb-0"
+              className="flex flex-col items-center justify-end px-2 md:px-4 lg:px-6 mb-0"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#7dcea0]/30 bg-[#7dcea0]/10 px-3 py-1.5 mb-4">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#7dcea0]/30 bg-[#7dcea0]/10 px-3 py-1.5 mb-6">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
                 <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#7dcea0]">Now Booking</span>
               </div>
 
+              <div className="flex flex-col items-center gap-2 md:gap-3">
+                {DRINK_FLAVORS.map((flavor, idx) => (
+                  <motion.div
+                    key={flavor}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + idx * 0.05, duration: 0.4 }}
+                  >
+                    <h3
+                      className="font-display font-bold text-white text-center"
+                      style={{
+                        fontSize: "clamp(0.9rem, 1.8vw, 1.3rem)",
+                        lineHeight: 1.1,
+                        letterSpacing: "-0.02em",
+                        textTransform: "uppercase"
+                      }}
+                    >
+                      {flavor}
+                    </h3>
+                  </motion.div>
+                ))}
+              </div>
+
               <h2
-                className="font-display font-bold text-white text-center whitespace-nowrap"
-                style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 1.0, letterSpacing: "-0.03em" }}
+                className="font-display font-bold text-white text-center mt-6"
+                style={{ fontSize: "clamp(1.5rem, 3vw, 2.2rem)", lineHeight: 1.0, letterSpacing: "-0.03em" }}
               >
                 <span style={{ background: "linear-gradient(135deg, #7dcea0 0%, #c4f0d5 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  Coming<br />Soon
+                  COMING SOON
                 </span>
               </h2>
             </motion.div>
