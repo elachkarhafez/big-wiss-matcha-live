@@ -44,9 +44,6 @@ export async function POST(request: Request) {
     }
   }
 
-  if (!payload.drinksRequested || payload.drinksRequested.length === 0) {
-    fieldErrors.drinksRequested = "Please select at least one drink.";
-  }
 
   if (!payload.agreeToTerms) {
     fieldErrors.agreeToTerms = "You must agree to the terms to submit.";

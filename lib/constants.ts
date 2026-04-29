@@ -1,12 +1,7 @@
 import type { MatchaLevel, MenuItem } from "@/types/menu";
 
 export const NAV_ITEMS = [
-  { label: "About", href: "#about", id: "about" },
-  { label: "Menu", href: "#menu", id: "menu" },
-  { label: "Events", href: "#events", id: "events" },
-  { label: "Media", href: "#media", id: "media" },
-  { label: "Book", href: "#book", id: "book" },
-  { label: "Location", href: "#location", id: "location" }
+  { label: "Book", href: "/catering", id: "book" }
 ] as const;
 
 export const CTA_COPY = {

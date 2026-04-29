@@ -7,17 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, ArrowLeft, ChevronRight } from "lucide-react";
 import type { CateringPayload, CateringResponse } from "@/types/catering";
 
-const DRINK_OPTIONS = [
-  "Classic Matcha",
-  "Iced Matcha",
-  "Vanilla Matcha",
-  "Strawberry Matcha",
-  "Cream Top Matcha",
-  "Dirty Matcha (w/ Espresso)",
-  "Honey Matcha",
-  "Big Wiss Special",
-];
-
 const EVENT_TYPES = [
   "Wedding", "Corporate Event", "Birthday Party", "Brand Activation",
   "Private Gathering", "Pop-Up", "Community Event", "Other",
@@ -83,12 +72,6 @@ export default function CateringPage() {
     if (errors[field]) setErrors((prev) => { const e = { ...prev }; delete e[field]; return e; });
   }
 
-  function toggleDrink(drink: string) {
-    set("drinksRequested", form.drinksRequested.includes(drink)
-      ? form.drinksRequested.filter((d) => d !== drink)
-      : [...form.drinksRequested, drink]
-    );
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -261,29 +244,9 @@ export default function CateringPage() {
             </div>
           </FormSection>
 
-          {/* Section 4 – Menu */}
-          <FormSection title="04 · Menu & Service Preferences">
-            <Field label="Drinks Requested * (select all that apply)" error={errors.drinksRequested}>
-              <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 mt-1">
-                {DRINK_OPTIONS.map((drink) => (
-                  <button
-                    key={drink}
-                    type="button"
-                    onClick={() => toggleDrink(drink)}
-                    className={`text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-150 ${
-                      form.drinksRequested.includes(drink)
-                        ? "bg-[#7dcea0]/20 border-[#7dcea0]/60 text-white"
-                        : "border-white/10 bg-white/5 text-white/50 hover:border-white/25 hover:text-white/80"
-                    }`}
-                  >
-                    {form.drinksRequested.includes(drink) && <span className="mr-2 text-[#7dcea0]">✓</span>}
-                    {drink}
-                  </button>
-                ))}
-              </div>
-            </Field>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          {/* Section 4 – Service Preferences */}
+          <FormSection title="04 · Service Preferences">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field label="Matcha Strength Preference *" error={errors.matchaLevel}>
                 <select className={selectClass} value={form.matchaLevel} onChange={(e) => set("matchaLevel", e.target.value)}>
                   <option value="">Select</option>
