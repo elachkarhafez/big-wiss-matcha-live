@@ -129,12 +129,23 @@ export default function CateringPage() {
   }
 
   const inputClass = "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#7dcea0]/50 focus:border-[#7dcea0]/50 transition-all";
-  const selectClass = inputClass + " appearance-none";
+  const selectClass = "w-full rounded-xl border border-white/10 bg-[#0f2318] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#7dcea0]/50 focus:border-[#7dcea0]/50 transition-all appearance-none cursor-pointer";
   const labelClass = "block text-xs font-semibold uppercase tracking-[0.1em] text-white/50 mb-2";
   const errorClass = "mt-1.5 text-xs text-red-400";
 
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #0a1f14 0%, #122a1c 40%, #0f2318 100%)" }}>
+      <style>{`
+        select option {
+          background-color: #0f2318;
+          color: #ffffff;
+        }
+        select option:checked,
+        select option:hover {
+          background-color: #1a4d2e;
+          color: #ffffff;
+        }
+      `}</style>
 
       {/* Nav bar */}
       <div className="sticky top-0 z-50 border-b border-white/5 backdrop-blur-md" style={{ background: "rgba(10, 31, 20, 0.85)" }}>
