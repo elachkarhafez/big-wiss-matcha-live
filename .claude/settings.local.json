@@ -59,7 +59,12 @@
       "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\strawberry matcha cup.png\" \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\strawberry-matcha.png\")",
       "Bash(python -c \"import rembg; print\\('rembg ok'\\)\")",
       "Bash(python fix_transparency.py)",
-      "Bash(python -)"
+      "Bash(python -)",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\classic matcha cup.png\"    \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\classic-matcha.png\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\cream top matcha cup.png\"  \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cream-top.png\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\dirty matcha cup.png\"      \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\dirty-matcha.png\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\iced matcha cup .png\"      \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\iced-matcha.png\")",
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\vanilla matcha cup.png\"    \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\vanilla-matcha.png\")"
     ]
   }
 }

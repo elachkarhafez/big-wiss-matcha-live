@@ -5,15 +5,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const HERO_CUPS_LEFT = [
-  { src: "/product-cups/classic-matcha.png", alt: "Classic Matcha" },
-  { src: "/product-cups/cream-top.png", alt: "Cream Top Matcha" },
-  { src: "/product-cups/iced-matcha.png", alt: "Iced Matcha" },
+  { src: "/product-cups/classic-matcha-cup.png", alt: "Classic Matcha" },
+  { src: "/product-cups/cream-top-cup.png", alt: "Cream Top Matcha" },
+  { src: "/product-cups/iced-matcha-cup.png", alt: "Iced Matcha" },
 ];
 
 const HERO_CUPS_RIGHT = [
-  { src: "/product-cups/strawberry-matcha.png", alt: "Strawberry Matcha" },
-  { src: "/product-cups/dirty-matcha.png", alt: "Dirty Matcha" },
-  { src: "/product-cups/vanilla-matcha.png", alt: "Vanilla Matcha" },
+  { src: "/product-cups/strawberry-matcha-cup.png", alt: "Strawberry Matcha" },
+  { src: "/product-cups/dirty-matcha-cup.png", alt: "Dirty Matcha" },
+  { src: "/product-cups/vanilla-matcha-cup.png", alt: "Vanilla Matcha" },
 ];
 
 const ALL_CUPS = [...HERO_CUPS_LEFT, ...HERO_CUPS_RIGHT];
