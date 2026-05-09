@@ -55,7 +55,7 @@ export function Navbar() {
           <Link href="#hero" className="group inline-flex items-center">
             <motion.span
               className="relative"
-              style={{ width: 110, height: 52 }}
+              style={{ width: 140, height: 66 }}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
