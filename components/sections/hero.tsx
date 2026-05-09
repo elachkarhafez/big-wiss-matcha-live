@@ -16,11 +16,16 @@ const HERO_CUPS_RIGHT = [
   { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
 ];
 
-// Mobile shows 3 featured cups — large and prominent
-const MOBILE_CUPS = [
+// Mobile: all 6 cups in 2 rows of 3, large size
+const MOBILE_ROW1 = [
   { src: "/product-cups/v3-classic.png", alt: "Classic Matcha" },
   { src: "/product-cups/v3-cream.png", alt: "Cream Top Matcha" },
+  { src: "/product-cups/v3-iced.png", alt: "Iced Matcha" },
+];
+const MOBILE_ROW2 = [
   { src: "/product-cups/v3-strawberry.png", alt: "Strawberry Matcha" },
+  { src: "/product-cups/v3-dirty.png", alt: "Dirty Matcha" },
+  { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
 ];
 
 export function Hero() {
@@ -86,38 +91,40 @@ export function Hero() {
           </h2>
         </motion.div>
 
-        {/* Cups — 3 large cups in an arch */}
+        {/* Cups — all 6 in 2 rows of 3, large arch each row */}
         <motion.div
-          className="w-full relative mb-6"
+          className="w-full relative mb-4"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
         >
           {/* Glow beneath cups */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 pointer-events-none"
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.18) 0%, transparent 70%)" }} />
 
-          <div className="flex items-end justify-center gap-2">
-            {MOBILE_CUPS.map((cup, i) => {
-              // Arch: left & right elevated, center at baseline
-              const archMb = i === 1 ? 0 : "5vw";
-              return (
-                <motion.div
-                  key={cup.src}
-                  className="relative flex-shrink-0"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45 + i * 0.08, duration: 0.5, ease: "easeOut" }}
-                  style={{ marginBottom: archMb }}
-                >
-                  <div style={{ animation: `gentleFloat ${3.8 + i * 0.25}s ease-in-out infinite`, animationDelay: `${i * 0.2}s` }}>
-                    <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 240 }}>
-                      <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                        style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+          {[MOBILE_ROW1, MOBILE_ROW2].map((row, rowIdx) => (
+            <div key={rowIdx} className="flex items-end justify-center gap-2 mb-1">
+              {row.map((cup, i) => {
+                const archMb = i === 1 ? 0 : "5vw";
+                const globalI = rowIdx * 3 + i;
+                return (
+                  <motion.div
+                    key={cup.src}
+                    className="relative flex-shrink-0"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + globalI * 0.07, duration: 0.5, ease: "easeOut" }}
+                    style={{ marginBottom: archMb }}
+                  >
+                    <div style={{ animation: `gentleFloat ${3.8 + globalI * 0.2}s ease-in-out infinite`, animationDelay: `${globalI * 0.15}s` }}>
+                      <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
+                        <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
+                          style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ))}
         </motion.div>
 
         {/* Description + CTAs */}
