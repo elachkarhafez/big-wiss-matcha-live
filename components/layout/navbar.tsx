@@ -52,26 +52,20 @@ export function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="#hero" className="group inline-flex items-center gap-3">
+          <Link href="#hero" className="group inline-flex items-center">
             <motion.span
-              className="relative h-9 w-9 overflow-hidden rounded-full ring-1 ring-white/25 md:h-12 md:w-12"
-              whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(255,255,255,0.3)" }}
-              animate={{ rotateY: 0 }}
+              className="relative"
+              style={{ width: 110, height: 52 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <Image
-                src="/logo/big-wiss-logo.jpeg"
+                src="/logo/no-bg-logo.png"
                 alt="Big Wiss Matcha logo"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
-            </motion.span>
-            <motion.span
-              className="font-display text-xl font-semibold uppercase tracking-[0.08em] text-white md:text-2xl"
-              animate={{ opacity: 1 }}
-              whileHover={{ letterSpacing: "0.15em" }}
-            >
-              Big Wiss
             </motion.span>
           </Link>
         </motion.div>
