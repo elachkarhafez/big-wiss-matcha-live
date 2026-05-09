@@ -154,8 +154,8 @@ export function Hero() {
 
         {/* Title */}
         <motion.h1
-          className="font-display font-bold text-white text-center leading-[0.95] tracking-[-0.03em] mb-10"
-          style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+          className="font-display font-bold text-white text-center leading-[0.95] tracking-[-0.03em] mb-4"
+          style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
           BIG ENERGY.
@@ -173,16 +173,16 @@ export function Hero() {
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-40 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.13) 0%, transparent 70%)" }} />
 
-          <div className="flex items-end w-full">
-            {/* Left cups — stagger via marginBottom so taller cups rise above the bottom baseline */}
+          <div className="flex items-center w-full">
+            {/* Left cups */}
             {HERO_CUPS_LEFT.map((cup, i) => (
               <motion.div key={cup.src} className="relative flex-shrink-0"
                 initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + i * 0.08, duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: i === 0 ? "6vw" : i === 1 ? "2vw" : 0 }}>
+                style={{ marginBottom: i === 0 ? "4vw" : i === 2 ? "2vw" : 0 }}>
                 <div style={{ animation: `gentleFloat ${3.5 + i * 0.25}s ease-in-out infinite`, animationDelay: `${i * 0.2}s` }}>
-                  <div style={{ position: "relative", width: "9vw", height: "32vw", minWidth: 80, minHeight: 260 }}>
-                    <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain object-bottom"
+                  <div style={{ position: "relative", width: "9vw", height: "30vw", minWidth: 80, minHeight: 240 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain"
                       style={{ filter: "drop-shadow(0 16px 36px rgba(0,0,0,0.5))" }} priority />
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export function Hero() {
             ))}
 
             {/* Center — COMING SOON */}
-            <motion.div className="flex-1 flex flex-col items-center justify-center pb-4"
+            <motion.div className="flex-1 flex flex-col items-center justify-center"
               initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#7dcea0]/30 bg-[#7dcea0]/10 px-3 py-1 mb-4">
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
@@ -214,10 +214,10 @@ export function Hero() {
               <motion.div key={cup.src} className="relative flex-shrink-0"
                 initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + (i + 3) * 0.08, duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: i === 0 ? "2vw" : i === 1 ? "5vw" : 0 }}>
+                style={{ marginBottom: i === 0 ? "2vw" : i === 2 ? "4vw" : 0 }}>
                 <div style={{ animation: `gentleFloat ${3.5 + (i + 3) * 0.25}s ease-in-out infinite`, animationDelay: `${(i + 3) * 0.2}s` }}>
-                  <div style={{ position: "relative", width: "9vw", height: "32vw", minWidth: 80, minHeight: 260 }}>
-                    <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain object-bottom"
+                  <div style={{ position: "relative", width: "9vw", height: "30vw", minWidth: 80, minHeight: 240 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain"
                       style={{ filter: "drop-shadow(0 16px 36px rgba(0,0,0,0.5))" }} priority />
                   </div>
                 </div>
