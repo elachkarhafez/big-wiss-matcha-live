@@ -16,7 +16,12 @@ const HERO_CUPS_RIGHT = [
   { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
 ];
 
-const ALL_CUPS = [...HERO_CUPS_LEFT, ...HERO_CUPS_RIGHT];
+// Mobile shows 3 featured cups — large and prominent
+const MOBILE_CUPS = [
+  { src: "/product-cups/v3-classic.png", alt: "Classic Matcha" },
+  { src: "/product-cups/v3-cream.png", alt: "Cream Top Matcha" },
+  { src: "/product-cups/v3-strawberry.png", alt: "Strawberry Matcha" },
+];
 
 export function Hero() {
   return (
@@ -81,33 +86,32 @@ export function Hero() {
           </h2>
         </motion.div>
 
-        {/* Cups — full width horizontal row */}
+        {/* Cups — 3 large cups in an arch */}
         <motion.div
           className="w-full relative mb-6"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
         >
-          {/* Glow */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-24 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.15) 0%, transparent 70%)" }} />
+          {/* Glow beneath cups */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.18) 0%, transparent 70%)" }} />
 
-          <div className="flex items-end justify-center">
-            {ALL_CUPS.map((cup, i) => {
-              const mid = (ALL_CUPS.length - 1) / 2;
-              const dist = Math.abs(i - mid);
-              const mb = dist * 12;
+          <div className="flex items-end justify-center gap-2">
+            {MOBILE_CUPS.map((cup, i) => {
+              // Arch: left & right elevated, center at baseline
+              const archMb = i === 1 ? 0 : "5vw";
               return (
                 <motion.div
                   key={cup.src}
                   className="relative flex-shrink-0"
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45 + i * 0.06, duration: 0.45, ease: "easeOut" }}
-                  style={{ marginBottom: mb }}
+                  transition={{ delay: 0.45 + i * 0.08, duration: 0.5, ease: "easeOut" }}
+                  style={{ marginBottom: archMb }}
                 >
-                  <div style={{ animation: `gentleFloat ${3.5 + i * 0.2}s ease-in-out infinite`, animationDelay: `${i * 0.15}s` }}>
-                    <div style={{ position: "relative", width: "14.5vw", height: "48vw", minWidth: 48, minHeight: 160 }}>
-                      <Image src={cup.src} alt={cup.alt} fill sizes="15vw" className="object-contain"
-                        style={{ filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.5))" }} priority quality={90} />
+                  <div style={{ animation: `gentleFloat ${3.8 + i * 0.25}s ease-in-out infinite`, animationDelay: `${i * 0.2}s` }}>
+                    <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 240 }}>
+                      <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
+                        style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
                     </div>
                   </div>
                 </motion.div>
