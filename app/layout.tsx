@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     siteName: appConfig.siteName,
     images: [
       {
-        url: "/images/big-wiss-action-poster.png",
+        url: "/images/og-preview.jpg",
         width: 1200,
-        height: 1600,
-        alt: "Big Wiss Matcha founder action poster"
+        height: 630,
+        alt: "Big Wiss Matcha — Dearborn Premium Matcha Pop-Up"
       }
     ],
     locale: "en_US",
@@ -49,10 +49,10 @@ export const metadata: Metadata = {
     title: "Big Wiss Matcha | Premium Event Matcha",
     description:
       "Book Big Wiss Matcha for premium, founder-led pop-up service in Dearborn and throughout Michigan.",
-    images: ["/images/big-wiss-action-poster.png"]
+    images: ["/images/og-preview.jpg"]
   },
   icons: {
-    icon: "/logo/big-wiss-logo.jpeg"
+    icon: "/logo/logo-v2.png"
   }
 };
 
