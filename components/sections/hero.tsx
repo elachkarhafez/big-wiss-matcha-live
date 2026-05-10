@@ -100,31 +100,51 @@ export function Hero() {
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.18) 0%, transparent 70%)" }} />
 
-          {[MOBILE_ROW1, MOBILE_ROW2].map((row, rowIdx) => (
-            <div key={rowIdx} className="flex items-end justify-center gap-2 mb-1">
-              {row.map((cup, i) => {
-                const archMb = i === 1 ? 0 : "5vw";
-                const globalI = rowIdx * 3 + i;
-                return (
-                  <motion.div
-                    key={cup.src}
-                    className="relative flex-shrink-0"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + globalI * 0.07, duration: 0.5, ease: "easeOut" }}
-                    style={{ marginBottom: archMb }}
-                  >
-                    <div style={{ animation: `gentleFloat ${3.8 + globalI * 0.2}s ease-in-out infinite`, animationDelay: `${globalI * 0.15}s` }}>
-                      <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
-                        <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                          style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+          {/* Row 1 */}
+          <div className="flex items-end justify-center gap-2">
+            {MOBILE_ROW1.map((cup, i) => (
+              <motion.div key={cup.src} className="relative flex-shrink-0"
+                initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + i * 0.07, duration: 0.5, ease: "easeOut" }}
+                style={{ marginBottom: i === 1 ? 0 : "5vw" }}>
+                <div style={{ animation: `gentleFloat ${3.8 + i * 0.2}s ease-in-out infinite`, animationDelay: `${i * 0.15}s` }}>
+                  <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
+                      style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Logo between rows */}
+          <motion.div className="flex flex-col items-center py-3"
+            initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.65, duration: 0.5 }}>
+            <div style={{ position: "relative", width: "44vw", height: "44vw" }}>
+              <Image src="/logo/logo-v2.png" alt="Big Wiss Matcha" fill className="object-contain" />
             </div>
-          ))}
+            <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/35 mt-1">
+              Dearborn, MI · Premium Matcha
+            </p>
+          </motion.div>
+
+          {/* Row 2 */}
+          <div className="flex items-end justify-center gap-2">
+            {MOBILE_ROW2.map((cup, i) => (
+              <motion.div key={cup.src} className="relative flex-shrink-0"
+                initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 + i * 0.07, duration: 0.5, ease: "easeOut" }}
+                style={{ marginBottom: i === 1 ? 0 : "5vw" }}>
+                <div style={{ animation: `gentleFloat ${4.4 + i * 0.2}s ease-in-out infinite`, animationDelay: `${(i + 3) * 0.15}s` }}>
+                  <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
+                      style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Description + CTAs */}
