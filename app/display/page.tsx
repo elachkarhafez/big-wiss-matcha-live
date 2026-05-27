@@ -3,11 +3,17 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+// ── PALETTE ──────────────────────────────────────────────────────────────────
+const CREAM      = "#f2ede3";
+const CREAM_MID  = "rgba(242,237,227,0.60)";
+const CREAM_LOW  = "rgba(242,237,227,0.42)";
+const CREAM_FAINT= "rgba(242,237,227,0.07)";
+
 // ── MENU DATA ────────────────────────────────────────────────────────────────
 const MENU = [
   {
-    category: "SIGNATURE",
-    accent: "#7dcea0",
+    category: "Signature",
+    accent: "#9ecdb0",
     items: [
       { name: "Classic Matcha Latte",  desc: "Ceremonial grade · steamed milk",      price: "$7.00" },
       { name: "Iced Matcha Latte",     desc: "Shaken over ice · smooth finish",      price: "$7.00" },
@@ -17,73 +23,71 @@ const MENU = [
     ],
   },
   {
-    category: "SPECIALTY",
-    accent: "#c4f0d5",
+    category: "Specialty",
+    accent: "#b8dfc8",
     items: [
-      { name: "Cream Top Matcha",   desc: "Sweet cream foam · velvety texture",    price: "$8.00" },
-      { name: "Dirty Matcha",       desc: "Espresso shot · balanced energy",       price: "$8.50" },
-      { name: "Strawberry Matcha",  desc: "Fresh strawberry purée · layered",      price: "$9.00" },
-      { name: "Vanilla Matcha",     desc: "House vanilla · ceremonial grade",      price: "$8.50" },
-      { name: "Brown Sugar Matcha", desc: "Caramelized brown sugar · rich blend",  price: "$8.50" },
+      { name: "Cream Top Matcha",   desc: "Sweet cream foam · velvety texture",   price: "$8.00" },
+      { name: "Dirty Matcha",       desc: "Espresso shot · balanced energy",      price: "$8.50" },
+      { name: "Strawberry Matcha",  desc: "Fresh strawberry purée · layered",     price: "$9.00" },
+      { name: "Vanilla Matcha",     desc: "House vanilla · ceremonial grade",     price: "$8.50" },
+      { name: "Brown Sugar Matcha", desc: "Caramelised brown sugar · rich blend", price: "$8.50" },
     ],
   },
   {
-    category: "SEASONAL",
-    accent: "#f0d080",
+    category: "Seasonal",
+    accent: "#c9aa6a",
     items: [
-      { name: "Lavender Matcha",    desc: "Floral lavender · silky finish",        price: "$9.50" },
-      { name: "Mango Matcha",       desc: "Tropical mango purée over ice",         price: "$9.00" },
-      { name: "Honey Yuzu Matcha",  desc: "Citrus honey · ceremonial grade",       price: "$9.50" },
-      { name: "Rose Matcha Latte",  desc: "Rose water · oat milk · delicate",      price: "$9.00" },
-      { name: "Mint Chip Matcha",   desc: "Fresh mint · dark chocolate chips",     price: "$9.50" },
+      { name: "Lavender Matcha",    desc: "Floral lavender · silky finish",       price: "$9.50" },
+      { name: "Mango Matcha",       desc: "Tropical mango purée over ice",        price: "$9.00" },
+      { name: "Honey Yuzu Matcha",  desc: "Citrus honey · ceremonial grade",      price: "$9.50" },
+      { name: "Rose Matcha Latte",  desc: "Rose water · oat milk · delicate",     price: "$9.00" },
+      { name: "Mint Chip Matcha",   desc: "Fresh mint · dark chocolate chips",    price: "$9.50" },
     ],
   },
   {
-    category: "ADD-ONS",
-    accent: "#C4A57B",
+    category: "Add-Ons",
+    accent: "#c4a57b",
     items: [
-      { name: "Extra Matcha Shot",  desc: "More depth, more energy",               price: "+$1.50" },
-      { name: "Cream Top",          desc: "Sweet cream foam layer",                price: "+$1.50" },
-      { name: "Oat Milk Upgrade",   desc: "Plant-based alternative",               price: "+$1.00" },
-      { name: "Flavor Syrup",       desc: "Vanilla · brown sugar · lavender",      price: "+$0.75" },
-      { name: "Large (24 oz)",      desc: "Regular → Large size upgrade",          price: "+$1.50" },
+      { name: "Extra Matcha Shot",  desc: "More depth, more energy",              price: "+$1.50" },
+      { name: "Cream Top",          desc: "Sweet cream foam layer",               price: "+$1.50" },
+      { name: "Oat Milk Upgrade",   desc: "Plant-based alternative",              price: "+$1.00" },
+      { name: "Flavour Syrup",      desc: "Vanilla · brown sugar · lavender",     price: "+$0.75" },
+      { name: "Large (24 oz)",      desc: "Regular → Large size upgrade",         price: "+$1.50" },
     ],
   },
 ];
 
-// Flat index map for spotlight cycling
 const FLAT_ITEMS = MENU.flatMap((cat, ci) =>
   cat.items.map((_item, ii) => ({ ci, ii }))
 );
 
-// ── MARQUEE SLIDES ───────────────────────────────────────────────────────────
+// ── MARQUEE DATA ─────────────────────────────────────────────────────────────
 const CUP_SLIDES = [
   { src: "/product-cups/v3-classic.png",    label: "Classic Matcha",    sub: "Ceremonial Grade" },
   { src: "/product-cups/v3-cream.png",      label: "Cream Top Matcha",  sub: "Sweet Cream Foam" },
-  { src: "/product-cups/v3-strawberry.png", label: "Strawberry Matcha", sub: "Fresh Purée" },
-  { src: "/product-cups/v3-dirty.png",      label: "Dirty Matcha",      sub: "Espresso Blend" },
-  { src: "/product-cups/v3-iced.png",       label: "Iced Matcha",       sub: "Shaken Over Ice" },
-  { src: "/product-cups/v3-vanilla.png",    label: "Vanilla Matcha",    sub: "House Vanilla" },
+  { src: "/product-cups/v3-strawberry.png", label: "Strawberry Matcha", sub: "Fresh Purée"      },
+  { src: "/product-cups/v3-dirty.png",      label: "Dirty Matcha",      sub: "Espresso Blend"   },
+  { src: "/product-cups/v3-iced.png",       label: "Iced Matcha",       sub: "Shaken Over Ice"  },
+  { src: "/product-cups/v3-vanilla.png",    label: "Vanilla Matcha",    sub: "House Vanilla"    },
 ];
 
 const BRAND_CARDS = [
-  { headline: "FOUNDER-LED",      sub: "Dearborn, MI",           accent: "#7dcea0" },
-  { headline: "PREMIUM MATCHA",   sub: "Ceremonial Grade",       accent: "#c4f0d5" },
-  { headline: "NOW BOOKING",      sub: "Summer 2026",            accent: "#C4A57B" },
-  { headline: "EVENT CATERING",   sub: "Weddings · Activations", accent: "#7dcea0" },
-  { headline: "BIG ENERGY.",      sub: "Real Matcha.",           accent: "#f0d080" },
+  { headline: "Founder-Led",      sub: "Dearborn, MI",           accent: "#9ecdb0" },
+  { headline: "Premium Matcha",   sub: "Ceremonial Grade",       accent: "#b8dfc8" },
+  { headline: "Now Booking",      sub: "Summer 2026",            accent: "#c9aa6a" },
+  { headline: "Event Catering",   sub: "Weddings · Activations", accent: "#9ecdb0" },
+  { headline: "Big Energy.",      sub: "Real Matcha.",           accent: "#c4a57b" },
 ];
 
 function buildMarquee() {
   const slides: { type: "cup" | "card"; data: (typeof CUP_SLIDES)[0] | (typeof BRAND_CARDS)[0] }[] = [];
-  const maxLen = Math.max(CUP_SLIDES.length, BRAND_CARDS.length);
-  for (let i = 0; i < maxLen; i++) {
+  const max = Math.max(CUP_SLIDES.length, BRAND_CARDS.length);
+  for (let i = 0; i < max; i++) {
     if (i < CUP_SLIDES.length)  slides.push({ type: "cup",  data: CUP_SLIDES[i] });
     if (i < BRAND_CARDS.length) slides.push({ type: "card", data: BRAND_CARDS[i] });
   }
   return slides;
 }
-
 const MARQUEE_SLIDES = buildMarquee();
 
 // ── CLOCK ────────────────────────────────────────────────────────────────────
@@ -106,7 +110,7 @@ export default function DisplayPage() {
   useEffect(() => {
     const id = setInterval(
       () => setSpotlight((p) => (p + 1) % FLAT_ITEMS.length),
-      2800
+      3200
     );
     return () => clearInterval(id);
   }, []);
@@ -117,56 +121,69 @@ export default function DisplayPage() {
         width: "100vw",
         height: "100vh",
         overflow: "hidden",
-        // Brighter, more saturated dark-green base
-        background: "linear-gradient(145deg, #0d3020 0%, #124030 45%, #0f3525 100%)",
-        fontFamily: "var(--font-display, 'Montserrat', sans-serif)",
+        background: "#0d1a10",
         position: "relative",
+        fontFamily: "'Montserrat', sans-serif",
       }}
     >
-      {/* ── BACKGROUND AMBIANCE ──────────────────────────── */}
-      <div
-        style={{
-          position: "absolute", inset: 0, overflow: "hidden",
-          pointerEvents: "none", zIndex: 0,
-        }}
-      >
-        {/* Large glowing orbs that slowly drift */}
-        <div style={{
-          position: "absolute", top: "-20%", left: "5%",
-          width: "55vw", height: "55vw", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(125,206,160,0.20) 0%, transparent 60%)",
-          animation: "drift1 20s ease-in-out infinite",
-        }} />
-        <div style={{
-          position: "absolute", bottom: "-10%", right: "0%",
-          width: "45vw", height: "45vw", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(196,240,213,0.13) 0%, transparent 60%)",
-          animation: "drift2 26s ease-in-out infinite",
-        }} />
-        <div style={{
-          position: "absolute", top: "30%", left: "-8%",
-          width: "30vw", height: "30vw", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(240,208,128,0.10) 0%, transparent 60%)",
-          animation: "drift3 32s ease-in-out infinite",
-        }} />
+      {/* ── BACKGROUND ──────────────────────────────────── */}
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
 
-        {/* Subtle dot grid overlay */}
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(rgba(125,206,160,0.07) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }} />
+        {/* Slow cream-swirl overlay — the centrepiece */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%", left: "50%",
+            width: "180vw", height: "180vw",
+            background:
+              "conic-gradient(from 0deg at 42% 38%, " +
+              "rgba(242,237,227,0.05) 0deg, " +
+              "rgba(88,148,108,0.07) 80deg, " +
+              "rgba(242,237,227,0.02) 180deg, " +
+              "rgba(196,166,100,0.06) 260deg, " +
+              "rgba(242,237,227,0.05) 360deg)",
+            animation: "creamSwirl 100s linear infinite",
+          }}
+        />
 
-        {/* Moving scan line — TV authenticity */}
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0,
-          height: "2px",
-          background: "linear-gradient(90deg, transparent 0%, rgba(125,206,160,0.25) 50%, transparent 100%)",
-          animation: "scan 10s linear infinite",
-        }} />
+        {/* Soft ambient pools */}
+        <div
+          style={{
+            position: "absolute", top: "-18%", right: "-4%",
+            width: "52vw", height: "52vw", borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(158,205,176,0.13) 0%, transparent 62%)",
+            animation: "poolDrift1 28s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute", bottom: "-12%", left: "-6%",
+            width: "44vw", height: "44vw", borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(196,165,100,0.10) 0%, transparent 62%)",
+            animation: "poolDrift2 34s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute", top: "38%", left: "42%",
+            width: "28vw", height: "28vw", borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(242,237,227,0.04) 0%, transparent 62%)",
+            animation: "poolDrift3 42s ease-in-out infinite",
+          }}
+        />
+
+        {/* Very faint noise-like grain overlay */}
+        <div
+          style={{
+            position: "absolute", inset: 0,
+            background: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E\")",
+            backgroundSize: "200px 200px",
+            opacity: 0.4,
+          }}
+        />
       </div>
 
-      {/* ── CONTENT ─────────────────────────────────────── */}
+      {/* ── LAYOUT ──────────────────────────────────────── */}
       <div
         style={{
           position: "relative", zIndex: 1,
@@ -176,111 +193,112 @@ export default function DisplayPage() {
         {/* ── HEADER ─────────────────────────────────────── */}
         <header
           style={{
-            height: "13vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0 3vw",
-            borderBottom: "1px solid rgba(125,206,160,0.3)",
-            background: "linear-gradient(90deg, rgba(18,64,48,0.75), rgba(14,48,36,0.55))",
-            backdropFilter: "blur(8px)",
+            height: "12.5vh",
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "0 3.5vw",
+            borderBottom: `1px solid ${CREAM_FAINT}`,
+            background: "rgba(9,18,11,0.50)",
+            backdropFilter: "blur(16px)",
             flexShrink: 0,
             position: "relative",
           }}
         >
-          {/* Glowing bottom rule */}
-          <div style={{
-            position: "absolute", bottom: -1, left: "8%", right: "8%", height: "1px",
-            background: "linear-gradient(90deg, transparent, rgba(125,206,160,0.7), transparent)",
-            filter: "blur(1px)",
-          }} />
+          {/* Subtle hairline glow along header bottom */}
+          <div
+            style={{
+              position: "absolute", bottom: 0, left: "10%", right: "10%", height: "1px",
+              background: "linear-gradient(90deg, transparent, rgba(158,205,176,0.35), transparent)",
+            }}
+          />
 
           {/* Logo + brand name */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1.6vw" }}>
-            <div style={{ position: "relative", width: "9vh", height: "9vh" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1.8vw" }}>
+            <div style={{ position: "relative", width: "8.5vh", height: "8.5vh" }}>
               <Image
                 src="/logo/logo-v2.png"
                 alt="Big Wiss Matcha"
                 fill
-                style={{
-                  objectFit: "contain",
-                  filter: "drop-shadow(0 0 14px rgba(125,206,160,0.45))",
-                }}
+                style={{ objectFit: "contain", filter: "brightness(1.05) contrast(0.95)" }}
                 priority
               />
             </div>
             <div>
               <div
                 style={{
-                  fontSize: "3.6vh",
-                  fontWeight: 800,
-                  letterSpacing: "0.04em",
-                  color: "#fff",
-                  lineHeight: 1.1,
-                  textTransform: "uppercase",
-                  textShadow: "0 0 28px rgba(125,206,160,0.5)",
+                  fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+                  fontSize: "3.8vh",
+                  fontWeight: 500,
+                  fontStyle: "italic",
+                  letterSpacing: "0.02em",
+                  color: CREAM,
+                  lineHeight: 1,
                 }}
               >
                 Big Wiss Matcha
               </div>
               <div
                 style={{
-                  fontSize: "1.55vh",
-                  color: "#8dd9ad",
-                  letterSpacing: "0.24em",
+                  fontSize: "1.1vh",
+                  fontWeight: 300,
+                  letterSpacing: "0.38em",
                   textTransform: "uppercase",
-                  marginTop: "0.35vh",
+                  color: CREAM_LOW,
+                  marginTop: "0.55vh",
                 }}
               >
-                Dearborn, MI · Premium Matcha
+                Dearborn, Michigan
               </div>
             </div>
           </div>
 
-          {/* Center booking badge */}
+          {/* Centre — booking notice, no badge pill */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.9vw",
-              background: "rgba(125,206,160,0.16)",
-              border: "1px solid rgba(125,206,160,0.55)",
-              borderRadius: "999px",
-              padding: "1.1vh 2.6vw",
-              boxShadow: "0 0 28px rgba(125,206,160,0.22), inset 0 1px 0 rgba(125,206,160,0.25)",
-              animation: "badgeBreath 4s ease-in-out infinite",
+              gap: "1.4vw",
+              borderLeft: `1px solid ${CREAM_FAINT}`,
+              borderRight: `1px solid ${CREAM_FAINT}`,
+              padding: "0 3vw",
             }}
           >
             <span
               style={{
-                width: "0.9vh", height: "0.9vh", borderRadius: "50%",
-                background: "#7dcea0",
-                animation: "pulse 2s ease-in-out infinite",
+                width: "0.45vh", height: "0.45vh", borderRadius: "50%",
+                background: "#9ecdb0",
                 display: "inline-block",
-                boxShadow: "0 0 10px #7dcea0",
+                animation: "breathe 3.5s ease-in-out infinite",
               }}
             />
             <span
               style={{
-                fontSize: "1.8vh",
-                fontWeight: 700,
-                color: "#a8e6c0",
-                letterSpacing: "0.22em",
+                fontSize: "1.25vh",
+                fontWeight: 300,
+                letterSpacing: "0.32em",
                 textTransform: "uppercase",
+                color: CREAM_MID,
               }}
             >
               Now Booking · Summer 2026
             </span>
+            <span
+              style={{
+                width: "0.45vh", height: "0.45vh", borderRadius: "50%",
+                background: "#9ecdb0",
+                display: "inline-block",
+                animation: "breathe 3.5s ease-in-out 1.75s infinite",
+              }}
+            />
           </div>
 
-          {/* Live clock */}
+          {/* Clock */}
           <div
             style={{
-              fontSize: "3vh",
-              fontWeight: 700,
-              color: "rgba(255,255,255,0.78)",
-              letterSpacing: "0.08em",
-              textShadow: "0 0 18px rgba(125,206,160,0.35)",
+              fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+              fontSize: "3.4vh",
+              fontWeight: 400,
+              color: "rgba(242,237,227,0.55)",
+              letterSpacing: "0.06em",
             }}
           >
             <LiveClock />
@@ -303,41 +321,26 @@ export default function DisplayPage() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                padding: "2vh 1.8vw",
-                borderRight: ci < MENU.length - 1
-                  ? "1px solid rgba(255,255,255,0.09)"
-                  : "none",
+                padding: "2.2vh 2.2vw",
+                borderRight:
+                  ci < MENU.length - 1
+                    ? `1px solid ${CREAM_FAINT}`
+                    : "none",
                 overflow: "hidden",
                 position: "relative",
               }}
             >
-              {/* Per-column top glow */}
-              <div
-                style={{
-                  position: "absolute", top: 0, left: "12%", right: "12%", height: "1px",
-                  background: `linear-gradient(90deg, transparent, ${cat.accent}95, transparent)`,
-                  boxShadow: `0 0 16px ${cat.accent}70`,
-                }}
-              />
-
-              {/* Category badge */}
-              <div style={{ marginBottom: "1.5vh", flexShrink: 0 }}>
+              {/* Category header */}
+              <div style={{ marginBottom: "1.6vh", flexShrink: 0 }}>
                 <div
                   style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    fontSize: "1.4vh",
-                    fontWeight: 800,
-                    letterSpacing: "0.3em",
+                    fontSize: "1.1vh",
+                    fontWeight: 600,
+                    letterSpacing: "0.42em",
                     textTransform: "uppercase",
                     color: cat.accent,
-                    background: `${cat.accent}20`,
-                    border: `1px solid ${cat.accent}55`,
-                    borderRadius: "5px",
-                    padding: "0.55vh 1vw",
-                    marginBottom: "0.9vh",
-                    boxShadow: `0 0 16px ${cat.accent}22`,
-                    textShadow: `0 0 12px ${cat.accent}90`,
+                    marginBottom: "1.1vh",
+                    opacity: 0.85,
                   }}
                 >
                   {cat.category}
@@ -345,20 +348,18 @@ export default function DisplayPage() {
                 <div
                   style={{
                     height: "1px",
-                    background: `linear-gradient(90deg, ${cat.accent}90, ${cat.accent}30, transparent)`,
-                    boxShadow: `0 0 6px ${cat.accent}50`,
+                    background: `linear-gradient(90deg, ${cat.accent}70, ${cat.accent}15, transparent)`,
                   }}
                 />
               </div>
 
               {/* Items */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.85vh", flex: 1 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75vh", flex: 1 }}>
                 {cat.items.map((item, ii) => {
                   const flatIdx = ci * 5 + ii;
                   const isSpotlit =
                     FLAT_ITEMS[spotlight].ci === ci &&
                     FLAT_ITEMS[spotlight].ii === ii;
-                  const entranceDelay = flatIdx * 0.09;
 
                   return (
                     <div
@@ -367,51 +368,48 @@ export default function DisplayPage() {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        gap: "0.8vw",
-                        padding: "1.2vh 1vw",
-                        borderRadius: "8px",
+                        gap: "1vw",
+                        padding: "1.1vh 1.1vw 1.1vh 1.3vw",
+                        borderRadius: "6px",
                         background: isSpotlit
-                          ? `${cat.accent}1c`
-                          : "rgba(255,255,255,0.06)",
-                        border: `1px solid ${
-                          isSpotlit
-                            ? `${cat.accent}70`
-                            : "rgba(255,255,255,0.09)"
-                        }`,
+                          ? "rgba(242,237,227,0.065)"
+                          : "rgba(242,237,227,0.025)",
+                        border: `1px solid rgba(242,237,227,0.07)`,
+                        // Inset left bar — the luxury "spotlight" tell
                         boxShadow: isSpotlit
-                          ? `0 0 28px ${cat.accent}30, inset 0 0 16px ${cat.accent}0c`
-                          : "none",
+                          ? `inset 2.5px 0 0 ${cat.accent}`
+                          : "inset 2.5px 0 0 transparent",
                         transition:
-                          "background 0.55s ease, border-color 0.55s ease, box-shadow 0.55s ease",
-                        // Entrance animation
-                        opacity: 0,
-                        animation: `slideIn 0.55s ease ${entranceDelay}s forwards`,
+                          "background 1.1s ease, box-shadow 1.1s ease",
+                        // Entrance
+                        animation: `riseIn 1s ease ${flatIdx * 0.1}s both`,
                       }}
                     >
                       <div style={{ flex: 1, minWidth: 0 }}>
+                        {/* Item name */}
                         <div
                           style={{
-                            fontSize: "2.1vh",
-                            fontWeight: 700,
-                            color: isSpotlit ? cat.accent : "#fff",
+                            fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+                            fontSize: "2.25vh",
+                            fontWeight: isSpotlit ? 500 : 400,
+                            color: isSpotlit ? CREAM : "rgba(242,237,227,0.88)",
                             lineHeight: 1.2,
-                            marginBottom: "0.3vh",
+                            marginBottom: "0.25vh",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            transition: "color 0.55s ease, text-shadow 0.55s ease",
-                            textShadow: isSpotlit
-                              ? `0 0 20px ${cat.accent}95`
-                              : "none",
+                            transition: "color 1.1s ease, font-weight 0.6s ease",
                           }}
                         >
                           {item.name}
                         </div>
+                        {/* Description */}
                         <div
                           style={{
-                            fontSize: "1.4vh",
-                            color: "rgba(255,255,255,0.65)",
+                            fontSize: "1.2vh",
+                            fontWeight: 300,
                             letterSpacing: "0.04em",
+                            color: CREAM_LOW,
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
@@ -424,12 +422,15 @@ export default function DisplayPage() {
                       {/* Price */}
                       <div
                         style={{
-                          fontSize: "2.2vh",
-                          fontWeight: 800,
+                          fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+                          fontSize: "2.1vh",
+                          fontWeight: 500,
                           color: cat.accent,
                           flexShrink: 0,
                           letterSpacing: "0.02em",
-                          animation: `priceGlow 3.5s ease-in-out ${flatIdx * 0.22}s infinite`,
+                          opacity: isSpotlit ? 1 : 0.75,
+                          transition: "opacity 1.1s ease",
+                          animation: `pricePulse 6s ease-in-out ${flatIdx * 0.3}s infinite`,
                         }}
                       >
                         {item.price}
@@ -442,12 +443,12 @@ export default function DisplayPage() {
           ))}
         </main>
 
-        {/* ── AUTO-SCROLL MARQUEE ─────────────────────────── */}
+        {/* ── MARQUEE ──────────────────────────────────────── */}
         <footer
           style={{
-            height: "20vh",
-            borderTop: "1px solid rgba(125,206,160,0.25)",
-            background: "rgba(0,0,0,0.3)",
+            height: "19vh",
+            borderTop: `1px solid ${CREAM_FAINT}`,
+            background: "rgba(6,14,8,0.40)",
             overflow: "hidden",
             flexShrink: 0,
             display: "flex",
@@ -458,15 +459,15 @@ export default function DisplayPage() {
           {/* Edge fade masks */}
           <div
             style={{
-              position: "absolute", left: 0, top: 0, bottom: 0, width: "10vw",
-              background: "linear-gradient(90deg, #0d3020 0%, transparent 100%)",
+              position: "absolute", left: 0, top: 0, bottom: 0, width: "9vw",
+              background: "linear-gradient(90deg, #0d1a10 0%, transparent 100%)",
               zIndex: 2, pointerEvents: "none",
             }}
           />
           <div
             style={{
-              position: "absolute", right: 0, top: 0, bottom: 0, width: "10vw",
-              background: "linear-gradient(-90deg, #0d3020 0%, transparent 100%)",
+              position: "absolute", right: 0, top: 0, bottom: 0, width: "9vw",
+              background: "linear-gradient(-90deg, #0d1a10 0%, transparent 100%)",
               zIndex: 2, pointerEvents: "none",
             }}
           />
@@ -474,7 +475,7 @@ export default function DisplayPage() {
           <div
             style={{
               display: "flex",
-              animation: "marquee 36s linear infinite",
+              animation: "marquee 42s linear infinite",
               width: "max-content",
             }}
           >
@@ -483,9 +484,9 @@ export default function DisplayPage() {
                 key={i}
                 style={{
                   width: "20vh",
-                  height: "18vh",
+                  height: "17vh",
                   flexShrink: 0,
-                  marginRight: "2.5vh",
+                  marginRight: "3vh",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -494,7 +495,7 @@ export default function DisplayPage() {
               >
                 {slide.type === "cup" ? (
                   <>
-                    <div style={{ position: "relative", width: "11vh", height: "14vh" }}>
+                    <div style={{ position: "relative", width: "11vh", height: "13.5vh" }}>
                       <Image
                         src={(slide.data as typeof CUP_SLIDES[0]).src}
                         alt={(slide.data as typeof CUP_SLIDES[0]).label}
@@ -502,26 +503,30 @@ export default function DisplayPage() {
                         style={{
                           objectFit: "contain",
                           filter:
-                            "drop-shadow(0 4px 22px rgba(0,0,0,0.75)) drop-shadow(0 0 10px rgba(125,206,160,0.22))",
+                            "drop-shadow(0 8px 28px rgba(0,0,0,0.70)) drop-shadow(0 0 6px rgba(158,205,176,0.10))",
                         }}
                       />
                     </div>
                     <div style={{ textAlign: "center", marginTop: "0.6vh" }}>
                       <div
                         style={{
-                          fontSize: "1.4vh",
-                          fontWeight: 700,
-                          color: "#fff",
-                          letterSpacing: "0.04em",
+                          fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+                          fontSize: "1.55vh",
+                          fontWeight: 400,
+                          color: CREAM,
+                          letterSpacing: "0.03em",
                         }}
                       >
                         {(slide.data as typeof CUP_SLIDES[0]).label}
                       </div>
                       <div
                         style={{
-                          fontSize: "1.1vh",
-                          color: "rgba(125,206,160,0.88)",
-                          letterSpacing: "0.08em",
+                          fontSize: "0.95vh",
+                          fontWeight: 300,
+                          color: CREAM_LOW,
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                          marginTop: "0.2vh",
                         }}
                       >
                         {(slide.data as typeof CUP_SLIDES[0]).sub}
@@ -531,45 +536,46 @@ export default function DisplayPage() {
                 ) : (
                   <div
                     style={{
-                      width: "16vh",
-                      height: "15vh",
-                      borderRadius: "12px",
-                      border: `1px solid ${(slide.data as typeof BRAND_CARDS[0]).accent}55`,
-                      background: `${(slide.data as typeof BRAND_CARDS[0]).accent}14`,
+                      width: "15.5vh",
+                      height: "14vh",
+                      borderRadius: "8px",
+                      border: `1px solid ${(slide.data as typeof BRAND_CARDS[0]).accent}30`,
+                      background: `${(slide.data as typeof BRAND_CARDS[0]).accent}0c`,
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
                       textAlign: "center",
-                      padding: "1.2vh",
-                      boxShadow: `0 0 22px ${(slide.data as typeof BRAND_CARDS[0]).accent}22`,
+                      padding: "1.1vh",
                     }}
                   >
                     <div
                       style={{
-                        fontSize: "1.8vh",
-                        fontWeight: 800,
+                        fontFamily: "'Cormorant Garamond', 'Georgia', serif",
+                        fontSize: "1.9vh",
+                        fontWeight: 500,
+                        fontStyle: "italic",
                         color: (slide.data as typeof BRAND_CARDS[0]).accent,
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        lineHeight: 1.2,
-                        textShadow: `0 0 14px ${(slide.data as typeof BRAND_CARDS[0]).accent}90`,
+                        letterSpacing: "0.02em",
+                        lineHeight: 1.25,
                       }}
                     >
                       {(slide.data as typeof BRAND_CARDS[0]).headline}
                     </div>
                     <div
                       style={{
-                        width: "40%", height: "1px",
-                        background: `${(slide.data as typeof BRAND_CARDS[0]).accent}65`,
-                        margin: "0.7vh auto",
+                        width: "28%",
+                        height: "1px",
+                        background: `${(slide.data as typeof BRAND_CARDS[0]).accent}50`,
+                        margin: "0.65vh auto",
                       }}
                     />
                     <div
                       style={{
-                        fontSize: "1.25vh",
-                        color: "rgba(255,255,255,0.72)",
-                        letterSpacing: "0.1em",
+                        fontSize: "0.9vh",
+                        fontWeight: 300,
+                        color: CREAM_LOW,
+                        letterSpacing: "0.16em",
                         textTransform: "uppercase",
                       }}
                     >
@@ -585,29 +591,26 @@ export default function DisplayPage() {
 
       {/* ── KEYFRAMES ───────────────────────────────────── */}
       <style>{`
-        /* Background orb drift */
-        @keyframes drift1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33%       { transform: translate(4%, 3%) scale(1.06); }
-          66%       { transform: translate(-2%, 5%) scale(0.96); }
-        }
-        @keyframes drift2 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          40%       { transform: translate(-5%, -3%) scale(1.08); }
-          70%       { transform: translate(3%, -2%) scale(0.94); }
-        }
-        @keyframes drift3 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          30%       { transform: translate(6%, 2%) scale(1.07); }
-          60%       { transform: translate(2%, -4%) scale(0.97); }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+        /* Cream swirling into matcha */
+        @keyframes creamSwirl {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to   { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Scan line sweep */
-        @keyframes scan {
-          0%   { transform: translateY(-4px); opacity: 0; }
-          4%   { opacity: 1; }
-          96%  { opacity: 0.55; }
-          100% { transform: translateY(100vh); opacity: 0; }
+        /* Ambient light pools */
+        @keyframes poolDrift1 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(-3%, 5%); }
+        }
+        @keyframes poolDrift2 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(5%, -3%); }
+        }
+        @keyframes poolDrift3 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(-4%, -4%); }
         }
 
         /* Marquee scroll */
@@ -616,26 +619,20 @@ export default function DisplayPage() {
           100% { transform: translateX(-50%); }
         }
 
-        /* Dot pulse in booking badge */
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.3; transform: scale(0.75); }
+        /* Tiny dot breathe in header */
+        @keyframes breathe {
+          0%, 100% { opacity: 0.9; transform: scale(1); }
+          50%       { opacity: 0.2; transform: scale(0.6); }
         }
 
-        /* Badge outer glow breath */
-        @keyframes badgeBreath {
-          0%, 100% { box-shadow: 0 0 28px rgba(125,206,160,0.22), inset 0 1px 0 rgba(125,206,160,0.25); }
-          50%       { box-shadow: 0 0 44px rgba(125,206,160,0.40), inset 0 1px 0 rgba(125,206,160,0.25); }
+        /* Gentle price shimmer — barely there */
+        @keyframes pricePulse {
+          0%, 100% { opacity: var(--price-opacity, 0.8); }
+          50%       { opacity: 1; }
         }
 
-        /* Price glow pulse (uses currentColor = cat.accent) */
-        @keyframes priceGlow {
-          0%, 100% { text-shadow: 0 0 10px currentColor; }
-          50%       { text-shadow: 0 0 26px currentColor, 0 0 8px currentColor; }
-        }
-
-        /* Menu item entrance — slides up from below */
-        @keyframes slideIn {
+        /* Menu item entrance — rises like steam */
+        @keyframes riseIn {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
