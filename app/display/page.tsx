@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // ── PALETTE ──────────────────────────────────────────────────────────────────
-const CREAM        = "#f5f0e4";
-const CREAM_MID    = "rgba(245,240,228,0.65)";
-const CREAM_LOW    = "rgba(245,240,228,0.42)";
-const CREAM_GHOST  = "rgba(245,240,228,0.07)";
-const GLASS        = "rgba(8,20,12,0.76)";
-const GLASS_BORDER = "rgba(245,240,228,0.10)";
+const CREAM       = "#f5f0e4";
+const CREAM_MID   = "rgba(245,240,228,0.65)";
+const CREAM_LOW   = "rgba(245,240,228,0.42)";
+const CREAM_GHOST = "rgba(245,240,228,0.09)";
+const GLASS       = "rgba(9,21,12,0.88)";
+const GLASS_BDR   = "rgba(245,240,228,0.11)";
 
 // ── MENU DATA ────────────────────────────────────────────────────────────────
 const MENU = [
@@ -26,7 +26,7 @@ const MENU = [
   },
   {
     category: "Specialty",
-    accent: "#a8dbbe",
+    accent: "#a8dbc0",
     items: [
       { name: "Cream Top Matcha",   desc: "Sweet cream foam · velvety texture",   price: "$8.00" },
       { name: "Dirty Matcha",       desc: "Espresso shot · balanced energy",      price: "$8.50" },
@@ -37,7 +37,7 @@ const MENU = [
   },
   {
     category: "Seasonal",
-    accent: "#cfa55a",
+    accent: "#d4a84e",
     items: [
       { name: "Lavender Matcha",    desc: "Floral lavender · silky finish",       price: "$9.50" },
       { name: "Mango Matcha",       desc: "Tropical mango purée over ice",        price: "$9.00" },
@@ -75,8 +75,8 @@ const CUP_SLIDES = [
 
 const BRAND_CARDS = [
   { headline: "Founder-Led",    sub: "Dearborn, MI",           accent: "#7ecba4" },
-  { headline: "Premium Matcha", sub: "Ceremonial Grade",       accent: "#a8dbbe" },
-  { headline: "Now Booking",    sub: "Summer 2026",            accent: "#cfa55a" },
+  { headline: "Premium Matcha", sub: "Ceremonial Grade",       accent: "#a8dbc0" },
+  { headline: "Now Booking",    sub: "Summer 2026",            accent: "#d4a84e" },
   { headline: "Event Catering", sub: "Weddings · Activations", accent: "#7ecba4" },
   { headline: "Big Energy.",    sub: "Real Matcha.",           accent: "#c4a07a" },
 ];
@@ -92,23 +92,17 @@ function buildMarquee() {
 }
 const MARQUEE_SLIDES = buildMarquee();
 
-// ── FLOATING MATCHA PARTICLES ─────────────────────────────────────────────────
-const PARTICLES = [
-  { x: 12,  y: 18, r: 3,   op: 0.35, d: 20, delay: 0   },
-  { x: 28,  y: 72, r: 2,   op: 0.25, d: 26, delay: 4   },
-  { x: 48,  y: 12, r: 4,   op: 0.30, d: 18, delay: 8   },
-  { x: 67,  y: 44, r: 2.5, op: 0.20, d: 24, delay: 2   },
-  { x: 82,  y: 22, r: 3,   op: 0.28, d: 22, delay: 10  },
-  { x: 38,  y: 58, r: 2,   op: 0.22, d: 30, delay: 6   },
-  { x: 74,  y: 78, r: 3.5, op: 0.25, d: 28, delay: 14  },
-  { x: 55,  y: 88, r: 2,   op: 0.18, d: 19, delay: 3   },
-  { x: 92,  y: 60, r: 3,   op: 0.30, d: 23, delay: 9   },
-  { x: 18,  y: 88, r: 2.5, op: 0.22, d: 25, delay: 7   },
-  { x: 62,  y: 30, r: 4,   op: 0.28, d: 21, delay: 12  },
-  { x: 85,  y: 90, r: 2,   op: 0.20, d: 32, delay: 5   },
-  { x: 42,  y: 38, r: 3,   op: 0.26, d: 17, delay: 11  },
-  { x: 8,   y: 52, r: 2,   op: 0.18, d: 29, delay: 16  },
-  { x: 96,  y: 38, r: 2.5, op: 0.24, d: 20, delay: 1   },
+// ── FLOATING MATCHA DUST ─────────────────────────────────────────────────────
+const DUST = [
+  { x: 7,  y: 14, r: 1.5, op: 0.18, d: 24, delay: 0   },
+  { x: 22, y: 72, r: 1,   op: 0.13, d: 30, delay: 5   },
+  { x: 53, y: 9,  r: 2,   op: 0.16, d: 20, delay: 8   },
+  { x: 77, y: 38, r: 1.2, op: 0.14, d: 26, delay: 3   },
+  { x: 88, y: 78, r: 1.5, op: 0.16, d: 22, delay: 11  },
+  { x: 38, y: 58, r: 1,   op: 0.11, d: 28, delay: 7   },
+  { x: 63, y: 86, r: 1.8, op: 0.14, d: 25, delay: 14  },
+  { x: 15, y: 44, r: 1.2, op: 0.12, d: 32, delay: 2   },
+  { x: 92, y: 22, r: 1,   op: 0.13, d: 19, delay: 9   },
 ];
 
 // ── CLOCK ────────────────────────────────────────────────────────────────────
@@ -144,32 +138,122 @@ export default function DisplayPage() {
         overflow: "hidden",
         position: "relative",
         fontFamily: "'Montserrat', sans-serif",
-        // ── THE BACKGROUND: cream pouring into deep matcha ──
-        background:
-          // Cream bloom — the pour point, bright & warm
-          "radial-gradient(ellipse 58% 65% at 22% 24%, #f7f3e2 0%, #e0ecd8 18%, #aaceb0 34%, #5fa876 50%, transparent 66%), " +
-          // Secondary swirl — smaller bloom, lower-right
-          "radial-gradient(ellipse 40% 42% at 78% 74%, rgba(240,236,208,0.60) 0%, rgba(140,198,152,0.38) 30%, transparent 54%), " +
-          // Rich deep matcha base
-          "linear-gradient(148deg, #1d5235 0%, #0d2c1a 36%, #163828 65%, #0b1e10 100%)",
       }}
     >
-      {/* ── MATCHA POWDER SPECKLE LAYER ────────────────── */}
+      {/* ══════════════════════════════════════════════════
+          MARBLE BACKGROUND
+          Calacatta Verde: cream base + warped dark-green veins
+          ══════════════════════════════════════════════════ */}
+      <svg
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
+      >
+        <defs>
+          {/* Turbulence displacement — makes straight gradient stripes flow organically */}
+          <filter id="marble-warp" x="-12%" y="-12%" width="124%" height="124%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.0038 0.0065"
+              numOctaves="5"
+              seed="12"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="72"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+
+          {/* Vein stripe gradient — diagonal 135° (upper-right → lower-left) matching the image */}
+          <linearGradient id="veins" x1="1" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            {/* TRANSPARENT cream between veins */}
+            <stop offset="0%"    stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="9.5%"  stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein A — thin hairline */}
+            <stop offset="9.7%"  stopColor="#253c22" stopOpacity="0.20"/>
+            <stop offset="9.9%"  stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="21.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein B — main bold vein */}
+            <stop offset="21.8%" stopColor="#1c3018" stopOpacity="0.38"/>
+            <stop offset="22.2%" stopColor="#243e20" stopOpacity="0.28"/>
+            <stop offset="22.6%" stopColor="#1c3018" stopOpacity="0.18"/>
+            <stop offset="22.9%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="31.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein C — secondary branch */}
+            <stop offset="31.7%" stopColor="#253c22" stopOpacity="0.16"/>
+            <stop offset="32.0%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="43.0%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein D — bold vein 2 */}
+            <stop offset="43.3%" stopColor="#1c3018" stopOpacity="0.34"/>
+            <stop offset="43.8%" stopColor="#243e20" stopOpacity="0.22"/>
+            <stop offset="44.2%" stopColor="#1c3018" stopOpacity="0.14"/>
+            <stop offset="44.6%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="52.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein E — delicate thin */}
+            <stop offset="52.7%" stopColor="#253c22" stopOpacity="0.14"/>
+            <stop offset="53.0%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="63.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein F — medium vein */}
+            <stop offset="63.8%" stopColor="#1c3018" stopOpacity="0.24"/>
+            <stop offset="64.3%" stopColor="#243e20" stopOpacity="0.15"/>
+            <stop offset="64.7%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="75.0%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein G — thin */}
+            <stop offset="75.2%" stopColor="#253c22" stopOpacity="0.16"/>
+            <stop offset="75.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="86.5%" stopColor="#f2ece0" stopOpacity="1"/>
+            {/* Vein H — near edge */}
+            <stop offset="86.8%" stopColor="#1c3018" stopOpacity="0.20"/>
+            <stop offset="87.1%" stopColor="#f2ece0" stopOpacity="1"/>
+            <stop offset="100%"  stopColor="#f2ece0" stopOpacity="1"/>
+          </linearGradient>
+
+          {/* Warm beige "cloud" patches — the calcium deposits in real marble */}
+          <radialGradient id="warm1" cx="56%" cy="36%" r="22%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stopColor="#c8b285" stopOpacity="0.22"/>
+            <stop offset="100%" stopColor="#c8b285" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="warm2" cx="22%" cy="72%" r="16%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stopColor="#c2aa7e" stopOpacity="0.16"/>
+            <stop offset="100%" stopColor="#c2aa7e" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="warm3" cx="82%" cy="18%" r="18%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stopColor="#c8b285" stopOpacity="0.18"/>
+            <stop offset="100%" stopColor="#c8b285" stopOpacity="0"/>
+          </radialGradient>
+          <radialGradient id="warm4" cx="70%" cy="82%" r="14%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stopColor="#bfa878" stopOpacity="0.13"/>
+            <stop offset="100%" stopColor="#bfa878" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+
+        {/* Cream base */}
+        <rect width="100%" height="100%" fill="#f3ede1"/>
+
+        {/* Warm patches — unwarped (laid flat, like natural stone tonality) */}
+        <rect width="100%" height="100%" fill="url(#warm1)"/>
+        <rect width="100%" height="100%" fill="url(#warm2)"/>
+        <rect width="100%" height="100%" fill="url(#warm3)"/>
+        <rect width="100%" height="100%" fill="url(#warm4)"/>
+
+        {/* Marble veins — the gradient warped by displacement */}
+        <rect width="100%" height="100%" fill="url(#veins)" filter="url(#marble-warp)"/>
+      </svg>
+
+      {/* Subtle dark vignette at screen edges — keeps focus on content */}
       <div
         style={{
-          position: "absolute", inset: 0,
-          backgroundImage:
-            "radial-gradient(circle, rgba(52,128,68,0.22) 1px, transparent 1px), " +
-            "radial-gradient(circle, rgba(38,105,54,0.14) 1.5px, transparent 1.5px)",
-          backgroundSize: "42px 42px, 68px 68px",
-          backgroundPosition: "0 0, 21px 26px",
-          pointerEvents: "none",
+          position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none",
+          background:
+            "radial-gradient(ellipse 82% 80% at 50% 50%, transparent 42%, rgba(18,30,20,0.26) 100%)",
         }}
       />
 
-      {/* ── FLOATING MATCHA PARTICLES ───────────────────── */}
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-        {PARTICLES.map((p, i) => (
+      {/* Floating matcha dust particles */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 3, pointerEvents: "none" }}>
+        {DUST.map((p, i) => (
           <div
             key={i}
             style={{
@@ -179,40 +263,20 @@ export default function DisplayPage() {
               width: `${p.r * 2}px`,
               height: `${p.r * 2}px`,
               borderRadius: "50%",
-              background: `rgba(55,138,72,${p.op})`,
-              filter: "blur(0.8px)",
-              animation: `particleFloat ${p.d}s ease-in-out ${p.delay}s infinite`,
+              background: `rgba(32,58,28,${p.op})`,
+              filter: "blur(0.6px)",
+              animation: `dustDrift ${p.d}s ease-in-out ${p.delay}s infinite`,
             }}
           />
         ))}
       </div>
 
-      {/* ── CREAM BLOOM BREATHING ANIMATION ─────────────── */}
-      {/* Layer 1: primary bloom pulses in */}
+      {/* ══════════════════════════════════════════════════
+          CONTENT — dark glass panels floating over marble
+          ══════════════════════════════════════════════════ */}
       <div
         style={{
-          position: "absolute", inset: 0,
-          background:
-            "radial-gradient(ellipse 52% 58% at 22% 24%, rgba(247,243,226,0.18) 0%, transparent 55%)",
-          animation: "creamBreathe1 9s ease-in-out infinite",
-          pointerEvents: "none",
-        }}
-      />
-      {/* Layer 2: secondary bloom pulses offset */}
-      <div
-        style={{
-          position: "absolute", inset: 0,
-          background:
-            "radial-gradient(ellipse 36% 38% at 78% 74%, rgba(240,234,205,0.14) 0%, transparent 52%)",
-          animation: "creamBreathe2 11s ease-in-out infinite",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* ── LAYOUT ──────────────────────────────────────── */}
-      <div
-        style={{
-          position: "relative", zIndex: 1,
+          position: "relative", zIndex: 10,
           display: "flex", flexDirection: "column", height: "100vh",
         }}
       >
@@ -223,24 +287,23 @@ export default function DisplayPage() {
             display: "flex", alignItems: "center", justifyContent: "space-between",
             padding: "0 3.5vw",
             background: GLASS,
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            borderBottom: `1px solid ${GLASS_BORDER}`,
+            backdropFilter: "blur(28px)",
+            WebkitBackdropFilter: "blur(28px)",
+            borderBottom: `1px solid ${GLASS_BDR}`,
             flexShrink: 0,
             position: "relative",
           }}
         >
-          {/* Cream shimmer line on header bottom */}
+          {/* Faint cream line shimmer */}
           <div
             style={{
-              position: "absolute", bottom: 0, left: "12%", right: "12%", height: "1px",
+              position: "absolute", bottom: 0, left: "10%", right: "10%", height: "1px",
               background:
-                "linear-gradient(90deg, transparent, rgba(245,240,228,0.30), rgba(167,215,186,0.50), rgba(245,240,228,0.30), transparent)",
-              animation: "shimmerLine 6s ease-in-out infinite",
+                "linear-gradient(90deg, transparent, rgba(245,240,228,0.28), rgba(168,219,192,0.45), rgba(245,240,228,0.28), transparent)",
             }}
           />
 
-          {/* Logo + brand */}
+          {/* Logo + brand name */}
           <div style={{ display: "flex", alignItems: "center", gap: "1.8vw" }}>
             <div style={{ position: "relative", width: "9vh", height: "9vh" }}>
               <Image
@@ -255,7 +318,7 @@ export default function DisplayPage() {
               <div
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: "4vh",
+                  fontSize: "4.1vh",
                   fontWeight: 500,
                   fontStyle: "italic",
                   color: CREAM,
@@ -267,9 +330,9 @@ export default function DisplayPage() {
               </div>
               <div
                 style={{
-                  fontSize: "1.15vh",
+                  fontSize: "1.1vh",
                   fontWeight: 300,
-                  letterSpacing: "0.42em",
+                  letterSpacing: "0.44em",
                   textTransform: "uppercase",
                   color: CREAM_LOW,
                   marginTop: "0.55vh",
@@ -280,20 +343,18 @@ export default function DisplayPage() {
             </div>
           </div>
 
-          {/* Centre — clean, no pill */}
+          {/* Centre booking */}
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1.5vw",
-              borderLeft: `1px solid ${GLASS_BORDER}`,
-              borderRight: `1px solid ${GLASS_BORDER}`,
+              display: "flex", alignItems: "center", gap: "1.4vw",
+              borderLeft: `1px solid ${GLASS_BDR}`,
+              borderRight: `1px solid ${GLASS_BDR}`,
               padding: "0 3vw",
             }}
           >
             <span
               style={{
-                width: "0.5vh", height: "0.5vh", borderRadius: "50%",
+                width: "0.48vh", height: "0.48vh", borderRadius: "50%",
                 background: "#7ecba4",
                 display: "inline-block",
                 animation: "dotBreathe 3.5s ease-in-out infinite",
@@ -301,7 +362,7 @@ export default function DisplayPage() {
             />
             <span
               style={{
-                fontSize: "1.3vh",
+                fontSize: "1.28vh",
                 fontWeight: 300,
                 letterSpacing: "0.34em",
                 textTransform: "uppercase",
@@ -312,7 +373,7 @@ export default function DisplayPage() {
             </span>
             <span
               style={{
-                width: "0.5vh", height: "0.5vh", borderRadius: "50%",
+                width: "0.48vh", height: "0.48vh", borderRadius: "50%",
                 background: "#7ecba4",
                 display: "inline-block",
                 animation: "dotBreathe 3.5s ease-in-out 1.75s infinite",
@@ -326,7 +387,7 @@ export default function DisplayPage() {
               fontFamily: "'Cormorant Garamond', Georgia, serif",
               fontSize: "3.5vh",
               fontWeight: 400,
-              color: "rgba(245,240,228,0.62)",
+              color: CREAM_MID,
               letterSpacing: "0.06em",
             }}
           >
@@ -334,7 +395,7 @@ export default function DisplayPage() {
           </div>
         </header>
 
-        {/* ── MENU BOARD — 4 glass panels ─────────────────── */}
+        {/* ── MENU — 4 frosted glass panels ──────────────── */}
         <main
           style={{
             flex: 1,
@@ -355,40 +416,46 @@ export default function DisplayPage() {
                 flexDirection: "column",
                 borderRadius: "14px",
                 background: GLASS,
-                border: `1px solid ${GLASS_BORDER}`,
-                backdropFilter: "blur(22px)",
-                WebkitBackdropFilter: "blur(22px)",
+                border: `1px solid ${GLASS_BDR}`,
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
                 overflow: "hidden",
-                animation: `panelRise 0.9s ease ${ci * 0.12}s both`,
+                animation: `panelRise 1s ease ${ci * 0.13}s both`,
               }}
             >
-              {/* Glass top sheen */}
+              {/* Top accent bar */}
               <div
                 style={{
                   position: "absolute",
-                  top: 0, left: 0, right: 0, height: "35%",
+                  top: 0, left: "18%", right: "18%",
+                  height: "2px",
+                  background: `linear-gradient(90deg, transparent, ${cat.accent}a0, transparent)`,
+                }}
+              />
+
+              {/* Inner glass top sheen */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0, left: 0, right: 0, height: "30%",
                   background:
-                    "linear-gradient(180deg, rgba(245,240,228,0.055) 0%, transparent 100%)",
+                    "linear-gradient(180deg, rgba(245,240,228,0.05) 0%, transparent 100%)",
                   borderRadius: "14px 14px 0 0",
                   pointerEvents: "none",
                 }}
               />
 
-              {/* Top accent strip */}
+              {/* Content */}
               <div
                 style={{
-                  position: "absolute",
-                  top: 0, left: "20%", right: "20%",
-                  height: "2px",
-                  background: `linear-gradient(90deg, transparent, ${cat.accent}90, transparent)`,
+                  padding: "2.2vh 1.8vw",
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: 1,
                 }}
-              />
-
-              {/* Content */}
-              <div style={{ padding: "2.2vh 1.8vw", display: "flex", flexDirection: "column", flex: 1 }}>
-
+              >
                 {/* Category label */}
-                <div style={{ marginBottom: "1.6vh", flexShrink: 0 }}>
+                <div style={{ marginBottom: "1.5vh", flexShrink: 0 }}>
                   <div
                     style={{
                       fontSize: "1.1vh",
@@ -396,7 +463,7 @@ export default function DisplayPage() {
                       letterSpacing: "0.46em",
                       textTransform: "uppercase",
                       color: cat.accent,
-                      marginBottom: "1.2vh",
+                      marginBottom: "1.1vh",
                     }}
                   >
                     {cat.category}
@@ -409,7 +476,7 @@ export default function DisplayPage() {
                   />
                 </div>
 
-                {/* Items */}
+                {/* Item rows */}
                 <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
                   {cat.items.map((item, ii) => {
                     const flatIdx = ci * 5 + ii;
@@ -419,36 +486,27 @@ export default function DisplayPage() {
 
                     return (
                       <div key={item.name}>
-                        {/* Hairline separator (not before first item) */}
                         {ii > 0 && (
                           <div
-                            style={{
-                              height: "1px",
-                              background: CREAM_GHOST,
-                              margin: "0 -1.8vw",
-                            }}
+                            style={{ height: "1px", background: CREAM_GHOST, margin: "0 -1.8vw" }}
                           />
                         )}
 
-                        {/* Item row */}
                         <div
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
                             gap: "1vw",
-                            padding: "1.05vh 0",
-                            paddingLeft: "0.6vw",
-                            // Spotlight: inset left bar
+                            padding: "1.05vh 0 1.05vh 0.65vw",
                             boxShadow: isSpotlit
                               ? `inset 3px 0 0 ${cat.accent}`
                               : "inset 3px 0 0 transparent",
                             background: isSpotlit
-                              ? "rgba(245,240,228,0.055)"
+                              ? "rgba(245,240,228,0.05)"
                               : "transparent",
-                            transition:
-                              "box-shadow 1s ease, background 1s ease",
-                            animation: `itemRise 0.9s ease ${flatIdx * 0.08 + 0.3}s both`,
+                            transition: "box-shadow 1s ease, background 1s ease",
+                            animation: `itemRise 1s ease ${flatIdx * 0.08 + 0.35}s both`,
                           }}
                         >
                           <div style={{ flex: 1, minWidth: 0 }}>
@@ -483,13 +541,12 @@ export default function DisplayPage() {
                             </div>
                           </div>
 
-                          {/* Price */}
                           <div
                             style={{
                               fontFamily: "'Cormorant Garamond', Georgia, serif",
-                              fontSize: "2.15vh",
+                              fontSize: "2.1vh",
                               fontWeight: 500,
-                              color: isSpotlit ? cat.accent : `${cat.accent}cc`,
+                              color: isSpotlit ? cat.accent : `${cat.accent}c0`,
                               flexShrink: 0,
                               letterSpacing: "0.02em",
                               transition: "color 1s ease",
@@ -512,18 +569,18 @@ export default function DisplayPage() {
           style={{
             height: "19vh",
             background: GLASS,
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            borderTop: `1px solid ${GLASS_BORDER}`,
+            backdropFilter: "blur(28px)",
+            WebkitBackdropFilter: "blur(28px)",
+            borderTop: `1px solid ${GLASS_BDR}`,
             overflow: "hidden",
             flexShrink: 0,
             display: "flex",
             alignItems: "center",
             position: "relative",
             WebkitMaskImage:
-              "linear-gradient(90deg, transparent 0%, black 9%, black 91%, transparent 100%)",
+              "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
             maskImage:
-              "linear-gradient(90deg, transparent 0%, black 9%, black 91%, transparent 100%)",
+              "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
           }}
         >
           <div
@@ -556,7 +613,7 @@ export default function DisplayPage() {
                         fill
                         style={{
                           objectFit: "contain",
-                          filter: "drop-shadow(0 8px 30px rgba(0,0,0,0.75))",
+                          filter: "drop-shadow(0 8px 28px rgba(0,0,0,0.80))",
                         }}
                       />
                     </div>
@@ -610,7 +667,7 @@ export default function DisplayPage() {
                         fontStyle: "italic",
                         color: (slide.data as typeof BRAND_CARDS[0]).accent,
                         letterSpacing: "0.02em",
-                        lineHeight: 1.2,
+                        lineHeight: 1.25,
                       }}
                     >
                       {(slide.data as typeof BRAND_CARDS[0]).headline}
@@ -646,54 +703,31 @@ export default function DisplayPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
 
-        /* Cream bloom breathe — layer 1 */
-        @keyframes creamBreathe1 {
-          0%, 100% { opacity: 0.75; transform: scale(1); }
-          50%       { opacity: 1;    transform: scale(1.04); }
+        @keyframes dustDrift {
+          0%,  100% { transform: translate(0, 0) scale(1);      opacity: var(--op, 0.15); }
+          28%        { transform: translate(9px, -13px) scale(1.3); opacity: calc(var(--op, 0.15) + 0.06); }
+          57%        { transform: translate(-5px, -20px) scale(0.8); opacity: calc(var(--op, 0.15) - 0.05); }
+          78%        { transform: translate(12px, -8px) scale(1.1);  opacity: calc(var(--op, 0.15) + 0.04); }
         }
 
-        /* Cream bloom breathe — layer 2, offset */
-        @keyframes creamBreathe2 {
-          0%, 100% { opacity: 0.55; transform: scale(1); }
-          50%       { opacity: 0.85; transform: scale(1.06); }
-        }
-
-        /* Floating matcha particles */
-        @keyframes particleFloat {
-          0%,  100% { transform: translate(0, 0)    scale(1);    opacity: var(--op, 0.3); }
-          25%        { transform: translate(10px,-14px) scale(1.25); opacity: calc(var(--op, 0.3) + 0.12); }
-          55%        { transform: translate(-6px,-22px) scale(0.8);  opacity: calc(var(--op, 0.3) - 0.08); }
-          78%        { transform: translate(14px,-9px)  scale(1.15); opacity: calc(var(--op, 0.3) + 0.08); }
-        }
-
-        /* Glass panel entrance */
         @keyframes panelRise {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: translateY(18px) scale(0.98); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Item row entrance */
         @keyframes itemRise {
-          from { opacity: 0; transform: translateX(-6px); }
+          from { opacity: 0; transform: translateX(-8px); }
           to   { opacity: 1; transform: translateX(0); }
         }
 
-        /* Marquee */
         @keyframes marquee {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
 
-        /* Breathing accent dots */
         @keyframes dotBreathe {
           0%, 100% { opacity: 0.9; transform: scale(1); }
-          50%       { opacity: 0.2; transform: scale(0.55); }
-        }
-
-        /* Header bottom shimmer sweep */
-        @keyframes shimmerLine {
-          0%,  100% { opacity: 0.6; background-position: 0% 0; }
-          50%        { opacity: 1;   background-position: 100% 0; }
+          50%       { opacity: 0.15; transform: scale(0.5); }
         }
       `}</style>
     </div>
