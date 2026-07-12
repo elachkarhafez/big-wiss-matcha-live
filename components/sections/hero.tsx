@@ -16,7 +16,6 @@ const HERO_CUPS_RIGHT = [
   { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
 ];
 
-// Mobile: all 6 cups in 2 rows of 3, large size
 const MOBILE_ROW1 = [
   { src: "/product-cups/v3-classic.png", alt: "Classic Matcha" },
   { src: "/product-cups/v3-cream.png", alt: "Cream Top Matcha" },
@@ -34,25 +33,40 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen"
       style={{
-        background: "linear-gradient(180deg, #0a1f14 0%, #122a1c 35%, #0f2318 70%, #0a1a11 100%)",
+        background: "linear-gradient(160deg, #0d2a1a 0%, #1a3d28 30%, #122e20 65%, #0d2218 100%)",
         overflowX: "clip",
       }}
     >
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(100, 180, 130, 0.07) 0%, transparent 70%)" }} />
+      {/* Cinematic background layers */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Center bloom — vivid */}
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 85% 70% at 50% 25%, rgba(110, 210, 150, 0.26) 0%, transparent 65%)" }} />
+        {/* Left theatrical fill */}
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 50% 90% at -5% 55%, rgba(70, 180, 120, 0.15) 0%, transparent 65%)" }} />
+        {/* Right theatrical fill */}
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 50% 90% at 105% 55%, rgba(50, 160, 100, 0.15) 0%, transparent 65%)" }} />
+        {/* Floor bounce */}
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 80% 25% at 50% 102%, rgba(150, 220, 170, 0.12) 0%, transparent 70%)" }} />
+        {/* Animated sweep shimmer */}
+        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(110deg, transparent 35%, rgba(125,206,160,0.07) 50%, transparent 65%)", animation: "heroShimmer 5s ease-in-out infinite" }} />
+        {/* Subtle vignette */}
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(5,15,8,0.55) 100%)" }} />
       </div>
 
       {/* ===================== MOBILE LAYOUT ===================== */}
       <div className="md:hidden relative z-10 flex flex-col items-center min-h-screen pt-24 pb-12 px-5">
 
-        {/* Tagline */}
-        <motion.p
-          className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40 mb-4 text-center"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+        {/* NOW OPEN badge */}
+        <motion.div
+          className="flex flex-col items-center mb-4"
+          initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
         >
-          Founder-Led · Dearborn, MI · Premium Matcha
-        </motion.p>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+            style={{ border: "1px solid rgba(125,206,160,0.45)", background: "rgba(125,206,160,0.13)" }}>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#7dcea0]">Now Open · Dearborn, MI</span>
+          </div>
+        </motion.div>
 
         {/* Title */}
         <motion.h1
@@ -67,38 +81,13 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        {/* COMING SOON — centered, large */}
-        <motion.div
-          className="flex flex-col items-center mb-6"
-          initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#7dcea0]/30 bg-[#7dcea0]/10 px-4 py-1.5 mb-3">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#7dcea0]">Now Booking · Summer 2026</span>
-          </div>
-          <h2
-            className="font-display font-bold text-center"
-            style={{
-              fontSize: "clamp(2.6rem, 14vw, 4rem)",
-              lineHeight: 0.92,
-              letterSpacing: "-0.03em",
-              background: "linear-gradient(135deg, #7dcea0 0%, #c4f0d5 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            COMING<br />SOON
-          </h2>
-        </motion.div>
-
-        {/* Cups — all 6 in 2 rows of 3, large arch each row */}
+        {/* Cups — all 6 in 2 rows of 3 */}
         <motion.div
           className="w-full relative mb-4"
-          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.65 }}
         >
-          {/* Glow beneath cups */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.18) 0%, transparent 70%)" }} />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-20 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.28) 0%, transparent 70%)" }} />
 
           {/* Row 1 */}
           <div className="flex items-end justify-center gap-2">
@@ -110,7 +99,7 @@ export function Hero() {
                 <div style={{ animation: `gentleFloat ${3.8 + i * 0.2}s ease-in-out infinite`, animationDelay: `${i * 0.15}s` }}>
                   <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
                     <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+                      style={{ filter: "drop-shadow(0 12px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 22px rgba(125,206,160,0.18))" }} priority />
                   </div>
                 </div>
               </motion.div>
@@ -139,7 +128,7 @@ export function Hero() {
                 <div style={{ animation: `gentleFloat ${4.4 + i * 0.2}s ease-in-out infinite`, animationDelay: `${(i + 3) * 0.15}s` }}>
                   <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
                     <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 12px 28px rgba(0,0,0,0.55))" }} priority />
+                      style={{ filter: "drop-shadow(0 12px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 22px rgba(125,206,160,0.18))" }} priority />
                   </div>
                 </div>
               </motion.div>
@@ -150,24 +139,24 @@ export function Hero() {
         {/* Description + CTAs */}
         <motion.div
           className="w-full text-center"
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.5 }}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.5 }}
         >
-          <p className="text-white/50 text-sm max-w-xs mx-auto leading-relaxed mb-6">
-            Big Wiss Matcha is filling up fast — lock in your event date and we&apos;ll have a full proposal back within 24 hours.
+          <p className="text-white/55 text-sm max-w-xs mx-auto leading-relaxed mb-6">
+            Premium matcha, crafted fresh every pop-up. Find us in Dearborn — or book us for your next event.
           </p>
           <div className="flex flex-col gap-3 w-full">
             <Link href="/catering"
-              className="w-full inline-flex items-center justify-center rounded-full bg-white py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
-              Book Catering Now
+              className="w-full inline-flex items-center justify-center rounded-full bg-white py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_24px_rgba(0,0,0,0.25)]">
+              Book an Event
             </Link>
-            <Link href="/catering"
+            <a href="https://www.instagram.com/bigwissmatcha/" target="_blank" rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center rounded-full py-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-all"
-              style={{ border: "1.5px solid rgba(125,206,160,0.3)", background: "rgba(125,206,160,0.07)" }}>
-              Save Your Spot →
-            </Link>
+              style={{ border: "1.5px solid rgba(125,206,160,0.35)", background: "rgba(125,206,160,0.09)" }}>
+              Follow @bigwissmatcha →
+            </a>
           </div>
           <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[9px] font-medium uppercase tracking-[0.12em] text-white/25">
-            <span>24hr Response</span><span>·</span><span>Dearborn & SE Michigan</span><span>·</span><span>No Commitment</span>
+            <span>Now Open</span><span>·</span><span>Dearborn & SE Michigan</span><span>·</span><span>Premium Craft Matcha</span>
           </div>
         </motion.div>
       </div>
@@ -177,7 +166,7 @@ export function Hero() {
 
         {/* Tagline */}
         <motion.p
-          className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/40 mb-5"
+          className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/45 mb-5"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}
         >
           Founder-Led &nbsp;&middot;&nbsp; Dearborn, MI &nbsp;&middot;&nbsp; Premium Matcha
@@ -196,13 +185,13 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        {/* Cups + Coming Soon row */}
+        {/* Cups + center logo row */}
         <motion.div
           className="relative w-full"
           initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-40 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.13) 0%, transparent 70%)" }} />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-44 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.26) 0%, transparent 70%)" }} />
 
           <div className="flex items-center w-full">
             {/* Left cups */}
@@ -214,30 +203,24 @@ export function Hero() {
                 <div style={{ animation: `gentleFloat ${3.5 + i * 0.25}s ease-in-out infinite`, animationDelay: `${i * 0.2}s` }}>
                   <div style={{ position: "relative", width: "9vw", height: "30vw", minWidth: 80, minHeight: 240 }}>
                     <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 16px 36px rgba(0,0,0,0.5))" }} priority />
+                      style={{ filter: "drop-shadow(0 16px 38px rgba(0,0,0,0.55)) drop-shadow(0 0 32px rgba(125,206,160,0.2))" }} priority />
                   </div>
                 </div>
               </motion.div>
             ))}
 
-            {/* Center — COMING SOON */}
-            <motion.div className="flex-1 flex flex-col items-center justify-center"
+            {/* Center — Logo + NOW OPEN */}
+            <motion.div className="flex-1 flex flex-col items-center justify-center gap-3"
               initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#7dcea0]/30 bg-[#7dcea0]/10 px-3 py-1 mb-4">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#7dcea0] whitespace-nowrap">Now Booking</span>
+              <div style={{ position: "relative", width: "min(20vw, 200px)", height: "min(20vw, 200px)" }}>
+                <Image src="/logo/logo-v2.png" alt="Big Wiss Matcha" fill className="object-contain"
+                  style={{ filter: "drop-shadow(0 8px 28px rgba(0,0,0,0.45))" }} />
               </div>
-              <h2 className="font-display font-bold text-center"
-                style={{
-                  fontSize: "clamp(2.2rem, 6.5vw, 7rem)",
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.03em",
-                  background: "linear-gradient(135deg, #7dcea0 0%, #c4f0d5 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}>
-                COMING<br />SOON
-              </h2>
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+                style={{ border: "1px solid rgba(125,206,160,0.45)", background: "rgba(125,206,160,0.13)" }}>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#7dcea0] whitespace-nowrap">Now Open</span>
+              </div>
             </motion.div>
 
             {/* Right cups */}
@@ -249,7 +232,7 @@ export function Hero() {
                 <div style={{ animation: `gentleFloat ${3.5 + (i + 3) * 0.25}s ease-in-out infinite`, animationDelay: `${(i + 3) * 0.2}s` }}>
                   <div style={{ position: "relative", width: "9vw", height: "30vw", minWidth: 80, minHeight: 240 }}>
                     <Image src={cup.src} alt={cup.alt} fill sizes="9vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 16px 36px rgba(0,0,0,0.5))" }} priority />
+                      style={{ filter: "drop-shadow(0 16px 38px rgba(0,0,0,0.55)) drop-shadow(0 0 32px rgba(125,206,160,0.2))" }} priority />
                   </div>
                 </div>
               </motion.div>
@@ -259,23 +242,23 @@ export function Hero() {
 
         {/* Bottom CTAs */}
         <motion.div className="text-center mt-10"
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.5 }}>
-          <p className="text-white/50 text-sm md:text-base max-w-md mx-auto leading-relaxed mb-8">
-            Big Wiss Matcha is filling up fast — lock in your event date and we&apos;ll have a full proposal back within 24 hours.
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.5 }}>
+          <p className="text-white/55 text-sm md:text-base max-w-md mx-auto leading-relaxed mb-8">
+            Premium matcha, crafted fresh every pop-up. Find us in Dearborn — or book us for your next event.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/catering"
-              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
-              Book Catering Now
+              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_24px_rgba(0,0,0,0.25)]">
+              Book an Event
             </Link>
-            <Link href="/catering"
+            <a href="https://www.instagram.com/bigwissmatcha/" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full px-10 py-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-all"
-              style={{ border: "1.5px solid rgba(125,206,160,0.3)", background: "rgba(125,206,160,0.07)" }}>
-              Save Your Spot →
-            </Link>
+              style={{ border: "1.5px solid rgba(125,206,160,0.35)", background: "rgba(125,206,160,0.09)" }}>
+              Follow @bigwissmatcha →
+            </a>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-1 text-[10px] font-medium uppercase tracking-[0.15em] text-white/25">
-            <span>24hr Response</span><span>·</span><span>Dearborn & SE Michigan</span><span>·</span><span>No Commitment to Inquire</span>
+            <span>Now Open</span><span>·</span><span>Dearborn & SE Michigan</span><span>·</span><span>Premium Craft Matcha</span>
           </div>
         </motion.div>
       </div>
@@ -284,6 +267,10 @@ export function Hero() {
         @keyframes gentleFloat {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
+        }
+        @keyframes heroShimmer {
+          0%, 100% { opacity: 0; transform: translateX(-10%); }
+          50% { opacity: 1; transform: translateX(10%); }
         }
       `}</style>
     </section>

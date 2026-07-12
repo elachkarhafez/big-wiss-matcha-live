@@ -64,7 +64,11 @@
       "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\cream top matcha cup.png\"  \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\cream-top.png\")",
       "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\dirty matcha cup.png\"      \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\dirty-matcha.png\")",
       "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\iced matcha cup .png\"      \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\iced-matcha.png\")",
-      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\vanilla matcha cup.png\"    \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\vanilla-matcha.png\")"
+      "Bash(cp \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\new cup designs\\\\vanilla matcha cup.png\"    \"C:\\\\Users\\\\hafez\\\\OneDrive\\\\Desktop\\\\BIG WISS MATCHA\\\\public\\\\product-cups\\\\vanilla-matcha.png\")",
+      "Bash(python -c ' *)",
+      "Bash(cat next.config.js)",
+      "Bash(cat next.config.mjs)",
+      "Bash(cat next.config.ts)"
     ]
   }
 }
