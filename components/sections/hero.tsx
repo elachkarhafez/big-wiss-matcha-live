@@ -54,24 +54,24 @@ export function Hero() {
       </div>
 
       {/* ===================== MOBILE LAYOUT ===================== */}
-      <div className="md:hidden relative z-10 flex flex-col items-center min-h-screen pt-24 pb-12 px-5">
+      <div className="md:hidden relative z-10 flex flex-col items-center justify-center min-h-[100svh] pt-16 pb-5 px-5">
 
         {/* NOW OPEN badge */}
         <motion.div
-          className="flex flex-col items-center mb-4"
+          className="flex flex-col items-center mb-2.5"
           initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+          <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1"
             style={{ border: "1px solid rgba(125,206,160,0.45)", background: "rgba(125,206,160,0.13)" }}>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#7dcea0]">Now Open · Dearborn, MI</span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#7dcea0]">Now Open · Dearborn, MI</span>
           </div>
         </motion.div>
 
         {/* Title */}
         <motion.h1
-          className="font-display font-bold text-white text-center leading-[0.92] tracking-[-0.03em] mb-8"
-          style={{ fontSize: "clamp(2.8rem, 13vw, 4rem)" }}
+          className="font-display font-bold text-white text-center leading-[0.95] tracking-[-0.03em] mb-3"
+          style={{ fontSize: "clamp(2rem, 9vw, 2.75rem)" }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
           BIG ENERGY.
@@ -81,25 +81,25 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        {/* Cups — all 6 in 2 rows of 3 */}
+        {/* Cups — all 6 in 2 rows of 3, compact */}
         <motion.div
-          className="w-full relative mb-4"
+          className="w-full relative mb-3"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.65 }}
         >
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-20 pointer-events-none"
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-12 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at center bottom, rgba(125,206,160,0.28) 0%, transparent 70%)" }} />
 
           {/* Row 1 */}
-          <div className="flex items-end justify-center gap-2">
+          <div className="flex items-end justify-center gap-1.5">
             {MOBILE_ROW1.map((cup, i) => (
               <motion.div key={cup.src} className="relative flex-shrink-0"
-                initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + i * 0.07, duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: i === 1 ? 0 : "5vw" }}>
+                style={{ marginBottom: i === 1 ? 0 : "2.5vw" }}>
                 <div style={{ animation: `gentleFloat ${3.8 + i * 0.2}s ease-in-out infinite`, animationDelay: `${i * 0.15}s` }}>
-                  <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
-                    <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 12px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 22px rgba(125,206,160,0.18))" }} priority />
+                  <div style={{ position: "relative", width: "18vw", height: "46vw", minWidth: 62, minHeight: 158 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="18vw" className="object-contain"
+                      style={{ filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.55)) drop-shadow(0 0 14px rgba(125,206,160,0.18))" }} priority />
                   </div>
                 </div>
               </motion.div>
@@ -107,28 +107,25 @@ export function Hero() {
           </div>
 
           {/* Logo between rows */}
-          <motion.div className="flex flex-col items-center py-3"
+          <motion.div className="flex flex-col items-center py-1"
             initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.65, duration: 0.5 }}>
-            <div style={{ position: "relative", width: "44vw", height: "44vw" }}>
+            <div style={{ position: "relative", width: "23vw", height: "23vw" }}>
               <Image src="/logo/logo-v2.png" alt="Big Wiss Matcha" fill className="object-contain" />
             </div>
-            <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/35 mt-1">
-              Dearborn, MI · Premium Matcha
-            </p>
           </motion.div>
 
           {/* Row 2 */}
-          <div className="flex items-end justify-center gap-2">
+          <div className="flex items-end justify-center gap-1.5">
             {MOBILE_ROW2.map((cup, i) => (
               <motion.div key={cup.src} className="relative flex-shrink-0"
-                initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + i * 0.07, duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: i === 1 ? 0 : "5vw" }}>
+                style={{ marginBottom: i === 1 ? 0 : "2.5vw" }}>
                 <div style={{ animation: `gentleFloat ${4.4 + i * 0.2}s ease-in-out infinite`, animationDelay: `${(i + 3) * 0.15}s` }}>
-                  <div style={{ position: "relative", width: "27vw", height: "72vw", minWidth: 90, minHeight: 220 }}>
-                    <Image src={cup.src} alt={cup.alt} fill sizes="27vw" className="object-contain"
-                      style={{ filter: "drop-shadow(0 12px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 22px rgba(125,206,160,0.18))" }} priority />
+                  <div style={{ position: "relative", width: "18vw", height: "46vw", minWidth: 62, minHeight: 158 }}>
+                    <Image src={cup.src} alt={cup.alt} fill sizes="18vw" className="object-contain"
+                      style={{ filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.55)) drop-shadow(0 0 14px rgba(125,206,160,0.18))" }} priority />
                   </div>
                 </div>
               </motion.div>
@@ -141,21 +138,21 @@ export function Hero() {
           className="w-full text-center"
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.5 }}
         >
-          <p className="text-white/55 text-sm max-w-xs mx-auto leading-relaxed mb-6">
-            Premium matcha, crafted fresh every pop-up. Find us in Dearborn — or book us for your next event.
+          <p className="text-white/55 text-[12px] max-w-[16rem] mx-auto leading-snug mb-3">
+            Premium matcha, crafted fresh every pop-up.
           </p>
-          <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-row gap-2.5 w-full">
             <Link href="/catering"
-              className="w-full inline-flex items-center justify-center rounded-full bg-white py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_24px_rgba(0,0,0,0.25)]">
-              Book an Event
+              className="flex-1 inline-flex items-center justify-center rounded-full bg-white py-3 text-[12px] font-bold uppercase tracking-[0.05em] text-[#0f2318] active:bg-white/90 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
+              Book Event
             </Link>
             <a href="https://www.instagram.com/bigwissmatcha/" target="_blank" rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center rounded-full py-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-all"
+              className="flex-1 inline-flex items-center justify-center rounded-full py-3 text-[12px] font-semibold uppercase tracking-[0.05em] text-white transition-all"
               style={{ border: "1.5px solid rgba(125,206,160,0.35)", background: "rgba(125,206,160,0.09)" }}>
-              Follow @bigwissmatcha →
+              Follow Us →
             </a>
           </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[9px] font-medium uppercase tracking-[0.12em] text-white/25">
+          <div className="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[8.5px] font-medium uppercase tracking-[0.1em] text-white/25">
             <span>Now Open</span><span>·</span><span>Dearborn & SE Michigan</span><span>·</span><span>Premium Craft Matcha</span>
           </div>
         </motion.div>

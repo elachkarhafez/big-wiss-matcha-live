@@ -163,7 +163,7 @@ export function InstagramGallery() {
   return (
     <section
       id="gallery"
-      className="relative py-20 md:py-28 px-5 md:px-10 lg:px-16 overflow-hidden"
+      className="relative py-12 md:py-28 px-4 md:px-10 lg:px-16 overflow-hidden"
       style={{
         background: "linear-gradient(180deg, #0a1a11 0%, #061410 55%, #0a1a11 100%)",
         borderTop: "1px solid rgba(125,206,160,0.06)",
@@ -181,7 +181,7 @@ export function InstagramGallery() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-7 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -308,7 +308,7 @@ export function InstagramGallery() {
         </motion.div>
 
         {/* Mosaic grid of real reels + photos */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
           {TILES.map((tile, i) => (
             <Tile key={tile.src} tile={tile} index={i} />
           ))}
@@ -316,7 +316,7 @@ export function InstagramGallery() {
 
         {/* CTA */}
         <motion.div
-          className="text-center mt-14"
+          className="text-center mt-9 md:mt-14"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
