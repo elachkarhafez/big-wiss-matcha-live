@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -11,6 +12,9 @@ import { cn } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 
 export function Navbar() {
+  const pathname = usePathname();
+  // "#hero" only exists on the home page — off it, every hash link is a dead end.
+  const isHome = pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const activeSection = useActiveSection(NAV_ITEMS.map((item) => item.id));
@@ -52,7 +56,11 @@ export function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="#hero" className="group inline-flex items-center">
+          <Link
+            href={isHome ? "#hero" : "/"}
+            aria-label={isHome ? "Big Wiss Matcha" : "Big Wiss Matcha — back to home"}
+            className="group inline-flex items-center"
+          >
             <motion.span
               className="relative"
               style={{ width: 140, height: 66 }}
@@ -113,11 +121,38 @@ export function Navbar() {
         </motion.ul>
 
         <motion.div
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 md:gap-3"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {/* Back to home — shown on every page except the home page itself, at
+              every breakpoint, and never hidden behind the mobile menu. */}
+          {!isHome ? (
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}>
+              <Link
+                href="/"
+                aria-label="Back to home page"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/20 md:px-4 md:text-[12px]"
+              >
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M19 12H5M11 5l-7 7 7 7" />
+                </svg>
+                Home
+              </Link>
+            </motion.div>
+          ) : null}
+
           {/* CTA Button */}
           <motion.div
             whileHover={{ scale: 1.08 }}
@@ -125,7 +160,7 @@ export function Navbar() {
             className="hidden lg:block"
           >
             <Link
-              href="#book"
+              href="/catering"
               className="relative inline-block rounded-[24px] bg-[#1A1A1A] px-7 py-3 text-[13px] font-semibold uppercase tracking-[1px] text-white overflow-hidden group"
             >
               <motion.span
@@ -182,6 +217,20 @@ export function Navbar() {
               onClick={(event) => event.stopPropagation()}
             >
               <ul className="mt-10 space-y-2">
+                {!isHome ? (
+                  <li>
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2 rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-[0.5px] text-[#2D5A3D] hover:bg-[#E8F3E8]"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M19 12H5M11 5l-7 7 7 7" />
+                      </svg>
+                      Home
+                    </Link>
+                  </li>
+                ) : null}
                 {NAV_ITEMS.map((item) => (
                   <li key={item.id}>
                     <Link
@@ -195,7 +244,7 @@ export function Navbar() {
                 ))}
               </ul>
               <Link
-                href="#book"
+                href="/catering"
                 onClick={() => setIsOpen(false)}
                 className="mt-6 block rounded-[24px] bg-[#2D5A3D] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[1px] text-white"
               >

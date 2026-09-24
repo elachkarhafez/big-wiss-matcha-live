@@ -1,6 +1,7 @@
 import type { MatchaLevel, MenuItem } from "@/types/menu";
 
 export const NAV_ITEMS = [
+  { label: "Flavors", href: "/flavors", id: "drops" },
   { label: "Book", href: "/catering", id: "book" }
 ] as const;
 

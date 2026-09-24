@@ -6,23 +6,68 @@ import { motion } from "framer-motion";
 
 const IG = "https://www.instagram.com/bigwissmatcha/";
 
-// Real content pulled from @bigwissmatcha
+// Real content pulled from @bigwissmatcha — captions, dates and links verified
+// against the live posts on 2026-09-24. Posters are the actual post thumbnails.
 type Tile = {
-  kind: "video" | "photo";
+  kind: "video" | "reel" | "photo";
   src: string;
   poster?: string;
   caption: string;
   href: string;
-  span?: boolean;
+  /** Use "contain" for square flyers so nothing important gets cropped. */
+  fit?: "cover" | "contain";
 };
 
 const TILES: Tile[] = [
   {
-    kind: "video",
-    src: "/videos/strawberry-matcha.mp4",
-    poster: "/instagram/strawberry-matcha.jpg",
-    caption: "Strawberry matcha, made my way 🍓",
-    href: "https://www.instagram.com/bigwissmatcha/reel/DZLyxLiRVqE/",
+    kind: "photo",
+    src: "/instagram/tiliani-popup.jpg",
+    caption: "Evening pop-up at Tiliani — serving Ube, Strawberry Shortcake & Vanilla Bean",
+    href: "https://www.instagram.com/p/DdQCQ24jX1W/",
+    fit: "contain",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/ube-matcha.jpg",
+    caption: "Ube matcha, paired with an ube brownie",
+    href: "https://www.instagram.com/reel/DdNI2hWOo__/",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/honey-whip.jpg",
+    caption: "Our Honey Whip matcha is to die for",
+    href: "https://www.instagram.com/reel/Dc67CuIP_jz/",
+  },
+  {
+    kind: "photo",
+    src: "/instagram/weekend-drop-sept.jpg",
+    caption: "All-new Honey Whip, plus Strawberry Shortcake & Coconut Vanilla",
+    href: "https://www.instagram.com/p/DcxRyogjbUA/",
+    fit: "contain",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/banana-pudding-coldfoam.jpg",
+    caption: "Banana pudding cold foam on a coffee",
+    href: "https://www.instagram.com/reel/DcG-DfeRjDr/",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/find-our-spot.jpg",
+    caption: "How to find our weekend pop-up spot",
+    href: "https://www.instagram.com/reel/DcHKAIJxQR9/",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/halal-food-guru.jpg",
+    caption: "@thehalalfoodguru: “hands down the best matcha I ever had”",
+    href: "https://www.instagram.com/reel/DbjpggVR3n7/",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/coconut-vanilla.jpg",
+    caption: "Coconut vanilla — creamy and refreshing",
+    href: "https://www.instagram.com/reel/DbeOwVdxEJz/",
   },
   {
     kind: "video",
@@ -30,30 +75,6 @@ const TILES: Tile[] = [
     poster: "/instagram/matcha-cart.jpg",
     caption: "The cart is up & running — book us for catering",
     href: "https://www.instagram.com/big_wissss/reel/DZBXyblR7wO/",
-  },
-  {
-    kind: "photo",
-    src: "/instagram/late-night-booth.jpg",
-    caption: "Our first ever late-night pop-up ✨",
-    href: "https://www.instagram.com/big_wissss/reel/DaCGGuoRz_L/",
-  },
-  {
-    kind: "photo",
-    src: "/instagram/making-matcha.jpg",
-    caption: "Whisked fresh, every single cup",
-    href: "https://www.instagram.com/big_wissss/reel/DZOZFuWJ0kb/",
-  },
-  {
-    kind: "photo",
-    src: "/instagram/late-night-poster.jpg",
-    caption: "Late Night Matcha — you can't miss this",
-    href: "https://www.instagram.com/bigwissmatcha/p/DZyx2SQjcJv/",
-  },
-  {
-    kind: "photo",
-    src: "/instagram/big-wiss-cup.jpg",
-    caption: "What a taste. What a cup.",
-    href: "https://www.instagram.com/bigwissmatcha/p/DYD34GFjZ7H/",
   },
 ];
 
@@ -90,7 +111,11 @@ function Tile({ tile, index }: { tile: Tile; index: number }) {
           alt={tile.caption}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 380px"
-          className="object-cover transition-transform duration-[6000ms] ease-out group-hover:scale-[1.12]"
+          className={
+            tile.fit === "contain"
+              ? "object-contain transition-transform duration-[6000ms] ease-out group-hover:scale-[1.04]"
+              : "object-cover transition-transform duration-[6000ms] ease-out group-hover:scale-[1.12]"
+          }
         />
       )}
 
@@ -113,7 +138,7 @@ function Tile({ tile, index }: { tile: Tile; index: number }) {
 
       {/* Media-type chip */}
       <div className="absolute top-3 right-3 z-10">
-        {tile.kind === "video" ? (
+        {tile.kind === "video" || tile.kind === "reel" ? (
           <div
             className="w-7 h-7 rounded-full flex items-center justify-center"
             style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(6px)" }}
@@ -272,6 +297,19 @@ export function InstagramGallery() {
                 <p className="text-white/60 text-xs md:text-sm mt-2 max-w-md">
                   &ldquo;It was a successful pop-up and we are beyond grateful. Thank you so much!&rdquo;
                 </p>
+                <a
+                  href="https://www.instagram.com/bigwissmatcha/reel/DaS_hmag1hn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#7dcea0] hover:text-white transition-colors"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                  Watch on Instagram
+                </a>
               </div>
 
               {/* mute toggle */}
@@ -340,7 +378,7 @@ export function InstagramGallery() {
             <span>Follow @bigwissmatcha</span>
           </a>
           <p className="text-white/25 text-[10px] uppercase tracking-widest mt-3">
-            121 followers &middot; 7 posts &middot; Dearborn, MI
+            196 followers &middot; Dearborn, MI
           </p>
         </motion.div>
       </div>
