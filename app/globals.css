@@ -538,3 +538,24 @@ select {
 }
 .bw-spin { opacity: 0; transition: opacity 0.35s var(--bw-ease); }
 .bw-spin[data-on="true"] { opacity: 1; }
+
+/* ───────────── Display type v3: sentence case, tight, large (Apple-like) ───────────── */
+.bw-h {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.bw-sub { font-size: clamp(1.08rem, 1rem + 0.4vw, 1.3rem); line-height: 1.45; letter-spacing: -0.01em; }
+
+/* iOS-style segmented flavor control */
+.bw-seg { position: relative; display: flex; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.08); }
+.bw-seg-thumb { position: absolute; top: 4px; bottom: 4px; border-radius: 999px; transition: transform 0.45s var(--bw-ease), width 0.45s var(--bw-ease), background-color 0.45s; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
+.bw-seg button { position: relative; z-index: 1; }
+
+/* sticky mobile action bar */
+.bw-dock { position: fixed; inset-inline: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 80; transform: translateY(140%); transition: transform 0.5s var(--bw-ease); }
+.bw-dock[data-show="true"] { transform: none; }
+@media (min-width: 1024px) { .bw-dock { display: none; } }
+@media (prefers-reduced-motion: reduce) { .bw-seg-thumb, .bw-dock { transition: none; } }

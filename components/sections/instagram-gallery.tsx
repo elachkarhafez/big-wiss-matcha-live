@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+import { IG_FOLLOWERS } from "@/lib/drops";
+
 const IG = "https://www.instagram.com/whatatastematcha/";
 
 // Real content pulled from @whatatastematcha — captions, dates and links verified
@@ -223,22 +225,10 @@ export function InstagramGallery() {
             </span>
           </div>
 
-          <h2
-            className="font-display font-bold text-white leading-[0.92] tracking-[-0.03em]"
-            style={{ fontSize: "clamp(2.2rem, 6vw, 4.2rem)" }}
-          >
-            THE{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #7dcea0 0%, #c4f0d5 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              WISS LIFE
-            </span>
+          <h2 className="bw-h text-white" style={{ fontSize: "clamp(2.6rem, 1.6rem + 4.2vw, 5rem)" }}>
+            The <span className="bw-accent text-[#9ee0b8]">Wiss life.</span>
           </h2>
-          <p className="text-white/40 text-sm mt-3 max-w-md mx-auto leading-relaxed">
+          <p className="bw-sub mx-auto mt-4 max-w-md text-white/55">
             Real pop-ups, real pours, real matcha. Straight off our feed.
           </p>
         </motion.div>
@@ -379,7 +369,7 @@ export function InstagramGallery() {
             <span>Follow @whatatastematcha</span>
           </a>
           <p className="text-white/25 text-[10px] uppercase tracking-widest mt-3">
-            200 followers &middot; Dearborn, MI
+            {IG_FOLLOWERS} followers &middot; Dearborn, MI
           </p>
         </motion.div>
       </div>

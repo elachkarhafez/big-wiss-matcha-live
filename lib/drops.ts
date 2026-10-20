@@ -183,4 +183,7 @@ export const renders = (id: string) => ({
   webm: `/flavors/${id}-pour.webm`,
 });
 
+/** Follower count of @whatatastematcha, refreshed by the monthly update. */
+export const IG_FOLLOWERS = 200;
+
 export const IG_URL = "https://www.instagram.com/whatatastematcha/";

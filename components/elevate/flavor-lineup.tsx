@@ -146,8 +146,8 @@ export function FlavorLineup() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="sd-rise sd-rail-intro">
               <p className="bw-kicker"><Heart className="h-3 w-3" /> Specialty drops</p>
-              <h2 id="flavors-title" className="mt-4 font-display text-[clamp(2.4rem,1.4rem+4vw,4.6rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-white">
-                The <span className="bw-accent normal-case text-[#9ee0b8]">line-up</span>
+              <h2 id="flavors-title" className="bw-h mt-4 text-[clamp(2.6rem,1.6rem+4.2vw,5rem)] text-white">
+                The <span className="bw-accent text-[#9ee0b8]">line-up.</span>
               </h2>
               <p className="sd-rail-lead mt-4 max-w-xl text-[1.02rem] leading-relaxed text-white/65">
                 Every pop-up puts three on the board. These are the flavors that have come off the cart since July.

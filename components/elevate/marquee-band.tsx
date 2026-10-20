@@ -23,7 +23,7 @@ function Row({ items, dir, dur, className }: { items: string[]; dir?: "rev"; dur
 export function MarqueeBand() {
   return (
     <section aria-label="Big Wiss Matcha" className="relative overflow-hidden border-y border-white/10 bg-[#0a1a11] py-7 md:py-9">
-      <Row items={VOICE} dur="44s" className="font-display text-[clamp(2.2rem,1.4rem+3.4vw,4.6rem)] font-extrabold uppercase leading-none tracking-[-0.03em] text-white" />
+      <Row items={VOICE} dur="44s" className="bw-h text-[clamp(2.4rem,1.5rem+3.6vw,5rem)] leading-none text-white" />
       <Row items={DROPS.map((d) => d.name)} dir="rev" dur="52s" className="bw-accent mt-3 text-[clamp(1.6rem,1.1rem+2vw,3rem)] leading-none text-[#c4a57b]" />
     </section>
   );

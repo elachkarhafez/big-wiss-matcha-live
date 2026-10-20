@@ -5,7 +5,9 @@ import { FlavorLineup } from "@/components/elevate/flavor-lineup";
 import { Founder } from "@/components/elevate/founder";
 import { HeroPour } from "@/components/elevate/hero-pour";
 import { MarqueeBand } from "@/components/elevate/marquee-band";
-import { PopUpStrip } from "@/components/elevate/popup-strip";
+import { Dock } from "@/components/elevate/dock";
+import { Highlights } from "@/components/elevate/highlights";
+import { UpClose } from "@/components/elevate/up-close";
 import { Proof } from "@/components/elevate/proof";
 import { SiteFooter } from "@/components/elevate/site-footer";
 import { InstagramGallery } from "@/components/sections/instagram-gallery";
@@ -19,7 +21,8 @@ export default function HomePage() {
       <main>
         <HeroPour />
         <MarqueeBand />
-        <PopUpStrip />
+        <Highlights />
+        <UpClose />
         <FlavorLineup />
         <Founder />
         <Proof />
@@ -28,6 +31,7 @@ export default function HomePage() {
         <FlavorForum />
       </main>
       <SiteFooter />
+      <Dock />
     </>
   );
 }

@@ -99,6 +99,24 @@ export function HeroPour() {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
   const autoCycling = !touched && !hold && inView;
 
+  // Segmented control: slide the coloured thumb under the active flavor, and keep it in view.
+  const segRef = useRef<HTMLDivElement>(null);
+  const [thumb, setThumb] = useState({ x: 0, w: 0 });
+  useEffect(() => {
+    const place = () => {
+      const b = tabsRef.current[index];
+      if (!b) return;
+      setThumb({ x: b.offsetLeft, w: b.offsetWidth });
+      const seg = segRef.current;
+      if (seg && seg.scrollWidth > seg.clientWidth) {
+        seg.scrollTo({ left: b.offsetLeft - (seg.clientWidth - b.offsetWidth) / 2, behavior: hold ? "auto" : "smooth" });
+      }
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [index, hold]);
+
   const onKey = (e: React.KeyboardEvent) => {
     const k = e.key;
     if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== "Home" && k !== "End") return;
@@ -113,45 +131,45 @@ export function HeroPour() {
     <section
       id="hero"
       className="relative overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #0d2a1a 0%, #163a26 38%, #0f2a1c 72%, #0a1a11 100%)" }}
+      style={{ background: "radial-gradient(120% 80% at 50% 0%, #1b4430 0%, #0f2a1c 46%, #0a1a11 100%)" }}
     >
       {/* flavor-tinted bloom behind the stage */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 transition-[background] duration-700"
-        style={{ background: `radial-gradient(ellipse 55% 60% at 72% 48%, ${drop.theme.glow}33 0%, transparent 62%), radial-gradient(ellipse 70% 50% at 20% 0%, rgba(125,206,160,0.14) 0%, transparent 60%)` }}
+        style={{ background: `radial-gradient(ellipse 60% 45% at 50% 62%, ${drop.theme.glow}2e 0%, transparent 65%)` }}
       />
 
       {/* giant flavor name, swaps with each pour */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden lg:justify-end">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[38%] flex justify-center overflow-hidden lg:top-1/2 lg:-translate-y-1/2 lg:justify-end">
         <p
           key={drop.id}
-          className="bw-watermark bw-accent whitespace-nowrap leading-none text-white/[0.05] lg:-mr-[6vw]"
-          style={{ fontSize: "clamp(7rem, 4rem + 13vw, 19rem)" }}
+          className="bw-watermark bw-accent whitespace-nowrap leading-none text-white/[0.045] lg:-mr-[6vw]"
+          style={{ fontSize: "clamp(6rem, 3rem + 16vw, 19rem)" }}
         >
           {drop.name}
         </p>
       </div>
 
-      <div className="bw-shell relative grid min-h-[100svh] grid-cols-1 items-center gap-10 pb-14 pt-24 md:pt-28 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-20">
+      <div className="relative mx-auto grid min-h-[100svh] w-full max-w-[1320px] grid-cols-1 content-start items-center gap-7 pb-10 pt-[88px] lg:grid-cols-[1.05fr_1fr] lg:content-center lg:gap-16 lg:px-[var(--bw-pad)] lg:pb-20 lg:pt-28">
         {/* copy */}
-        <div className="sd-hero-copy order-1 min-w-0 text-center lg:text-left">
+        <div className="sd-hero-copy order-1 min-w-0 px-[var(--bw-pad)] text-center lg:px-0 lg:text-left">
           <p className="bw-kicker bw-fade-in justify-center lg:justify-start" style={{ ["--d" as string]: "80ms" }}>
-            <Heart className="h-3 w-3" /> Founder-led matcha · Dearborn, MI
+            <Heart className="h-3 w-3" /> Big Wiss Matcha · Dearborn
           </p>
-          <h1 className="mt-5 font-display font-extrabold uppercase leading-[0.86] tracking-[-0.035em] text-white" style={{ fontSize: "clamp(3.4rem, 2rem + 6.4vw, 7.6rem)" }}>
+          <h1 className="bw-h mt-4 text-white" style={{ fontSize: "clamp(3.6rem, 2.2rem + 7vw, 8.4rem)" }}>
             <span className="bw-line"><span style={{ ["--d" as string]: "120ms" }}>What a</span></span>
-            <span className="bw-line normal-case">
+            <span className="bw-line">
               <span style={{ ["--d" as string]: "260ms" }}>
-                <span className="bw-accent text-[#9ee0b8]" style={{ fontSize: "1.12em", lineHeight: 0.9 }}>taste</span>
-                <span key={pop} className="bw-heart-pop ml-2 inline-block align-[0.1em]" style={{ width: "0.32em" }}>
+                <span className="bw-accent text-[#9ee0b8]" style={{ fontSize: "1.08em" }}>taste.</span>
+                <span key={pop} className="bw-heart-pop ml-2 inline-block align-[0.08em]" style={{ width: "0.3em" }}>
                   <Heart className="h-auto w-full" title="heart" />
                 </span>
               </span>
             </span>
           </h1>
-          <p style={{ ["--d" as string]: "480ms" }} className="bw-fade-in mx-auto mt-6 max-w-[34rem] text-[1.06rem] leading-relaxed text-white/70 lg:mx-0 lg:text-[1.15rem]">
-            Handcrafted matcha poured off Big Wiss&rsquo;s cart. A new dessert flavor every pop-up, and the whole cart for your event.
+          <p style={{ ["--d" as string]: "480ms" }} className="bw-fade-in bw-sub mx-auto mt-5 max-w-[30rem] text-white/70 lg:mx-0">
+            Handcrafted matcha off Big Wiss&rsquo;s cart. A new dessert flavor every pop-up, and the whole cart for your event.
           </p>
           <div style={{ ["--d" as string]: "620ms" }} className="bw-fade-in mt-8 hidden flex-wrap items-center gap-3 lg:flex">
             <Link href="/catering" className="bw-btn bw-btn-gold">Book the cart <Heart className="h-3.5 w-3.5" color="#0a1a11" /></Link>
@@ -160,7 +178,7 @@ export function HeroPour() {
         </div>
 
         {/* stage */}
-        <div className="bw-stage-in order-2 mx-auto w-full min-w-0 max-w-[480px] lg:max-w-[min(500px,calc((100svh-250px)*0.75))]" style={{ ["--d" as string]: "300ms" }}>
+        <div className="bw-stage-in order-2 mx-auto w-full min-w-0 max-w-[560px] px-3 sm:px-[var(--bw-pad)] lg:max-w-[min(500px,calc((100svh-260px)*0.75))] lg:px-0" style={{ ["--d" as string]: "300ms" }}>
          <div className="sd-hero-stage">
           <div onPointerMove={onTilt} onPointerLeave={resetTilt} style={{ perspective: "1100px" }}>
           <div
@@ -170,16 +188,9 @@ export function HeroPour() {
             aria-label={`${drop.name} is poured. Pour the next flavor`}
             onClick={() => choose(index + 1, true)}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(index + 1, true); } }}
-            className="relative cursor-pointer overflow-hidden rounded-[28px] shadow-[0_40px_90px_rgba(0,0,0,0.45)] transition-[background-color,transform] duration-500 [transition-timing-function:var(--bw-ease)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7dcea0] active:scale-[0.99]"
+            className="relative cursor-pointer overflow-hidden rounded-[32px] shadow-[0_40px_100px_rgba(0,0,0,0.5)] transition-[background-color,transform] duration-500 [transition-timing-function:var(--bw-ease)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7dcea0] active:scale-[0.985]"
             style={{ background: drop.backdrop, aspectRatio: "3 / 4", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
           >
-            {!touched ? (
-              <span className={`absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#0a1a11] px-3.5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white shadow-lg ${nudge ? "bw-nudge" : ""}`}>
-                <span aria-hidden>👆</span>
-                <span className="md:hidden">Tap the cup</span>
-                <span className="hidden md:inline">Click the cup</span>
-              </span>
-            ) : null}
             {/* Always the same element on server and client; under reduced motion it never plays, so the poster is the cup. */}
             <video
               key={drop.id}
@@ -195,6 +206,27 @@ export function HeroPour() {
               <source src={r.mp4} type="video/mp4" />
             </video>
 
+            {/* name, set into the frame like a product label */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4 sm:p-5">
+              <div className="rounded-2xl bg-white/55 px-3.5 py-2 backdrop-blur-md">
+                <p className="bw-accent text-[1.35rem] leading-none text-[#1a1a1a] sm:text-[1.6rem]" aria-live="polite">{drop.name}</p>
+                <p className="mt-1 text-[0.72rem] font-semibold text-[#1a1a1a]/65">{drop.tagline}</p>
+              </div>
+              {onBoard ? (
+                <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#0a1a11] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.14em] text-[#9ee0b8]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#7dcea0]" /> This weekend
+                </span>
+              ) : null}
+            </div>
+
+            {!touched ? (
+              <span className={`absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#0a1a11]/85 px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white shadow-lg backdrop-blur ${nudge ? "bw-nudge" : ""}`}>
+                <span aria-hidden>👆</span>
+                <span className="md:hidden">Tap to pour</span>
+                <span className="hidden md:inline">Click to pour the next one</span>
+              </span>
+            ) : null}
+
             {/* time until the next auto-pour */}
             {autoCycling ? (
               <span key={`p-${index}`} aria-hidden className="bw-progress absolute inset-x-0 bottom-0 h-[3px] bg-[#0a1a11]/45" style={{ ["--dur" as string]: `${CYCLE_MS}ms` }} />
@@ -203,65 +235,35 @@ export function HeroPour() {
           </div>
          </div>
 
-          {/* name */}
-          <div className="mt-5 flex items-end justify-between gap-4 text-left">
-            <div>
-              <p className="bw-accent text-[2rem] leading-none text-white sm:text-[2.3rem]" aria-live="polite">{drop.name}</p>
-              <p className="mt-1.5 text-[0.88rem] text-white/60">{drop.tagline}</p>
-            </div>
-            {onBoard ? (
-              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#7dcea0]/40 bg-[#7dcea0]/10 px-3 py-1 text-[0.64rem] font-bold uppercase tracking-[0.16em] text-[#9ee0b8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#7dcea0]" /> This weekend
-              </span>
-            ) : null}
+          {/* segmented flavor control */}
+          <div
+            ref={segRef}
+            role="tablist"
+            aria-label="Specialty flavors"
+            onKeyDown={onKey}
+            className="bw-seg bw-noscrollbar mt-5 overflow-x-auto"
+          >
+            <span aria-hidden className="bw-seg-thumb" style={{ width: thumb.w, transform: `translateX(${thumb.x - 4}px)`, left: 4, background: drop.backdrop }} />
+            {DROPS.map((d, i) => {
+              const active = i === index;
+              return (
+                <button
+                  key={d.id}
+                  ref={(el) => { tabsRef.current[i] = el; }}
+                  role="tab"
+                  type="button"
+                  aria-selected={active}
+                  tabIndex={active ? 0 : -1}
+                  onClick={() => choose(i, true)}
+                  className="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2.5 text-[0.82rem] font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7dcea0]"
+                  style={{ color: active ? "#1a1a1a" : "rgba(255,255,255,0.78)" }}
+                >
+                  <span className="h-2 w-2 rounded-full" style={{ background: d.theme.glow }} aria-hidden />
+                  {d.name}
+                </button>
+              );
+            })}
           </div>
-
-          {/* flavor rail */}
-          <div className="relative mt-5">
-            {!touched && !reduce ? (
-              <p className={`mb-3 flex items-center justify-center gap-2 text-[0.8rem] font-semibold text-[#c4f0d5] ${nudge ? "bw-nudge" : ""}`}>
-                <span aria-hidden>👆</span>
-                <span className="md:hidden">Tap a flavor, watch it pour</span>
-                <span className="hidden md:inline">Pick a flavor, watch it pour</span>
-              </p>
-            ) : null}
-            <div
-              role="tablist"
-              aria-label="Specialty flavors"
-              onKeyDown={onKey}
-              className={`bw-noscrollbar -mx-[var(--bw-pad)] flex snap-x gap-2 overflow-x-auto px-[var(--bw-pad)] pb-1 lg:mx-0 lg:flex-wrap lg:justify-center lg:overflow-visible lg:px-0 ${nudge ? "bw-nudge" : ""}`}
-            >
-              {DROPS.map((d, i) => {
-                const active = i === index;
-                return (
-                  <button
-                    key={d.id}
-                    ref={(el) => { tabsRef.current[i] = el; }}
-                    role="tab"
-                    type="button"
-                    aria-selected={active}
-                    tabIndex={active ? 0 : -1}
-                    onClick={() => choose(i, true)}
-                    className="flex shrink-0 snap-start items-center gap-2 rounded-full px-3.5 py-2 text-[0.8rem] font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7dcea0]"
-                    style={{
-                      background: active ? d.backdrop : "rgba(255,255,255,0.06)",
-                      color: active ? "#1a1a1a" : "rgba(255,255,255,0.82)",
-                      border: `1px solid ${active ? d.backdrop : "rgba(255,255,255,0.12)"}`,
-                    }}
-                  >
-                    <span className="h-2.5 w-2.5 rounded-full" style={{ background: d.theme.glow }} aria-hidden />
-                    {d.name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* mobile CTAs sit under the stage */}
-        <div className="order-3 flex flex-col gap-3 sm:flex-row sm:justify-center lg:hidden">
-          <Link href="/catering" className="bw-btn bw-btn-gold">Book the cart <Heart className="h-3.5 w-3.5" color="#0a1a11" /></Link>
-          <a href="#popup" className="bw-btn bw-btn-ghost">Next pop-up</a>
         </div>
       </div>
     </section>

@@ -26,8 +26,8 @@ export function Founder() {
 
         <div className="sd-rise pt-6 lg:pt-0">
           <p className="bw-kicker"><Heart className="h-3 w-3" /> Who&rsquo;s pouring</p>
-          <h2 id="about-title" className="mt-4 font-display text-[clamp(2.4rem,1.4rem+4vw,4.4rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-white">
-            It&rsquo;s Wiss <span className="bw-accent normal-case text-[#9ee0b8]">behind the cart</span>
+          <h2 id="about-title" className="bw-h mt-4 text-[clamp(2.6rem,1.6rem+4.2vw,5rem)] text-white">
+            It&rsquo;s Wiss <span className="bw-accent text-[#9ee0b8]">behind the cart.</span>
           </h2>
           <p className="mt-6 max-w-xl text-[1.06rem] leading-relaxed text-white/70">
             Big Wiss Matcha is Wiss&rsquo;s own cart: handcrafted matcha, a dessert flavor or three on the board, and the

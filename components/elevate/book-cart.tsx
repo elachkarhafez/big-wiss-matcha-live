@@ -19,8 +19,8 @@ export function BookCart() {
       <div className="bw-shell grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
         <div className="sd-rise">
           <p className="bw-kicker !text-[#2d5a3d]"><Heart className="h-3 w-3" /> Catering</p>
-          <h2 id="book-title" className="mt-4 font-display text-[clamp(2.4rem,1.4rem+4vw,4.6rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-[#12301f]">
-            Put the cart <span className="bw-accent normal-case text-[#2d5a3d]">at your party</span>
+          <h2 id="book-title" className="bw-h mt-4 text-[clamp(2.6rem,1.6rem+4.2vw,5rem)] text-[#12301f]">
+            Put the cart <span className="bw-accent text-[#2d5a3d]">at your party.</span>
           </h2>
           <p className="mt-5 max-w-xl text-[1.06rem] leading-relaxed text-[#1a1a1a]/70">
             &ldquo;Whether an event big or small, our Matcha cart is here to be the cherry on top of your event!&rdquo; Now booking.

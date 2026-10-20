@@ -60,21 +60,11 @@ export function FlavorForum() {
             </span>
           </div>
 
-          <h2
-            className="font-display font-bold text-white leading-[0.95] tracking-[-0.03em] mb-3"
-            style={{ fontSize: "clamp(1.9rem, 7vw, 3rem)" }}
-          >
-            WHAT SHOULD WE<br />
-            <span style={{
-              background: "linear-gradient(135deg, #7dcea0 0%, #c4f0d5 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}>
-              DROP NEXT?
-            </span>
+          <h2 className="bw-h mb-4 text-white" style={{ fontSize: "clamp(2.4rem, 1.5rem + 3.8vw, 4.4rem)" }}>
+            What should we <span className="bw-accent text-[#9ee0b8]">drop next?</span>
           </h2>
 
-          <p className="text-white/40 text-sm max-w-xs mx-auto leading-relaxed mb-10">
+          <p className="bw-sub mx-auto mb-10 max-w-sm text-white/55">
             Got a flavor idea? Send it to Wiss. New specialty flavors land on the board at every pop-up.
           </p>
         </motion.div>
