@@ -351,3 +351,103 @@ select {
     animation: none !important;
   }
 }
+
+/* ───────────── Elevate (Oct 2026) ─────────────
+   Brand palette is unchanged; these name it and add the cup's heart red as the one
+   signature accent.
+   deep #0A1A11 · forest #12301F · matcha #2D5A3D · leaf #4A7C59 · mint #7DCEA0
+   gold #C4A57B · foil #D1AE47 (logo only) · cream #F5F3F0 · heart #D30002        */
+:root {
+  --bw-deep: #0a1a11;
+  --bw-forest: #12301f;
+  --bw-matcha: #2d5a3d;
+  --bw-leaf: #4a7c59;
+  --bw-mint: #7dcea0;
+  --bw-gold: #c4a57b;
+  --bw-foil: #d1ae47;
+  --bw-cream: #f5f3f0;
+  --bw-heart: #d30002;
+  --bw-pad: clamp(16px, 4vw, 56px);
+  --bw-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bw-shell {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--bw-pad);
+}
+
+.bw-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bw-mint);
+}
+
+.bw-accent {
+  font-family: var(--font-accent), Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.bw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.25s var(--bw-ease), background-color 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.bw-btn-gold {
+  background: var(--bw-gold);
+  color: var(--bw-deep);
+  box-shadow: 0 10px 30px rgba(196, 165, 123, 0.25);
+}
+.bw-btn-ghost {
+  color: var(--bw-cream);
+  border: 1px solid rgba(245, 243, 240, 0.28);
+}
+@media (hover: hover) and (pointer: fine) {
+  .bw-btn-gold:hover { transform: translateY(-2px); background: #d4b78f; box-shadow: 0 14px 36px rgba(196, 165, 123, 0.35); }
+  .bw-btn-ghost:hover { transform: translateY(-2px); border-color: var(--bw-mint); color: #fff; }
+}
+.bw-btn:focus-visible { outline: 2px solid var(--bw-mint); outline-offset: 3px; }
+
+.bw-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(125, 206, 160, 0.28), transparent); }
+
+/* Hero flavor switch: heart pop on every change */
+@keyframes bwHeartPop {
+  0% { transform: scale(0.4) rotate(-12deg); opacity: 0; }
+  55% { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.bw-heart-pop { animation: bwHeartPop 0.42s var(--bw-ease) both; }
+
+@keyframes bwNudge {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px) rotate(-2deg); }
+  40% { transform: translateX(6px) rotate(2deg); }
+  60% { transform: translateX(-3px); }
+}
+.bw-nudge { animation: bwNudge 0.7s ease-in-out both; }
+
+.bw-noscrollbar { scrollbar-width: none; }
+.bw-noscrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bw-heart-pop, .bw-nudge { animation: none; }
+  .bw-btn { transition: none; }
+}

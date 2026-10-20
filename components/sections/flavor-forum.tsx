@@ -75,7 +75,7 @@ export function FlavorForum() {
           </h2>
 
           <p className="text-white/40 text-sm max-w-xs mx-auto leading-relaxed mb-10">
-            Got a flavor idea? Drop it here — we read every request and the best ones make it on the menu.
+            Got a flavor idea? Send it to Wiss. New specialty flavors land on the board at every pop-up.
           </p>
         </motion.div>
 
@@ -151,7 +151,7 @@ export function FlavorForum() {
           </AnimatePresence>
 
           <p className="mt-5 text-[10px] text-white/20 tracking-wide">
-            New special drops weekly · Requests reviewed every Sunday
+            New flavors are announced on Instagram first · @whatatastematcha
           </p>
         </motion.div>
       </div>

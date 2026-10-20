@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Fraunces, Inter, Montserrat } from "next/font/google";
 
 import "@/app/globals.css";
 import { appConfig } from "@/lib/config";
@@ -7,7 +7,15 @@ import { appConfig } from "@/lib/config";
 const displayFont = Montserrat({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["600", "700"]
+  weight: ["600", "700", "800"]
+});
+
+// Soft italic accent for single emotive words ("taste", flavor names). Headings stay Montserrat.
+const accentFont = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-accent",
+  style: ["italic"],
+  weight: ["500", "600"]
 });
 
 const bodyFont = Inter({
@@ -65,7 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${displayFont.variable} ${bodyFont.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
+        className={`${displayFont.variable} ${bodyFont.variable} ${accentFont.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
       >
         {children}
       </body>

@@ -12,7 +12,7 @@ import {
 } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { DROPS, IG_URL, type Drop } from "@/lib/drops";
+import { DROPS, IG_URL, renders, type Drop } from "@/lib/drops";
 
 const N = DROPS.length;
 const SEG = 1 / N;
@@ -94,7 +94,7 @@ function Scene({
           style={{ y: cupY, scale: cupScale, rotate: cupRotate }}
         >
           <Image
-            src={drop.cup}
+            src={renders(drop.id).still}
             alt={`${drop.name} in a Big Wiss Matcha cup`}
             fill
             sizes="(max-width: 768px) 45vw, 420px"
@@ -185,7 +185,7 @@ function StaticList() {
         >
           <div className="relative h-40 w-28 flex-none">
             <Image
-              src={drop.cup}
+              src={renders(drop.id).still}
               alt={`${drop.name} in a Big Wiss Matcha cup`}
               fill
               sizes="112px"

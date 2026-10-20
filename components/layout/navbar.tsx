@@ -40,15 +40,19 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-[90] bg-[#2D5A3D] shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+      className={cn(
+        "fixed inset-x-0 top-0 z-[90] transition-[background-color,box-shadow,backdrop-filter] duration-300",
+        !isHome
+          ? "bg-[#2D5A3D] shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+          : scrollY > 40
+            ? "bg-[#0a1a11]/85 shadow-[0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md"
+            : "bg-transparent"
+      )}
     >
       <motion.nav
         aria-label="Primary"
         className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-8 xl:px-12"
-        animate={{
-          y: scrollY > 100 ? -5 : 0,
-        }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+
       >
         {/* Logo with animations */}
         <motion.div
@@ -155,23 +159,10 @@ export function Navbar() {
 
           {/* CTA Button */}
           <motion.div
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
             className="hidden lg:block"
           >
-            <Link
-              href="/catering"
-              className="relative inline-block rounded-[24px] bg-[#1A1A1A] px-7 py-3 text-[13px] font-semibold uppercase tracking-[1px] text-white overflow-hidden group"
-            >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0"
-                animate={{ x: ["0%", "100%"] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
-                group-hover={{
-                  opacity: 0.2,
-                }}
-              />
-              <span className="relative">{CTA_COPY.heroPrimary}</span>
+            <Link href="/catering" className="bw-btn bw-btn-gold !min-h-[44px] !px-6">
+              {CTA_COPY.heroPrimary}
             </Link>
           </motion.div>
 
@@ -209,7 +200,7 @@ export function Navbar() {
             onClick={() => setIsOpen(false)}
           >
             <motion.div
-              className="ml-auto h-full w-[82vw] max-w-[360px] bg-[#FAFAF8] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.15)]"
+              className="ml-auto h-full w-[82vw] max-w-[360px] border-l border-white/10 bg-[#0a1a11] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -221,7 +212,7 @@ export function Navbar() {
                   <li>
                     <Link
                       href="/"
-                      className="flex items-center gap-2 rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-[0.5px] text-[#2D5A3D] hover:bg-[#E8F3E8]"
+                      className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-[#9ee0b8] hover:bg-white/5"
                       onClick={() => setIsOpen(false)}
                     >
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -235,7 +226,7 @@ export function Navbar() {
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className="block rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-[0.5px] text-[#1A1A1A] hover:bg-[#E8F3E8]"
+                      className="block rounded-lg px-4 py-4 font-display text-xl font-bold uppercase tracking-[-0.01em] text-white hover:bg-white/5"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
@@ -246,7 +237,7 @@ export function Navbar() {
               <Link
                 href="/catering"
                 onClick={() => setIsOpen(false)}
-                className="mt-6 block rounded-[24px] bg-[#2D5A3D] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[1px] text-white"
+                className="bw-btn bw-btn-gold mt-6 w-full"
               >
                 <span className="leading-none">
                   {CTA_COPY.heroPrimary}

@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { DROPS, IG_URL as IG, type Drop } from "@/lib/drops";
+import { DROPS, IG_URL as IG, renders, type Drop } from "@/lib/drops";
 
 /* ─────────────────────────────  card  ───────────────────────────── */
 
@@ -55,7 +55,7 @@ function DropCard({
         className="pointer-events-none absolute -bottom-8 -right-4 h-40 w-28 opacity-70 transition-all duration-500 group-hover:-translate-y-2 group-hover:opacity-100"
       >
         <Image
-          src={drop.cup}
+          src={renders(drop.id).still}
           alt=""
           fill
           sizes="112px"
@@ -269,7 +269,7 @@ function DropDetail({
               }
             >
               <Image
-                src={drop.cup}
+                src={renders(drop.id).still}
                 alt={`${drop.name} in a Big Wiss Matcha cup`}
                 fill
                 sizes="(max-width: 768px) 70vw, 300px"
