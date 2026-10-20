@@ -66,7 +66,7 @@ export function PopUpStrip() {
               {flavors.map((d) => (
                 <li key={d.id} className="overflow-hidden rounded-2xl" style={{ background: d.backdrop }}>
                   <div className="relative aspect-[3/4]">
-                    <Image src={renders(d.id).stillSm} alt="" fill sizes="(max-width: 768px) 30vw, 180px" className="object-contain p-2" />
+                    <Image src={renders(d.id).photoSm} alt="" fill sizes="(max-width: 768px) 30vw, 180px" className="object-cover" />
                   </div>
                   <p className="px-2.5 pb-3 text-center text-[0.78rem] font-semibold leading-tight text-[#1a1a1a]">{d.name}</p>
                 </li>

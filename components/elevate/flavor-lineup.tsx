@@ -29,14 +29,15 @@ export function FlavorLineup() {
             return (
               <li key={d.id} className="w-[78vw] max-w-[340px] shrink-0 snap-center md:w-auto md:max-w-none">
                 <article className="group relative flex h-full flex-col overflow-hidden rounded-[26px]" style={{ background: d.backdrop }}>
-                  <div className="relative aspect-[4/5]">
+                  <div className="relative aspect-[3/4] overflow-hidden">
                     <Image
-                      src={renders(d.id).still}
+                      src={renders(d.id).photo}
                       alt={`${d.name} matcha in the Big Wiss cup (3D render)`}
                       fill
                       sizes="(max-width: 768px) 78vw, (max-width: 1280px) 33vw, 300px"
-                      className="object-contain px-6 pt-6 transition-transform duration-500 [transition-timing-function:var(--bw-ease)] group-hover:-translate-y-2 group-hover:scale-[1.03]"
+                      className="object-cover transition-transform duration-700 [transition-timing-function:var(--bw-ease)] group-hover:scale-[1.04]"
                     />
+                    <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/4" style={{ background: `linear-gradient(180deg, transparent, ${d.backdrop})` }} />
                     {live ? (
                       <span className="absolute left-4 top-4 rounded-full bg-[#0a1a11] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#9ee0b8]">This weekend</span>
                     ) : null}

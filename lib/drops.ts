@@ -27,9 +27,9 @@ export type Drop = {
   blurb: string;
   cup: string;
   /**
-   * Rendered from the 3D model of the brand's cup (WISS/tools/cup-studio): a transparent
-   * still, a short pour clip on `backdrop`, and its served frame as the poster.
-   * Paths follow /flavors/<id>.webp, /flavors/<id>-pour.mp4|webm, /flavors/<id>-poster.webp.
+   * Photoreal renders of the brand's cup from Blender Cycles (WISS/tools/cup-blender):
+   * a photo on `backdrop`, a transparent cutout, a short pour clip and its served frame.
+   * `backdrop` is sampled from the photo so frames and cards blend into it.
    */
   backdrop: string;
   theme: Theme;
@@ -46,7 +46,7 @@ export const DROPS: Drop[] = [
     blurb:
       "The newest name on the specialty board, announced for the late-October pop-up weekend. A dessert-café flavor over handcrafted matcha, billed as the perfect fall drink.",
     cup: "/product-cups/flavor-tiramisu.webp",
-    backdrop: "#ECDCCB",
+    backdrop: "#EDD5BD",
     theme: { deep: "#1E140C", glow: "#C8915E", accent: "#F2DEC6" },
     notes: [
       { emoji: "🍰", label: "Tiramisu" },
@@ -64,7 +64,7 @@ export const DROPS: Drop[] = [
     blurb:
       "On the board at nearly every pop-up since July. A bright strawberry layer under the matcha, so every sip pulls a little of both.",
     cup: "/product-cups/v3-strawberry.webp",
-    backdrop: "#F9DCE2",
+    backdrop: "#FAD1DA",
     theme: { deep: "#2B0B13", glow: "#FF5E7D", accent: "#FFC6D2" },
     notes: [
       { emoji: "🍓", label: "Strawberry" },
@@ -82,7 +82,7 @@ export const DROPS: Drop[] = [
     blurb:
       "Creamy and refreshing, in the cart's own words. Soft vanilla and coconut round off the matcha instead of burying it.",
     cup: "/product-cups/v3-vanilla.webp",
-    backdrop: "#F5EBDD",
+    backdrop: "#F7EBD6",
     theme: { deep: "#241E14", glow: "#EBD4A4", accent: "#FFF3DE" },
     notes: [
       { emoji: "🥥", label: "Real coconut" },
@@ -100,7 +100,7 @@ export const DROPS: Drop[] = [
     blurb:
       "Thick, cool and unapologetically sweet. A cream cap sits over the matcha so the first sip is all pudding and the last one is all green.",
     cup: "/product-cups/flavor-banana-pudding.webp",
-    backdrop: "#F8E7BF",
+    backdrop: "#FAE6AD",
     theme: { deep: "#2A2009", glow: "#FFD24A", accent: "#FFEBA8" },
     notes: [
       { emoji: "🍌", label: "Banana" },
@@ -118,7 +118,7 @@ export const DROPS: Drop[] = [
     blurb:
       "Toasted, milky and a little nostalgic: that last-sip-of-the-bowl feeling, over matcha. First dropped for the mid-August pop-up.",
     cup: "/product-cups/flavor-cereal-milk.webp",
-    backdrop: "#EDE4D6",
+    backdrop: "#EFE1CC",
     theme: { deep: "#271E10", glow: "#F2B45C", accent: "#FFDFAE" },
     notes: [
       { emoji: "🥣", label: "Cereal milk" },
@@ -136,7 +136,7 @@ export const DROPS: Drop[] = [
     blurb:
       "A honey-gold whipped cap introduced as an all-new drop over Labor Day weekend. Wiss called it \"to die for\" days later.",
     cup: "/product-cups/flavor-honey-whip.webp",
-    backdrop: "#F4DBAA",
+    backdrop: "#F8D494",
     theme: { deep: "#2B1D08", glow: "#F0A93C", accent: "#FFDD9E" },
     notes: [
       { emoji: "🍯", label: "Honey" },
@@ -154,7 +154,7 @@ export const DROPS: Drop[] = [
     blurb:
       "The purple sweet-potato flavor Wiss pairs with an ube brownie on pop-up days. By mid-September it was named among the bestselling flavors.",
     cup: "/product-cups/flavor-ube.webp",
-    backdrop: "#E5D9F2",
+    backdrop: "#E3D2F5",
     theme: { deep: "#211129", glow: "#9B6BD6", accent: "#D9C2F2" },
     notes: [
       { emoji: "🍠", label: "Ube" },
@@ -169,8 +169,12 @@ export const DROPS: Drop[] = [
 
 /** Asset paths for a flavor's 3D renders. */
 export const renders = (id: string) => ({
+  /** transparent cutout, for dark or themed grounds */
   still: `/flavors/${id}.webp`,
   stillSm: `/flavors/${id}-sm.webp`,
+  /** on its own studio backdrop, 3:4 */
+  photo: `/flavors/${id}-photo.webp`,
+  photoSm: `/flavors/${id}-photo-sm.webp`,
   poster: `/flavors/${id}-poster.webp`,
   mp4: `/flavors/${id}-pour.mp4`,
   webm: `/flavors/${id}-pour.webm`,
