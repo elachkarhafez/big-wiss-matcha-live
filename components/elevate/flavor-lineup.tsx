@@ -80,7 +80,7 @@ function Card({ d, active, onHover }: { d: Drop; active: boolean; onHover: (on: 
           <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Flavor notes">
             {d.notes.slice(0, 3).map((n) => (
               <li key={n.label} className="rounded-full bg-white/55 px-2.5 py-1 text-[0.72rem] font-semibold">
-                <span aria-hidden>{n.emoji}</span> {n.label}
+                {n.label}
               </li>
             ))}
           </ul>
@@ -90,7 +90,7 @@ function Card({ d, active, onHover }: { d: Drop; active: boolean; onHover: (on: 
             rel="noopener noreferrer"
             className="mt-auto pt-5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-[#1a1a1a]/60 underline-offset-4 hover:text-[#1a1a1a] hover:underline"
           >
-            Posted {d.posted} ↗
+            Posted {d.posted}
           </a>
         </div>
       </article>
@@ -154,7 +154,7 @@ export function FlavorLineup() {
                 <span className="hidden [@media(hover:hover)]:inline"> Hover a cup to spin it.</span>
               </p>
             </div>
-            <Link href="/flavors" className="bw-btn bw-btn-ghost self-start md:self-auto">Explore every flavor <span aria-hidden>→</span></Link>
+            <Link href="/flavors" className="bw-btn bw-btn-ghost self-start md:self-auto">Explore every flavor</Link>
           </div>
         </div>
 
@@ -170,7 +170,7 @@ export function FlavorLineup() {
         </div>
 
         <p className="bw-shell mt-6 text-[0.8rem] text-white/40">
-          Cups shown are 3D renders of the Big Wiss cup. Flavors rotate every pop-up; <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="text-white/60 underline underline-offset-4">follow @whatatastematcha</a> for the next drop.
+          Cups shown are studio renders of the Big Wiss cup. Flavors rotate every pop-up; <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="text-white/60 underline underline-offset-4">follow @whatatastematcha</a> for the next drop.
         </p>
       </div>
     </section>

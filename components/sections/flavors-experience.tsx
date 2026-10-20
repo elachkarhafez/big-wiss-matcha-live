@@ -138,9 +138,6 @@ function Scene({
                   color: drop.theme.accent,
                 }}
               >
-                <span className="text-[14px] leading-none" aria-hidden>
-                  {note.emoji}
-                </span>
                 {note.label}
               </span>
             ))}
@@ -212,7 +209,6 @@ function StaticList() {
                     color: drop.theme.accent,
                   }}
                 >
-                  <span aria-hidden>{n.emoji}</span>
                   {n.label}
                 </span>
               ))}

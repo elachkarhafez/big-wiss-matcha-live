@@ -53,7 +53,7 @@ export function PopUpStrip() {
               rel="noopener noreferrer"
               className="bw-btn bw-btn-ghost mt-7"
             >
-              Address &amp; details on the post <span aria-hidden>↗</span>
+              Address &amp; details on the post
             </a>
             <p className="mt-3 text-[0.75rem] text-white/40">Announced {p.posted}</p>
           </div>

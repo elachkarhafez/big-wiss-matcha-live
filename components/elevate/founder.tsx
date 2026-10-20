@@ -45,7 +45,6 @@ export function Founder() {
                     <span className="block font-display text-[1.05rem] font-bold uppercase tracking-[-0.01em] text-white">{s.place}</span>
                     <span className="mt-0.5 block text-[0.85rem] text-white/55">{s.when}</span>
                   </span>
-                  <span className="text-[#c4a57b] transition-transform duration-300 group-hover:translate-x-1" aria-hidden>↗</span>
                 </a>
               </li>
             ))}

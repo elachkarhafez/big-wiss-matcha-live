@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Heart } from "@/components/elevate/heart";
 
 export function FlavorForum() {
   const [input, setInput] = useState("");
@@ -86,9 +87,9 @@ export function FlavorForum() {
                 className="rounded-2xl py-8 px-6"
                 style={{ background: "rgba(125,206,160,0.08)", border: "1px solid rgba(125,206,160,0.2)" }}
               >
-                <div className="text-3xl mb-3">🍵</div>
+                <Heart className="mx-auto mb-3 h-7 w-7" />
                 <p className="text-[#7dcea0] font-bold text-sm uppercase tracking-widest mb-1">Request Sent!</p>
-                <p className="text-white/40 text-sm">We got it — stay tuned for next week&apos;s drop.</p>
+                <p className="text-white/40 text-sm">We got it. Stay tuned for the next drop.</p>
               </motion.div>
             ) : (
               <motion.form

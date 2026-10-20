@@ -58,44 +58,71 @@ export function UpClose() {
     return () => io.disconnect();
   }, [still]);
 
-  // Scrub loop: only while on screen.
+  // Scrub loop: only while on screen. Three things keep it smooth:
+  //  1. the shown time eases toward the scroll target (frame-rate independent), so scroll
+  //     steps and trackpad bursts become one continuous move instead of jumps;
+  //  2. a new seek is only issued once the previous one has landed (no seek pile-up);
+  //  3. captions and the progress bar follow the same eased value, so text and film agree.
   useEffect(() => {
     if (still || !src) return;
     const sec = sectionRef.current, v = videoRef.current;
     if (!sec || !v) return;
-    let raf = 0, running = false, shown = -1;
-    let primed = false;
+    const FPS = 30;
+    let raf = 0, running = false, primed = false;
+    let eased = -1;        // seconds, what we're steering the film toward
+    let requested = -1;    // last currentTime we asked for
+    let last = performance.now();
+
     const prime = () => {
       if (primed) return;
       primed = true;
-      // iOS only paints seeks after the media has been "played" once.
+      // iOS only paints seeks after the media has been played once; pause on the very next frame.
       const p = v.play();
-      if (p) p.then(() => v.pause()).catch(() => {});
+      if (p) p.then(() => { v.pause(); }).catch(() => {});
     };
-    const tick = () => {
+
+    const progress = () => {
       const r = sec.getBoundingClientRect();
       const span = r.height - window.innerHeight;
-      const p = Math.min(1, Math.max(0, -r.top / Math.max(1, span)));
-      if (v.duration) {
-        const t = p * (v.duration - 0.04);
-        if (Math.abs(t - shown) > 1 / 60) {
-          v.currentTime = t;
-          shown = t;
-        }
-      }
+      return Math.min(1, Math.max(0, -r.top / Math.max(1, span)));
+    };
+
+    const paint = (p: number) => {
       SCENES.forEach((s, i) => {
         const el = capRefs.current[i];
         if (!el) return;
         const a = sceneAlpha(p, s);
         el.style.opacity = String(a);
-        el.style.transform = `translateY(${(1 - a) * 18}px)`;
+        el.style.transform = `translate3d(0, ${((1 - a) * 18).toFixed(2)}px, 0)`;
         el.style.visibility = a > 0.01 ? "visible" : "hidden";
       });
-      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${p.toFixed(4)})`;
+    };
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      const dur = v.duration;
+      const p = progress();
+      if (dur && isFinite(dur)) {
+        const target = p * (dur - 1 / FPS);
+        if (eased < 0) eased = target;
+        const k = 1 - Math.exp(-dt * 9); // ~110 ms to settle: smooth, still tied to the finger
+        eased += (target - eased) * k;
+        if (Math.abs(target - eased) < 0.0015) eased = target;
+        if (!v.seeking && Math.abs(eased - requested) >= 0.5 / FPS) {
+          requested = eased;
+          v.currentTime = eased;
+        }
+        paint(eased / (dur - 1 / FPS));
+      } else {
+        paint(p);
+      }
       if (running) raf = requestAnimationFrame(tick);
     };
+
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !running) { running = true; prime(); raf = requestAnimationFrame(tick); }
+      if (e.isIntersecting && !running) { running = true; prime(); last = performance.now(); raf = requestAnimationFrame(tick); }
       if (!e.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
     });
     io.observe(sec);
@@ -150,7 +177,7 @@ export function UpClose() {
           <div
             key={s.title}
             ref={(el) => { capRefs.current[i] = el; }}
-            className="pointer-events-none absolute inset-x-0 bottom-[max(6.5rem,10svh)] px-[var(--bw-pad)] text-center md:inset-x-auto md:bottom-auto md:left-[max(var(--bw-pad),calc((100vw-1320px)/2+var(--bw-pad)))] md:top-1/2 md:w-[min(34vw,480px)] md:-translate-y-1/2 md:text-left"
+            className="pointer-events-none absolute inset-x-0 bottom-[max(6.5rem,10svh)] will-change-[opacity,transform] px-[var(--bw-pad)] text-center md:inset-x-auto md:bottom-auto md:left-[max(var(--bw-pad),calc((100vw-1320px)/2+var(--bw-pad)))] md:top-1/2 md:w-[min(34vw,480px)] md:-translate-y-1/2 md:text-left"
             style={{ opacity: i === 0 ? 1 : 0, visibility: i === 0 ? "visible" : "hidden" }}
           >
             <p className="bw-kicker justify-center md:justify-start"><Heart className="h-3 w-3" /> {s.kicker}</p>

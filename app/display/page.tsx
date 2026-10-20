@@ -54,7 +54,7 @@ const MENU = [
       { name: "Cream Top",          desc: "Sweet cream foam layer",               price: "+$1.50" },
       { name: "Oat Milk Upgrade",   desc: "Plant-based alternative",              price: "+$1.00" },
       { name: "Flavour Syrup",      desc: "Vanilla · brown sugar · lavender",     price: "+$0.75" },
-      { name: "Large (24 oz)",      desc: "Regular → Large size upgrade",         price: "+$1.50" },
+      { name: "Large (24 oz)",      desc: "Upgrade a regular to large",         price: "+$1.50" },
     ],
   },
 ];

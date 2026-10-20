@@ -54,7 +54,7 @@ export function Highlights() {
               ))}
             </ul>
             <a href={p.source} target="_blank" rel="noopener noreferrer" className="mt-auto pt-7 text-[0.95rem] font-semibold text-[#9ee0b8] underline-offset-4 hover:underline">
-              Address &amp; details on the post ↗
+              Address &amp; details on the post
             </a>
           </article>
 

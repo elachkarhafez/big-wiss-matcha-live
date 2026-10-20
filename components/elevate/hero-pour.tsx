@@ -221,7 +221,7 @@ export function HeroPour() {
 
             {!touched ? (
               <span className={`absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#0a1a11]/85 px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white shadow-lg backdrop-blur ${nudge ? "bw-nudge" : ""}`}>
-                <span aria-hidden>👆</span>
+                <Heart className="h-3 w-3" />
                 <span className="md:hidden">Tap to pour</span>
                 <span className="hidden md:inline">Click to pour the next one</span>
               </span>

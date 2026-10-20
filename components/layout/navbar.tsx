@@ -139,19 +139,6 @@ export function Navbar() {
                 aria-label="Back to home page"
                 className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/20 md:px-4 md:text-[12px]"
               >
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden
-                >
-                  <path d="M19 12H5M11 5l-7 7 7 7" />
-                </svg>
                 Home
               </Link>
             </motion.div>
@@ -215,9 +202,6 @@ export function Navbar() {
                       className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold uppercase tracking-[0.08em] text-[#9ee0b8] hover:bg-white/5"
                       onClick={() => setIsOpen(false)}
                     >
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                        <path d="M19 12H5M11 5l-7 7 7 7" />
-                      </svg>
                       Home
                     </Link>
                   </li>

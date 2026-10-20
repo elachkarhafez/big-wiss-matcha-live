@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, ArrowLeft, ChevronRight } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import type { CateringPayload, CateringResponse } from "@/types/catering";
 
 const EVENT_TYPES = [
@@ -120,7 +120,7 @@ export default function CateringPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/" className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#0f2318] hover:bg-white/90 transition-colors">
-              <ArrowLeft className="w-4 h-4" /> Back to Home
+              Back to home
             </Link>
           </div>
         </motion.div>
@@ -157,7 +157,7 @@ export default function CateringPage() {
             <span className="text-white font-bold text-sm tracking-wide">BIG WISS MATCHA</span>
           </Link>
           <Link href="/" className="flex items-center gap-1.5 text-white/50 hover:text-white text-sm transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to site
+            Back to site
           </Link>
         </div>
       </div>
@@ -403,7 +403,6 @@ export default function CateringPage() {
             ) : (
               <>
                 Submit Catering Request
-                <ChevronRight className="w-4 h-4" />
               </>
             )}
           </button>

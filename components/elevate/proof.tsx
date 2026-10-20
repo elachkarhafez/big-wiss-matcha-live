@@ -18,7 +18,7 @@ export function Proof() {
           </p>
           <footer className="mt-6 text-[0.82rem] font-bold uppercase tracking-[0.18em] text-[#c4a57b]">
             <a href="https://www.instagram.com/reel/DbjpggVR3n7/" target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
-              @thehalalfoodguru · 2 Aug 2026 ↗
+              @thehalalfoodguru · 2 Aug 2026
             </a>
           </footer>
         </blockquote>
