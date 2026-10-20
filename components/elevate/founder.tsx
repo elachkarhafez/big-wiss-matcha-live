@@ -14,17 +14,17 @@ export function Founder() {
     <section id="about" aria-labelledby="about-title" className="relative overflow-hidden bg-[linear-gradient(180deg,#0a1a11,#12301f)] py-20 md:py-28">
       <div className="bw-shell grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
         <div className="relative mx-auto w-full max-w-[460px]">
-          <div className="relative aspect-[9/14] overflow-hidden rounded-[28px] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+          <div className="sd-mask relative aspect-[9/14] overflow-hidden rounded-[28px] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
             <Image src="/elevate/cart-night.webp" alt="Big Wiss at his matcha cart outside Tiliani at night" fill sizes="(max-width: 1024px) 80vw, 460px" className="object-cover" />
           </div>
-          <div className="absolute -bottom-8 -right-3 w-[44%] rotate-[4deg] overflow-hidden rounded-[22px] border-4 border-[#0a1a11] shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:-right-10">
+          <div className="sd-drift absolute -bottom-8 -right-3 w-[44%] overflow-hidden rounded-[22px] border-4 border-[#0a1a11] shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:-right-10" style={{ ["--rot" as string]: "4deg", ["--from" as string]: "18%", ["--to" as string]: "-14%", transform: "rotate(4deg)" }}>
             <div className="relative aspect-[9/16]">
               <Image src="/elevate/wiss-pouring.webp" alt="Wiss making a matcha at the cart" fill sizes="200px" className="object-cover" />
             </div>
           </div>
         </div>
 
-        <div className="pt-6 lg:pt-0">
+        <div className="sd-rise pt-6 lg:pt-0">
           <p className="bw-kicker"><Heart className="h-3 w-3" /> Who&rsquo;s pouring</p>
           <h2 id="about-title" className="mt-4 font-display text-[clamp(2.4rem,1.4rem+4vw,4.4rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-white">
             It&rsquo;s Wiss <span className="bw-accent normal-case text-[#9ee0b8]">behind the cart</span>

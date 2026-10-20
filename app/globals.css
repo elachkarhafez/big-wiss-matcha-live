@@ -451,3 +451,90 @@ select {
   .bw-heart-pop, .bw-nudge { animation: none; }
   .bw-btn { transition: none; }
 }
+
+/* ───────────── Motion system v2 ─────────────
+   Load choreography uses ordinary keyframes. Everything tied to scroll uses scroll-driven
+   animations (animation-timeline), which run off the main thread; browsers without them get
+   the finished layout. All of it is off under prefers-reduced-motion. */
+
+/* — load: masked line rise — */
+.bw-line { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.bw-line > span { display: inline-block; animation: bwLineUp 1s var(--bw-ease) both; animation-delay: var(--d, 0ms); }
+@keyframes bwLineUp { from { transform: translateY(105%) rotate(2deg); } to { transform: none; } }
+.bw-fade-in { animation: bwFadeIn 0.9s var(--bw-ease) both; animation-delay: var(--d, 0ms); }
+@keyframes bwFadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.bw-stage-in { animation: bwStageIn 1.2s var(--bw-ease) both; animation-delay: var(--d, 200ms); }
+@keyframes bwStageIn { from { opacity: 0; transform: translateY(40px) scale(0.94); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* — watermark swap — */
+.bw-watermark { animation: bwMark 0.9s var(--bw-ease) both; }
+@keyframes bwMark { from { opacity: 0; transform: translateY(6%) scale(0.98); letter-spacing: 0.02em; } to { opacity: 1; transform: none; } }
+
+/* — marquee — */
+.bw-marquee { display: flex; width: max-content; animation: bwMarquee var(--dur, 38s) linear infinite; }
+.bw-marquee[data-dir="rev"] { animation-direction: reverse; }
+@keyframes bwMarquee { to { transform: translateX(-50%); } }
+@media (hover: hover) { .bw-marquee-wrap:hover .bw-marquee { animation-play-state: paused; } }
+
+/* — auto-cycle progress — */
+.bw-progress { transform-origin: left; animation: bwProgress var(--dur, 5s) linear both; }
+@keyframes bwProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@supports (animation-timeline: view()) {
+  /* rise into place as the element enters */
+  .sd-rise { animation: sdRise linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
+  @keyframes sdRise { from { opacity: 0; transform: translateY(56px); } to { opacity: 1; transform: none; } }
+  .sd-rise-2 { animation-range: entry 8% cover 34%; }
+  .sd-rise-3 { animation-range: entry 16% cover 40%; }
+
+  /* image unmask from the bottom with a slow settle */
+  .sd-mask { animation: sdMask linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  @keyframes sdMask { from { clip-path: inset(100% 0 0 0 round 28px); transform: scale(1.06); } to { clip-path: inset(0 0 0 0 round 28px); transform: none; } }
+
+  /* drift across the viewport */
+  .sd-drift { animation: sdDrift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+  @keyframes sdDrift { from { transform: translateY(var(--from, 8%)) rotate(var(--rot, 0deg)); } to { transform: translateY(var(--to, -8%)) rotate(var(--rot, 0deg)); } }
+
+  /* the hero settles back as you scroll away */
+  .sd-hero-copy { animation: sdHeroCopy linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  @keyframes sdHeroCopy { to { transform: translateY(-90px); opacity: 0.15; } }
+  .sd-hero-stage { animation: sdHeroStage linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  @keyframes sdHeroStage { to { transform: translateY(60px) scale(0.9) rotate(-2deg); } }
+
+  /* quote: each word lights up in turn */
+  .sd-word { animation: sdWord linear both; animation-timeline: view(); animation-range: cover calc(18% + var(--i) * 1.6%) cover calc(30% + var(--i) * 1.6%); }
+  @keyframes sdWord { from { opacity: 0.14; filter: blur(2px); } to { opacity: 1; filter: none; } }
+
+  /* desktop flavor rail: horizontal travel pinned to the section's scroll */
+  @media (min-width: 1024px) {
+    .sd-rail-section { view-timeline-name: --rail; }
+    .sd-rail-track { animation: sdRail linear both; animation-timeline: --rail; animation-range: contain 0% contain 100%; }
+    @keyframes sdRail { to { transform: translateX(calc(-1 * var(--rail-dist, 0px))); } }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bw-line > span, .bw-fade-in, .bw-stage-in, .bw-watermark, .bw-marquee, .bw-progress,
+  .sd-rise, .sd-mask, .sd-drift, .sd-hero-copy, .sd-hero-stage, .sd-word, .sd-rail-track {
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+
+/* Pinned flavor rail layout: only where the scroll-driven travel can actually run. */
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .sd-rail-section { height: calc(100vh + var(--rail-dist, 0px)); }
+    .sd-rail-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding-top: 104px !important; padding-bottom: 20px !important; justify-content: flex-start; }
+    .sd-rail-track { display: flex !important; flex-wrap: nowrap; width: max-content; }
+    /* cards sized to the viewport height so the pinned panel never runs under the navbar */
+    .sd-rail-track > li { width: min(270px, 19vw, calc((100vh - 440px) * 0.75)) !important; min-width: 210px; flex: none; }
+    .sd-rail-sticky .sd-rail-lead { display: none; }
+    .sd-rail-sticky .sd-rail-intro h2 { font-size: clamp(2.2rem, 1.2rem + 2.6vw, 3.6rem); margin-top: 0.6rem; }
+    .sd-rail-sticky .sd-rail-gap { margin-top: 1.75rem; }
+  }
+}
+.bw-spin { opacity: 0; transition: opacity 0.35s var(--bw-ease); }
+.bw-spin[data-on="true"] { opacity: 1; }

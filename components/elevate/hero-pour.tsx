@@ -9,6 +9,7 @@ import { DROPS, renders } from "@/lib/drops";
 import { NEXT_POPUP } from "@/lib/popup";
 
 const HOLD_MS = 2600; // how long a served cup stays before the auto-cycle pours the next one
+const CYCLE_MS = 2800 + HOLD_MS; // pour clip + hold
 
 /**
  * Signature: "Pick your pour". Every flavor is rendered from one 3D model of the brand's cup.
@@ -86,6 +87,18 @@ export function HeroPour() {
     return () => io.disconnect();
   }, []);
 
+  // A few degrees of tilt toward a fine pointer; nothing on touch or under reduced motion.
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const onTilt = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (hold || e.pointerType !== "mouse") return;
+    const b = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - b.left) / b.width - 0.5;
+    const py = (e.clientY - b.top) / b.height - 0.5;
+    setTilt({ x: +(-py * 6).toFixed(2), y: +(px * 8).toFixed(2) });
+  };
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
+  const autoCycling = !touched && !hold && inView;
+
   const onKey = (e: React.KeyboardEvent) => {
     const k = e.key;
     if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== "Home" && k !== "End") return;
@@ -109,32 +122,47 @@ export function HeroPour() {
         style={{ background: `radial-gradient(ellipse 55% 60% at 72% 48%, ${drop.theme.glow}33 0%, transparent 62%), radial-gradient(ellipse 70% 50% at 20% 0%, rgba(125,206,160,0.14) 0%, transparent 60%)` }}
       />
 
+      {/* giant flavor name, swaps with each pour */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden lg:justify-end">
+        <p
+          key={drop.id}
+          className="bw-watermark bw-accent whitespace-nowrap leading-none text-white/[0.05] lg:-mr-[6vw]"
+          style={{ fontSize: "clamp(7rem, 4rem + 13vw, 19rem)" }}
+        >
+          {drop.name}
+        </p>
+      </div>
+
       <div className="bw-shell relative grid min-h-[100svh] grid-cols-1 items-center gap-10 pb-14 pt-24 md:pt-28 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-20">
         {/* copy */}
-        <div className="order-1 min-w-0 text-center lg:text-left">
-          <p className="bw-kicker justify-center lg:justify-start">
+        <div className="sd-hero-copy order-1 min-w-0 text-center lg:text-left">
+          <p className="bw-kicker bw-fade-in justify-center lg:justify-start" style={{ ["--d" as string]: "80ms" }}>
             <Heart className="h-3 w-3" /> Founder-led matcha · Dearborn, MI
           </p>
           <h1 className="mt-5 font-display font-extrabold uppercase leading-[0.86] tracking-[-0.035em] text-white" style={{ fontSize: "clamp(3.4rem, 2rem + 6.4vw, 7.6rem)" }}>
-            What a
-            <span className="relative block normal-case">
-              <span className="bw-accent text-[#9ee0b8]" style={{ fontSize: "1.12em", lineHeight: 0.9 }}>taste</span>
-              <span key={pop} className="bw-heart-pop ml-2 inline-block align-[0.1em]" style={{ width: "0.32em" }}>
-                <Heart className="h-auto w-full" title="heart" />
+            <span className="bw-line"><span style={{ ["--d" as string]: "120ms" }}>What a</span></span>
+            <span className="bw-line normal-case">
+              <span style={{ ["--d" as string]: "260ms" }}>
+                <span className="bw-accent text-[#9ee0b8]" style={{ fontSize: "1.12em", lineHeight: 0.9 }}>taste</span>
+                <span key={pop} className="bw-heart-pop ml-2 inline-block align-[0.1em]" style={{ width: "0.32em" }}>
+                  <Heart className="h-auto w-full" title="heart" />
+                </span>
               </span>
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-[34rem] text-[1.06rem] leading-relaxed text-white/70 lg:mx-0 lg:text-[1.15rem]">
+          <p style={{ ["--d" as string]: "480ms" }} className="bw-fade-in mx-auto mt-6 max-w-[34rem] text-[1.06rem] leading-relaxed text-white/70 lg:mx-0 lg:text-[1.15rem]">
             Handcrafted matcha poured off Big Wiss&rsquo;s cart. A new dessert flavor every pop-up, and the whole cart for your event.
           </p>
-          <div className="mt-8 hidden flex-wrap items-center gap-3 lg:flex">
+          <div style={{ ["--d" as string]: "620ms" }} className="bw-fade-in mt-8 hidden flex-wrap items-center gap-3 lg:flex">
             <Link href="/catering" className="bw-btn bw-btn-gold">Book the cart <Heart className="h-3.5 w-3.5" color="#0a1a11" /></Link>
             <a href="#popup" className="bw-btn bw-btn-ghost">Next pop-up</a>
           </div>
         </div>
 
         {/* stage */}
-        <div className="order-2 mx-auto w-full min-w-0 max-w-[480px] lg:max-w-[min(500px,calc((100svh-250px)*0.75))]">
+        <div className="bw-stage-in order-2 mx-auto w-full min-w-0 max-w-[480px] lg:max-w-[min(500px,calc((100svh-250px)*0.75))]" style={{ ["--d" as string]: "300ms" }}>
+         <div className="sd-hero-stage">
+          <div onPointerMove={onTilt} onPointerLeave={resetTilt} style={{ perspective: "1100px" }}>
           <div
             ref={stageRef}
             role="button"
@@ -142,8 +170,8 @@ export function HeroPour() {
             aria-label={`${drop.name} is poured. Pour the next flavor`}
             onClick={() => choose(index + 1, true)}
             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(index + 1, true); } }}
-            className="relative cursor-pointer overflow-hidden rounded-[28px] shadow-[0_40px_90px_rgba(0,0,0,0.45)] transition-[background-color,transform] duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7dcea0] active:scale-[0.99]"
-            style={{ background: drop.backdrop, aspectRatio: "3 / 4" }}
+            className="relative cursor-pointer overflow-hidden rounded-[28px] shadow-[0_40px_90px_rgba(0,0,0,0.45)] transition-[background-color,transform] duration-500 [transition-timing-function:var(--bw-ease)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7dcea0] active:scale-[0.99]"
+            style={{ background: drop.backdrop, aspectRatio: "3 / 4", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
           >
             {!touched ? (
               <span className={`absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#0a1a11] px-3.5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white shadow-lg ${nudge ? "bw-nudge" : ""}`}>
@@ -167,7 +195,13 @@ export function HeroPour() {
               <source src={r.mp4} type="video/mp4" />
             </video>
 
+            {/* time until the next auto-pour */}
+            {autoCycling ? (
+              <span key={`p-${index}`} aria-hidden className="bw-progress absolute inset-x-0 bottom-0 h-[3px] bg-[#0a1a11]/45" style={{ ["--dur" as string]: `${CYCLE_MS}ms` }} />
+            ) : null}
           </div>
+          </div>
+         </div>
 
           {/* name */}
           <div className="mt-5 flex items-end justify-between gap-4 text-left">

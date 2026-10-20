@@ -177,6 +177,9 @@ export const renders = (id: string) => ({
   photoSm: `/flavors/${id}-photo-sm.webp`,
   poster: `/flavors/${id}-poster.webp`,
   mp4: `/flavors/${id}-pour.mp4`,
+  /** one full 360° turn of the served cup, loops */
+  spinWebm: `/flavors/${id}-spin.webm`,
+  spinMp4: `/flavors/${id}-spin.mp4`,
   webm: `/flavors/${id}-pour.webm`,
 });
 

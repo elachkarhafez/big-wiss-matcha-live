@@ -25,7 +25,7 @@ export function PopUpStrip() {
   return (
     <section id="popup" aria-labelledby="popup-title" className="relative bg-[#0a1a11] py-16 md:py-20">
       <div className="bw-shell">
-        <div className="grid items-center gap-8 overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,#12301f,#0d2418)] p-6 sm:p-8 md:grid-cols-[1.2fr_1fr] md:p-10">
+        <div className="sd-rise grid items-center gap-8 overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,#12301f,#0d2418)] p-6 sm:p-8 md:grid-cols-[1.2fr_1fr] md:p-10">
           <div>
             <p className="bw-kicker">
               <span className={`inline-block h-2 w-2 rounded-full ${status?.status === "today" ? "animate-pulse bg-[#7dcea0]" : "bg-[#c4a57b]"}`} aria-hidden />

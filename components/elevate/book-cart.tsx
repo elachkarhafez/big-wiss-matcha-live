@@ -17,7 +17,7 @@ export function BookCart() {
   return (
     <section id="book" aria-labelledby="book-title" className="relative overflow-hidden py-20 md:py-28" style={{ background: "var(--bw-cream)" }}>
       <div className="bw-shell grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
-        <div>
+        <div className="sd-rise">
           <p className="bw-kicker !text-[#2d5a3d]"><Heart className="h-3 w-3" /> Catering</p>
           <h2 id="book-title" className="mt-4 font-display text-[clamp(2.4rem,1.4rem+4vw,4.6rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-[#12301f]">
             Put the cart <span className="bw-accent normal-case text-[#2d5a3d]">at your party</span>
@@ -52,10 +52,10 @@ export function BookCart() {
         </div>
 
         <div className="relative mx-auto grid w-full max-w-[520px] grid-cols-2 gap-4">
-          <div className="relative mt-10 aspect-[9/16] -rotate-[3deg] overflow-hidden rounded-[24px] shadow-[0_24px_60px_rgba(18,48,31,0.25)]">
+          <div className="sd-drift relative mt-10 aspect-[9/16] overflow-hidden rounded-[24px] shadow-[0_24px_60px_rgba(18,48,31,0.25)]" style={{ ["--rot" as string]: "-3deg", ["--from" as string]: "14%", ["--to" as string]: "-10%", transform: "rotate(-3deg)" }}>
             <Image src="/elevate/cart-day.webp" alt="The Big Wiss matcha cart set up outdoors" fill sizes="(max-width: 1024px) 45vw, 250px" className="object-cover" />
           </div>
-          <div className="relative aspect-[9/16] rotate-[3deg] overflow-hidden rounded-[24px] shadow-[0_24px_60px_rgba(18,48,31,0.25)]">
+          <div className="sd-drift relative aspect-[9/16] overflow-hidden rounded-[24px] shadow-[0_24px_60px_rgba(18,48,31,0.25)]" style={{ ["--rot" as string]: "3deg", ["--from" as string]: "-6%", ["--to" as string]: "12%", transform: "rotate(3deg)" }}>
             <Image src="/elevate/cup-in-hand.webp" alt="A Big Wiss matcha held up, What A Taste printed on the cup" fill sizes="(max-width: 1024px) 45vw, 250px" className="object-cover" />
           </div>
         </div>
