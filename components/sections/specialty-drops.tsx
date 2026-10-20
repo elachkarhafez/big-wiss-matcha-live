@@ -553,7 +553,7 @@ export function SpecialtyDrops() {
             rel="noopener noreferrer"
             className="text-[#7dcea0] underline underline-offset-2 transition-colors hover:text-white"
           >
-            follow @bigwissmatcha
+            follow @whatatastematcha
           </a>{" "}
           for the next drop.
         </motion.p>

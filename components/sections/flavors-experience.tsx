@@ -442,7 +442,7 @@ export function FlavorsExperience() {
                 border: "1px solid rgba(125,206,160,0.35)",
               }}
             >
-              Follow @bigwissmatcha
+              Follow @whatatastematcha
             </a>
             <Link
               href="/catering"

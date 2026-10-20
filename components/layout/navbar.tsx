@@ -68,7 +68,7 @@ export function Navbar() {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <Image
-                src="/logo/logo-v2.png"
+                src="/logo/logo-v2.webp"
                 alt="Big Wiss Matcha logo"
                 fill
                 className="object-contain"

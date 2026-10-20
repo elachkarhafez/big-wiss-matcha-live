@@ -5,26 +5,26 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const HERO_CUPS_LEFT = [
-  { src: "/product-cups/v3-classic.png", alt: "Classic Matcha" },
-  { src: "/product-cups/v3-cream.png", alt: "Cream Top Matcha" },
-  { src: "/product-cups/v3-iced.png", alt: "Iced Matcha" },
+  { src: "/product-cups/v3-classic.webp", alt: "Classic Matcha" },
+  { src: "/product-cups/v3-cream.webp", alt: "Cream Top Matcha" },
+  { src: "/product-cups/v3-iced.webp", alt: "Iced Matcha" },
 ];
 
 const HERO_CUPS_RIGHT = [
-  { src: "/product-cups/v3-strawberry.png", alt: "Strawberry Matcha" },
-  { src: "/product-cups/v3-dirty.png", alt: "Dirty Matcha" },
-  { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
+  { src: "/product-cups/v3-strawberry.webp", alt: "Strawberry Matcha" },
+  { src: "/product-cups/v3-dirty.webp", alt: "Dirty Matcha" },
+  { src: "/product-cups/v3-vanilla.webp", alt: "Vanilla Matcha" },
 ];
 
 const MOBILE_ROW1 = [
-  { src: "/product-cups/v3-classic.png", alt: "Classic Matcha" },
-  { src: "/product-cups/v3-cream.png", alt: "Cream Top Matcha" },
-  { src: "/product-cups/v3-iced.png", alt: "Iced Matcha" },
+  { src: "/product-cups/v3-classic.webp", alt: "Classic Matcha" },
+  { src: "/product-cups/v3-cream.webp", alt: "Cream Top Matcha" },
+  { src: "/product-cups/v3-iced.webp", alt: "Iced Matcha" },
 ];
 const MOBILE_ROW2 = [
-  { src: "/product-cups/v3-strawberry.png", alt: "Strawberry Matcha" },
-  { src: "/product-cups/v3-dirty.png", alt: "Dirty Matcha" },
-  { src: "/product-cups/v3-vanilla.png", alt: "Vanilla Matcha" },
+  { src: "/product-cups/v3-strawberry.webp", alt: "Strawberry Matcha" },
+  { src: "/product-cups/v3-dirty.webp", alt: "Dirty Matcha" },
+  { src: "/product-cups/v3-vanilla.webp", alt: "Vanilla Matcha" },
 ];
 
 export function Hero() {
@@ -111,7 +111,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.65, duration: 0.5 }}>
             <div style={{ position: "relative", width: "23vw", height: "23vw" }}>
-              <Image src="/logo/logo-v2.png" alt="Big Wiss Matcha" fill className="object-contain" />
+              <Image src="/logo/logo-v2.webp" alt="Big Wiss Matcha" fill className="object-contain" />
             </div>
           </motion.div>
 
@@ -146,7 +146,7 @@ export function Hero() {
               className="flex-1 inline-flex items-center justify-center rounded-full bg-white py-3 text-[12px] font-bold uppercase tracking-[0.05em] text-[#0f2318] active:bg-white/90 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.25)]">
               Book Event
             </Link>
-            <a href="https://www.instagram.com/bigwissmatcha/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.instagram.com/whatatastematcha/" target="_blank" rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center rounded-full py-3 text-[12px] font-semibold uppercase tracking-[0.05em] text-white transition-all"
               style={{ border: "1.5px solid rgba(125,206,160,0.35)", background: "rgba(125,206,160,0.09)" }}>
               Follow Us →
@@ -210,7 +210,7 @@ export function Hero() {
             <motion.div className="flex-1 flex flex-col items-center justify-center gap-3"
               initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
               <div style={{ position: "relative", width: "min(20vw, 200px)", height: "min(20vw, 200px)" }}>
-                <Image src="/logo/logo-v2.png" alt="Big Wiss Matcha" fill className="object-contain"
+                <Image src="/logo/logo-v2.webp" alt="Big Wiss Matcha" fill className="object-contain"
                   style={{ filter: "drop-shadow(0 8px 28px rgba(0,0,0,0.45))" }} />
               </div>
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
@@ -248,10 +248,10 @@ export function Hero() {
               className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-[#0f2318] hover:bg-white/90 transition-all shadow-[0_4px_24px_rgba(0,0,0,0.25)]">
               Book an Event
             </Link>
-            <a href="https://www.instagram.com/bigwissmatcha/" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.instagram.com/whatatastematcha/" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full px-10 py-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-all"
               style={{ border: "1.5px solid rgba(125,206,160,0.35)", background: "rgba(125,206,160,0.09)" }}>
-              Follow @bigwissmatcha →
+              Follow @whatatastematcha →
             </a>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-1 text-[10px] font-medium uppercase tracking-[0.15em] text-white/25">

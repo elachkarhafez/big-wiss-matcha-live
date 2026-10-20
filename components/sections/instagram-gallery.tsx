@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const IG = "https://www.instagram.com/bigwissmatcha/";
+const IG = "https://www.instagram.com/whatatastematcha/";
 
-// Real content pulled from @bigwissmatcha — captions, dates and links verified
-// against the live posts on 2026-09-24. Posters are the actual post thumbnails.
+// Real content pulled from @whatatastematcha — captions, dates and links verified
+// against the live posts on 2026-10-19. Posters are the actual post thumbnails.
 type Tile = {
   kind: "video" | "reel" | "photo";
   src: string;
@@ -19,6 +19,32 @@ type Tile = {
 };
 
 const TILES: Tile[] = [
+  {
+    kind: "photo",
+    src: "/instagram/weekend-drop-oct-tiramisu.jpg",
+    caption: "New for fall: Tiramisu matcha, plus Strawberry Shortcake & Coconut Vanilla",
+    href: "https://www.instagram.com/p/Deszopcjfua/",
+    fit: "contain",
+  },
+  {
+    kind: "reel",
+    src: "/instagram/roots-trunk-or-treat.jpg",
+    caption: "Trunk or Treat at Roots Children’s Center — the cart sold out in the first hour",
+    href: "https://www.instagram.com/reel/DeNp8U3CZqP/",
+  },
+  {
+    kind: "photo",
+    src: "/instagram/catering-now-booking.jpg",
+    caption: "Now booking the matcha cart — showers, weddings, birthdays & more",
+    href: "https://www.instagram.com/p/Ddzc_fZFCAL/",
+  },
+  {
+    kind: "photo",
+    src: "/instagram/nuts-now-popup.jpg",
+    caption: "Pop-up at Nuts Now: Strawberry Shortcake, Banana Pudding & Coconut Vanilla",
+    href: "https://www.instagram.com/p/DduaN_oFKGj/",
+    fit: "contain",
+  },
   {
     kind: "photo",
     src: "/instagram/tiliani-popup.jpg",
@@ -39,35 +65,10 @@ const TILES: Tile[] = [
     href: "https://www.instagram.com/reel/Dc67CuIP_jz/",
   },
   {
-    kind: "photo",
-    src: "/instagram/weekend-drop-sept.jpg",
-    caption: "All-new Honey Whip, plus Strawberry Shortcake & Coconut Vanilla",
-    href: "https://www.instagram.com/p/DcxRyogjbUA/",
-    fit: "contain",
-  },
-  {
-    kind: "reel",
-    src: "/instagram/banana-pudding-coldfoam.jpg",
-    caption: "Banana pudding cold foam on a coffee",
-    href: "https://www.instagram.com/reel/DcG-DfeRjDr/",
-  },
-  {
-    kind: "reel",
-    src: "/instagram/find-our-spot.jpg",
-    caption: "How to find our weekend pop-up spot",
-    href: "https://www.instagram.com/reel/DcHKAIJxQR9/",
-  },
-  {
     kind: "reel",
     src: "/instagram/halal-food-guru.jpg",
     caption: "@thehalalfoodguru: “hands down the best matcha I ever had”",
     href: "https://www.instagram.com/reel/DbjpggVR3n7/",
-  },
-  {
-    kind: "reel",
-    src: "/instagram/coconut-vanilla.jpg",
-    caption: "Coconut vanilla — creamy and refreshing",
-    href: "https://www.instagram.com/reel/DbeOwVdxEJz/",
   },
   {
     kind: "video",
@@ -113,7 +114,7 @@ function Tile({ tile, index }: { tile: Tile; index: number }) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 380px"
           className={
             tile.fit === "contain"
-              ? "object-contain transition-transform duration-[6000ms] ease-out group-hover:scale-[1.04]"
+              ? "object-contain object-top transition-transform duration-[6000ms] ease-out group-hover:scale-[1.04]"
               : "object-cover transition-transform duration-[6000ms] ease-out group-hover:scale-[1.12]"
           }
         />
@@ -218,7 +219,7 @@ export function InstagramGallery() {
           >
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7dcea0] animate-pulse" />
             <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#7dcea0]">
-              Straight from @bigwissmatcha
+              Straight from @whatatastematcha
             </span>
           </div>
 
@@ -298,7 +299,7 @@ export function InstagramGallery() {
                   &ldquo;It was a successful pop-up and we are beyond grateful. Thank you so much!&rdquo;
                 </p>
                 <a
-                  href="https://www.instagram.com/bigwissmatcha/reel/DaS_hmag1hn/"
+                  href="https://www.instagram.com/reel/DaS_hmag1hn/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#7dcea0] hover:text-white transition-colors"
@@ -375,10 +376,10 @@ export function InstagramGallery() {
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
-            <span>Follow @bigwissmatcha</span>
+            <span>Follow @whatatastematcha</span>
           </a>
           <p className="text-white/25 text-[10px] uppercase tracking-widest mt-3">
-            196 followers &middot; Dearborn, MI
+            200 followers &middot; Dearborn, MI
           </p>
         </motion.div>
       </div>

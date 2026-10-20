@@ -1,5 +1,5 @@
 /**
- * Rotating specialty flavors announced on @bigwissmatcha.
+ * Rotating specialty flavors announced on @whatatastematcha.
  *
  * Every name and every `source` link comes from a real, dated post.
  * `notes` are flavor descriptors drawn from the drink's own name and the
@@ -33,6 +33,23 @@ export type Drop = {
 };
 
 export const DROPS: Drop[] = [
+  {
+    id: "tiramisu",
+    name: "Tiramisu",
+    tagline: "New for fall",
+    blurb:
+      "The newest name on the specialty board, announced for the late-October pop-up weekend. A dessert-café flavor over handcrafted matcha, billed as the perfect fall drink.",
+    cup: "/product-cups/flavor-tiramisu.webp",
+    theme: { deep: "#1E140C", glow: "#C8915E", accent: "#F2DEC6" },
+    notes: [
+      { emoji: "🍰", label: "Tiramisu" },
+      { emoji: "☕", label: "Coffee" },
+      { emoji: "🍫", label: "Cocoa" },
+      { emoji: "🍵", label: "Matcha" },
+    ],
+    source: "https://www.instagram.com/p/Deszopcjfua/",
+    posted: "19 Oct 2026",
+  },
   {
     id: "strawberry-shortcake",
     name: "Strawberry Shortcake",
@@ -137,4 +154,4 @@ export const DROPS: Drop[] = [
   },
 ];
 
-export const IG_URL = "https://www.instagram.com/bigwissmatcha/";
+export const IG_URL = "https://www.instagram.com/whatatastematcha/";
