@@ -132,7 +132,7 @@ export const DROPS: Drop[] = [
   {
     id: "honey-whip",
     name: "Honey Whip",
-    tagline: "All-new, gone fast",
+    tagline: "All-new over Labor Day",
     blurb:
       "A honey-gold whipped cap introduced as an all-new drop over Labor Day weekend. Wiss called it \"to die for\" days later.",
     cup: "/product-cups/flavor-honey-whip.webp",
